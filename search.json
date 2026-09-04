@@ -1,0 +1,1425 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Introduction to Data Analytics and Python",
+    "section": "",
+    "text": "Introduction\nWelcome to Introduction to Data Analytics and Python! This course is an open enrollment course at the University of Zurich. The material is aimed towards teaching BSc, MSc, and PhD students about quantitative robust assessment of data in chemistry, biochemistry, business chemistry, and related fields.\nThe course meets in the Fall semester on Wednesdays and Fridays from 10.15-12.00 h in room Y19-H22. This site contains the core material covered in the course, and the statistics and Python knowledge necessary to pass the course can be learned from this online platform. The in-person class sessions are interactive and focus on additional worked examples of this material, and more practical knowledge regarding real-world data analysis. Thus, for students who interested in the topic for their future careers (beyond just passing the course), it is recommended to attend the lectures.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Data Analytics and Python</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#faq",
+    "href": "index.html#faq",
+    "title": "Introduction to Data Analytics and Python",
+    "section": "FAQ",
+    "text": "FAQ\n\n\n\n\n\n\nNote\n\n\n\nClass attendance is not required, but for students who are interested in excelling in the topics of the course for further application, I would recommend attending the in-person sessions.\n\n\n\nWhat materials do you need for class? - You need to bring a Laptop and have access to OLAT.\nWhat background information do I need to know? - Please see the pre-reading and refresher materials and the section on chemical topics below.\nWill I become an expert in Python? - If you learn how to apply all the code covered this course, I would equate that to being about “A2” if we make an analogy to spoken languages.\nWhat kind of assessment can we expect? - The exam is a written exam that includes principles in statistics, data analytics, and code comprehension. You will receive a practice exam.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Data Analytics and Python</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#learning-objectives",
+    "href": "index.html#learning-objectives",
+    "title": "Introduction to Data Analytics and Python",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nAfter completing this course, you should be able to:\n\nPlan an experiment with the appropriate controls and power\nDescribe the types of experimental replicates and their importance\nWrangle or process data in an honest and clear way\nVisually represent data using Python\nDetermine descriptive and inferential statistical metrics for a dataset\nDetermine the correct statistical test(s) to address a hypothesis\nMathematically identify outliers and address them in a clear and honest way\nCompare data using statistical models or tests\nComplete regression analysis for datasets\nIdentify use cases for DOE, chemometrics, and ML",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Data Analytics and Python</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#website-structure",
+    "href": "index.html#website-structure",
+    "title": "Introduction to Data Analytics and Python",
+    "section": "Website structure",
+    "text": "Website structure\nThe website is divided into several sections:\n\nCourse overview (this page)\nPre-reading\nFoundations - Sessions 1-2\nDescribing data - Sessions 3-7\nInferential Statistics - Sessions 8-14\nModeling and regression - Sessions 19-23\nAdvanced analysis - Sessions 24-25\nReference - General reference guides to aid in study\n\nSessions 15-18 are taught by an excellent co-lecturer and are not yet on this website. The topics of these sessions are reproducible coding and git.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Data Analytics and Python</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#resources",
+    "href": "index.html#resources",
+    "title": "Introduction to Data Analytics and Python",
+    "section": "Resources",
+    "text": "Resources\nTextbooks for statistics:\n\nStatistics and Chemometrics for Analytical Chemistry — JN Miller, JC Miller, and RD Miller (older editions titled Statistics for Analytical Chemistry are also fine)\nEssential Mathematics and Statistics for Science — G Currell and A Dowman\n\nOnline References for Python:\n\npandas documentation\nnumpy documentation\nmatplotlib documentation\nseaborn documentation\nstatistics documentation\npingouin documentation\nscipy documentation\nReal Python (realpython.com) for tutorials",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Data Analytics and Python</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#on-using-generative-ai-in-education",
+    "href": "index.html#on-using-generative-ai-in-education",
+    "title": "Introduction to Data Analytics and Python",
+    "section": "On Using Generative AI in Education",
+    "text": "On Using Generative AI in Education\nAI tools can assist with many tasks! In particular, Claude Code (which I often use myself) has become a valuable coding assistant. But these tools come with important caveats:\n\nThey can give incorrect solutions, particularly for common mistakes\nYou are accountable for anything you submit, regardless of the source you used\nRecent research suggests that relying on AI for answers reduces retention\nBoth reduced learning and de-skilling are serious concerns if you rely too much on these tools\n\nA suggested reasonable approach: use AI only when you already understand the problem well enough to immediately evaluate the output, or for routine tasks where the risk of error is low. Always review the result.\nI really like the perspective of Science Journalist, Cleo Abram, in the perspective in the video below.\n\n\n\n\n\nDisclosure on AI use for this course: The original course was designed by Alexandria Deliz Liang (2022-2025). In 2026, this website was created after several requests from students to provide alternatives to in-person learning and requests from external colleagues to open the material for wider use. Making a website for the course was a difficult choice to make existentially. What is even the point of the four-hours per week of lecture. Will this reduce attendance? What is the point of attendance? Do I really want to make all of this public? After deciding that the pros out-weighed the cons, Claude Code was used to scrape text, images, audio recordings, and coding examples from the original course material to create the framework for this website. The scraped material was evaluated and further edited by the Alexandria Deliz Liang.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Data Analytics and Python</span>"
+    ]
+  },
+  {
+    "objectID": "parts/prereading.html",
+    "href": "parts/prereading.html",
+    "title": "Pre-reading",
+    "section": "",
+    "text": "How This Course Works\nThis page explains how the course and these notes work, then reviews the mathematics, Python, and chemistry background assumed throughout. Skim it before the first session — none of it is advanced; the goal is a common starting point so that session time can focus on data analysis.\nBefore reading the sessions: read through the pre-reading, including the math refresher, the chemical background information, and the Python quick implementation.\nBefore the first in-person session: make sure you have installed Anaconda and Visual Code Studio!\nDSA101 runs two interwoven topics in every session:\nIn early session, we need to establish scripting fundamentals, so the material is less interwoven. In later sessions, the Python is directly used to implement the statistical sections.\nUsing this website:",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Pre-reading</span>"
+    ]
+  },
+  {
+    "objectID": "parts/prereading.html#how-this-course-works",
+    "href": "parts/prereading.html#how-this-course-works",
+    "title": "Pre-reading",
+    "section": "",
+    "text": "Statistics & data analytics: experimental design, descriptive and inferential statistics, regression, and an introduction to higher-order methods.\nPython: the practical skills to apply those concepts to real chemical and biochemical data.\n\n\n\n\nRead actively!: make sure you are not just passively receiving the information. This is one of the highest risks of independent study.\nRun the code in your browser: many code cells are live; you can edit the code in the cells; to execute the code click Run. Note that the first run loads the Python environment, so give it a few seconds.\nIn the exam, you will be asked to line read code and write minimal code by hand. The work on this website prepares you for these tasks. However, IRL, coding requires setting up an environment and using software to write and run code. If you are only using this website and not coming to the course, you can learn to read and write code at the level of the exam, BUT if you want to learn to code at the level necessary IRL, you will need additional tools, which are covered in the in-person sessions.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Pre-reading</span>"
+    ]
+  },
+  {
+    "objectID": "parts/prereading.html#mathematics-refresher",
+    "href": "parts/prereading.html#mathematics-refresher",
+    "title": "Pre-reading",
+    "section": "Mathematics Refresher",
+    "text": "Mathematics Refresher\n\nNotation\n\n\n\n\n\n\n\nSymbol\nMeaning\n\n\n\n\n\\(\\sum_{i=1}^{n} x_i\\)\nsum of all values \\(x_1\\) to \\(x_n\\)\n\n\n\\(\\bar{x}\\)\nthe line over indicates the mean of the parameter, here the mean of \\(x\\)\n\n\n\\(\\propto\\)\n“is proportional to”\n\n\n\n\n\nExponentials and Logarithms\nThese appear throughout kinetics and regression.\n\n\\(a^m \\cdot a^n = a^{m+n}\\) and \\((a^m)^n = a^{mn}\\)\nThe natural log \\(\\ln\\) is the inverse of \\(e^x\\): if \\(y = e^x\\) then \\(x = \\ln y\\)\n\\(\\ln(ab) = \\ln a + \\ln b\\) and \\(\\ln(a^n) = n\\ln a\\)\nExponential decay \\(y = A_0\\,e^{-kt}\\) linearizes by taking logs: \\(\\ln y = \\ln A_0 - kt\\)\n\n\n\nRearranging Equations\nYou should be comfortable solving for any variable. For a calibration line \\(y = mx + b\\), the concentration of an unknown is: \\[x = \\frac{y - b}{m}\\]\n\n\nScientific Notation and Significant Figures\n\n\\(1.3 \\times 10^{4} = 13{,}000\\); \\(2.5 \\times 10^{-3} = 0.0025\\)\nThe basics of counting significant figures.\nReport results to a number of significant figures justified by the measurement precision.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Pre-reading</span>"
+    ]
+  },
+  {
+    "objectID": "parts/prereading.html#python-verification",
+    "href": "parts/prereading.html#python-verification",
+    "title": "Pre-reading",
+    "section": "Python verification",
+    "text": "Python verification\nYou do not need prior Python experience; the course builds it from scratch. Below is just an orientation so that you can see how to run the cells on this website.\n\n\n\n\n\n\n\n\n\n\n\n\nIf you could run the two cells above, you are ready. If the content and output do not yet make sense, that is exactly what the early sessions teach don’t worry.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Pre-reading</span>"
+    ]
+  },
+  {
+    "objectID": "parts/prereading.html#chemical-background",
+    "href": "parts/prereading.html#chemical-background",
+    "title": "Pre-reading",
+    "section": "Chemical Background",
+    "text": "Chemical Background\nThe worked examples and case studies draw on a handful of chemical and biochemical concepts. You do not need to be an expert in any of them, but you should recognize what each quantity means so the data examples make sense.\nPercent yield — the amount of product obtained relative to the theoretical maximum: \\[\\%\\text{ yield} = \\frac{\\text{actual amount}}{\\text{theoretical amount}} \\times 100\\] Used throughout as a continuous outcome (e.g. comparing yields across catalysts).\nCatalytic turnover number (TON): TON is for each catalyst molecule, the number of substrate molecules is converted to product before consuming all of the substrate or becoming inactive. \\[\\text{TON} = \\frac{\\text{moles product}}{\\text{moles of catalyst}}\\]\nAbsorbance (\\(A\\)): the amount of light a substance is taken in by a substance. This quantity follows Beer–Lambert’s law (below). \\[A = \\varepsilon\\, l\\, c \\] Where \\(\\varepsilon\\) is the extinction coefficient, \\(l\\) is the path length, and \\(c\\) is the concentration of the substance. There is a linear relationship between absorbance and concentration.\nFluorescence: the re-emission of light after excitation.\nReaction kinetics: how concentrations change with time under different reaction orders:\n\nFirst-order: decays exponentially, \\([A] = [A]_0\\,e^{-kt}\\).\nSecond-order: rate depends on the product of two concentrations.\nPseudo-first-order: a second-order reaction that behaves as first-order because one reactant is in large excess.\n\nThe rate constant \\(k\\) and half-life \\(t_{1/2} = \\ln 2 / k\\) (first-order) appear in the nonlinear-regression examples.\nMichaelis–Menten kinetics: enzyme rate vs. substrate concentration \\([S]\\) \\[v = \\frac{V_{max}\\,[S]}{K_M + [S]}\\] where \\(V_{max}\\) is the maximum rate and \\(K_M\\) the substrate concentration at half-maximal rate. A saturating curve and a standard nonlinear-regression example.\n\n\n\n\n\n\nNote\n\n\n\nThese concepts are only the contexts for the data analysis. The statistics and Python skills are the focus, and the chemistry is the setting in which you apply them.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Pre-reading</span>"
+    ]
+  },
+  {
+    "objectID": "parts/prereading.html#what-you-will-be-able-to-do-by-the-end",
+    "href": "parts/prereading.html#what-you-will-be-able-to-do-by-the-end",
+    "title": "Pre-reading",
+    "section": "What You Will Be Able to Do by the End",
+    "text": "What You Will Be Able to Do by the End\n\nPlan an experiment with appropriate controls, replicates, and power\nWrangle, visualize, and clearly describe data in Python\nChoose and apply the correct statistical test for a question\nIdentify and justify the handling of outliers\nBuild linear and nonlinear regression models\nRecognize use cases for DoE, chemometrics, and machine learning",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Pre-reading</span>"
+    ]
+  },
+  {
+    "objectID": "parts/foundations.html",
+    "href": "parts/foundations.html",
+    "title": "Foundations",
+    "section": "",
+    "text": "This foundation section covers the first two sessions.\nBefore a single number is calculated, the quality of a conclusion is already set by how the experiment was designed.\nHow can we best design experiments?\nWhat are good components of a well designed experiment?\nThis foundational section introduces you to\n\nthe scope of data analytics,\nthe kinds of data you will encounter in chemistry and biochemistry,\nthe difference between exploratory and confirmatory research, and\nthe principles of sound experimental design, including controls and replicates.\n\nGood implementation of the concepts determines whether any later analysis has any meaning at all!",
+    "crumbs": [
+      "Foundations"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L01.html",
+    "href": "parts/sessions/L01.html",
+    "title": "1. Introduction to Data Analytics",
+    "section": "",
+    "text": "Introduction to Data Analytics\nWelcome to Introduction to Data Analytics and Python!\nPlease make sure that you have read the course introduction and the pre-reading before proceeding because we are about to dive straight in!",
+    "crumbs": [
+      "Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>1. Introduction to Data Analytics</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L01.html#introduction-to-data-analytics",
+    "href": "parts/sessions/L01.html#introduction-to-data-analytics",
+    "title": "1. Introduction to Data Analytics",
+    "section": "",
+    "text": "What is Data Analytics?\nData analytics encompasses the full pipeline from designing an experiment to extracting meaning from its results. Some of the core topics are listed below.\n\nExperimental design — deciding what to measure, how many replicates, and what controls are needed\nData wrangling — transforming raw data into a usable form\nStatistical analysis — summarizing and characterizing data\n\nSignificance testing — determining whether observed differences are real\nData modeling — fitting mathematical models to data\nDesign of Experiment (DoE) — a formal framework for exploring multi-variable systems efficiently\nChemometrics — multivariate statistical methods tailored to chemical data\nMachine learning (ML) — data-driven models that learn patterns from large datasets\n\n\n\n\n\nChemical Concepts Used in This Course\nThe examples and case studies throughout the course draw on the following chemical concepts. If any of these are unfamiliar, please review the pre-reading before proceeding.\n\nPercent yield of a chemical reaction\nCatalytic turnover number\nAbsorbance and fluorescence\nFirst-order, second-order, and pseudo-first-order kinetics\nExponential equations\nMichaelis-Menten kinetics\n\n\n\n\nWhat Are Data?\nData are units of information — collected facts and statistics about the world. In practice, data come in many forms:\n\n\n\n\n\n\nMeasurements\n\n\n\n\n\n\n\nCounts\n\n\n\n\n\n\n\nObservations\n\n\n\n\n\nA yield analysis, counts for journal review timeline, photograph, a survey response, and a spectroscopic trace are all data. Different data types just require different handling.\n\n\n\n\n\n\nYield analysis\n\n\n\n\n\n\n\nJournal counts\n\n\n\n\n\n\n\nPhotograph\n\n\n\n\n\n\n\nStructured vs. Unstructured Data\nData can also be structured or unstructured.\nStructured data is organized in a defined format (such as rows and columns), where each entry has a clear meaning (e.g. a table of reaction yields, a plate reader output). Structured data can easily be further described by several other features.\n\nQualitative vs. quantitative\n\nQualitative data describes a property (e.g., “the solution turned blue”). Quantitative data assigns a number to it (e.g., absorbance = 0.42 at 600 nm).\n\n\n\n\n\n \n\n\n\n\n\nQualitative\n\n\n\n\n\n\n\nQuantitative\n\n\n\n\n \n\n\n\n\nCategorical\n\nTakes a fixed set of inputs that are not numerically related. Example: degree level (BSc, MSc, PhD).\n\n\n\n\n\n\nCategorial\n\n\n\n\nDiscrete vs. continuous\n\nThink of this like stairs (discrete steps) vs a ramp (continuous rise).\n\n\n\nDiscrete data: Takes a fixed set of values. Example: number of lectures in a course, number of photons absorbed, number of people (integer values).\nContinuous data: Consists of a range of values and any number within that range. (e.g., wavelength, reaction yield).\n\n\n\n\n\nDiscrete vs. continuous\n\n\n\n\nDistribution\n\nA set of measurements follows a distribution (such as unimodal, bimodal, or multimodal). Recognizing the distribution shape is important for choosing the right statistical test.\n\n\n\n\n\n\nuni-, bi-, and tri-modal\n\n\n\nIn contrast, unstructured data has no predefined format. Some examples:\n\n\n\nUnstructured text data: A TripAdvisor review of Big Ben.\n\n\n\n\n\nUnstructured text data: Synthetic protocol.\n\n\nText-mining tools can convert unstructured text into structured data. For example, sentiment analysis can assign a numerical score to a written review, making it comparable across thousands of entries.\n\n\n\n\n\n\nNote\n\n\n\nIn this course, we will focus on handling structured, quantitative data that can be categorical, discrete, or continuous and be represented by different distributions.\n\n\n\n\n\n\nWhy Does Data Analysis Matter?\nMost experimental measurements contain uncertainty. Values with uncertainty can only be interpreted with repeated experiments and proper data analysis!\n\n\n\n\nHow can we describe the difference between the response with conditions A and B?\n\n\n\nIn chemistry, data analysis answers questions like:\n\nWhich reaction condition is the most robust?\nWhich reaction conditions produce the highest yield?\nWhich enzyme is most active, and why?\nHow do bond lengths in a crystal structure correlate with function?\nHow does the rate of deposition affect material performance?\nIs an analytical method sensitive enough for a given assay?\nHow can complex, high-throughput datasets be handled systematically?\n\n\n\n\nData Analysis with Rigor and Integrity\nThere are both intentional and unintentional ways to analyze data incorrectly. Being aware of these is part of becoming a rigorous scientist (and also citizen).\nCommon errors and misconduct include:\n\nProcessing data incorrectly — transforming data in ways that introduce bias\nOverfitting data — fitting a model with too many inputs that are not meaningful\nOmitting critical variables — not accounting for factors that contribute to observations\nNot performing replicates — drawing conclusions from a single measurement\nData blocking deceptively — grouping data to hide variation\nMaking misleading plots — manipulating axes, scales, or colors to exaggerate effects\nDiscarding outliers deceptively — removing inconvenient points without justification\nCherry-picking data — selecting only results that support your hypothesis\nMaking up data — fabricating results entirely \n\nThis course will teach you how to avoid common, unintentional mistakes in data analysis!\nIt is up to each individual to avoid those that are intentional.",
+    "crumbs": [
+      "Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>1. Introduction to Data Analytics</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L01.html#getting-started-in-python",
+    "href": "parts/sessions/L01.html#getting-started-in-python",
+    "title": "1. Introduction to Data Analytics",
+    "section": "Getting Started in Python",
+    "text": "Getting Started in Python\nLet’s switch gears a little here, so that we can get started with Python!\nWhat is important for running code?\n\nAn environment with the installed libraries\nA place where we can run the code\n\n\n\n\n\n\n\n\n\n\nWebsite\nIn-person\n\n\n\n\nenvironment\nPre-installed on the website, but very basic/lite\nNeed to create with Anaconda\n\n\nplace to run the code\n“cells” on each webpage\ncells in an ipynb file that we open in Visual Code Studio\n\n\n\n\nLibraries, environments, and imports\nLibraries are packages of code that act as software.\nEnvironments are isolated computing “space” in which we install libraries necessary for executing specific coding tasks.\nExample: I have an environment called “DSA101” on my computer. In this environment, I have installed the libraries necessary for me to run the code in this class.\nMost coding sessions require importing libraries into the code. It is best practice to run the imports cell first at the top of the code. An example of imports is shown below (not interactive).\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport matplotlib.colors as pltcolors\nimport seaborn as sns\nNote: if an import fails, the package is likely not installed in your environment.",
+    "crumbs": [
+      "Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>1. Introduction to Data Analytics</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L01.html#lets-look-at-some-code",
+    "href": "parts/sessions/L01.html#lets-look-at-some-code",
+    "title": "1. Introduction to Data Analytics",
+    "section": "Let’s look at some code!",
+    "text": "Let’s look at some code!\nCode is made up of two things: runnable code and comments.\n\n\n\n\n\n\nComments are notes for the reader; Python ignores them entirely. Every comment starts with ‘#’.\nNow that we know the difference, let’s get started with the structure of runnable code.\nWe have seen earlier that data have types (qualitative or quantitative; categorical, discrete, or continuous). Python mirrors this: every value you store also has a type.\n\nScalar Variables\nA variable is a name for a stored value. The simplest variables are scalars, which have single values. In this course, we will cover four types of scalar values: integers, floats (numbers with decimal places), strings (text), and bool (True/False). Below you can see examples of each of these.\n\n\n\n\n\n\nVariables are changeable, such that reassigning overwrites the previous value:\n\n\n\n\n\n\nPython is case-sensitive! x and X are different variables.\n\n\nPrinting and f-strings\nThe print() function displays output. An f-string lets you embed variable values directly in text:\n\n\n\n\n\n\n\nControlling decimal places with f-strings\nTo display a float to a specific number of decimal places, use :.Nf inside the curly braces:\n\n\n\n\n\n\nThis :.Nf approach controls only the display, but the underlying value remains precise. This is preferred for reporting: you never lose precision in intermediate calculations, and the formatted output is always clear about how many significant figures are being shown. The round() function changes the stored value, which can cause unexpected rounding errors in subsequent calculations.\n\n\n\nBasic Operations\n\n\n\n\n\n\nString concatenation uses +:\n\n\n\n\n\n\n\n\nLight coding practice\nIn the cell below, try write and run some short code to test your knowledge of this session.\n\nCan you calculate how many seconds there are in a day? in a year?\nCan you determine the percent yield of a reaction with an expected 378 mg of product (100%) for which you isolate 113 mg of product?\nCan you use an f-string to clearly output the desired information?\n\n\n\n\n\n\n\nWant to do more or learn more operations?\nYes we will definitely do more in the future sessions, but you can also learn from reading documentation (see below)!\n\n\nReading Documentation\nGetting comfortable with documentation is a core skill for this course and any coding.\nTake a look at some short documentation for the function len() to see how these are usually described. Note: the description for len() ends before “class list()”.\n\nWhat can you put in the parentheses (offical term: pass to the function)?\nWhat is the output?\n\n\n\n\n\n\n\n\nTipKey takeaways\n\n\n\n\nData analytics spans the whole pipeline: design → wrangling → statistics → modeling.\nData are structured/unstructured and qualitative/quantitative.\nThis course focuses on structured, quantitative data.\nQuantitative data can be categorical, discrete, or continuous",
+    "crumbs": [
+      "Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>1. Introduction to Data Analytics</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L01.html#next-and-in-person-session",
+    "href": "parts/sessions/L01.html#next-and-in-person-session",
+    "title": "1. Introduction to Data Analytics",
+    "section": "Next and In person session",
+    "text": "Next and In person session\n\nMake sure that you have read all of the introductory material (home page, pre-reading)!\nIf you intend to come to in-person sessions, make sure that you download Anaconda and Visual Code Studio.\nComplete the anonymous questionnaire on OLAT regarding expected attendance during the first week of the course.\nIf you plan to come to the in-person meeting for session 1, please access the working materials via OLAT.",
+    "crumbs": [
+      "Foundations",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>1. Introduction to Data Analytics</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L02.html",
+    "href": "parts/sessions/L02.html",
+    "title": "2. Experimental Design",
+    "section": "",
+    "text": "When Does Data Analysis Begin?\nThis session is about designing an experiment so that its data can support a real conclusion. We focus on core concepts in this area:\nPlease note, another important feature of experimental design is calibration. We will discuss this in the session on correlation and regression.\nThe Python work introduces four core data structures used to store that data:\nA poorly designed experiment cannot be rescued by rigorous data analysis. In classical science, we say that failing to include appropriate controls or account for relevant variables produces uninterpretable data. In machine learning, low-quality input produces low-quality models, or more colloquially, “garbage in, garbage out.”\nThe goals of good experimental design are to ensure that scientific conclusions are valid even to a determined skeptic and to actively exclude alternative explanations. This means statistical thinking must begin before any data are collected.",
+    "crumbs": [
+      "Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>2. Experimental Design</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L02.html#control-experiments",
+    "href": "parts/sessions/L02.html#control-experiments",
+    "title": "2. Experimental Design",
+    "section": "Control Experiments",
+    "text": "Control Experiments\nControls are experiments in which a specific variable is regulated rather than tested. They confirm that the experimental system is working as expected.\nNegative control: a key component is omitted or replaced with a non-functional version. Confirms that any observed signal is specific to the component under test, not an artefact of the system.\nPositive control: the tested component is replaced with one of known, sufficient activity. Confirms the assay can detect the expected signal.\nIn computational contexts and some biological fields, the analogous concept is benchmarking, comparing a new method against an established standard.\nIt is important to understand that each control answers a different question! A passing positive control indicates that you can quantify a response, but nothing about whether your test sample is active. A passing negative control quantifies the background signal, but again, nothing about the test sample. Both together allow you to interpret the test result: if the positive control works and the negative control is clean, a positive result from the test sample is meaningful and attributable to the variable being studied.\nAs experimental systems become more complex, the number of meaningful controls typically increases.\nPlease note that in German and English the words control and monitoring do not overlap exactly. A consequence is that in chemistry a common direct translation from German is to say “reaction control” to refer to a sample that you take from the reaction to test by TLC, LC, GC, etc. This is not technically a “control experiment”. This would be “reaction monitoring”. These are different concepts.",
+    "crumbs": [
+      "Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>2. Experimental Design</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L02.html#random-variables-and-events",
+    "href": "parts/sessions/L02.html#random-variables-and-events",
+    "title": "2. Experimental Design",
+    "section": "Random Variables and Events",
+    "text": "Random Variables and Events\nIn statistics, we are often discussing a random variable (\\(X\\)) and events (\\(x\\)).\n\nA random variable (\\(X\\)) is a variable whose value results from a random process and can take a range of possible values.\nAn event (\\(x\\)) is an individual observation of a random variable, written as \\(x_1\\), \\(x_2\\), \\(x_3\\).\n\nNote: The case, capital or lower case, matters!\nConsider an experiment: you measure the extinction coefficient of a compound three times, obtaining 13200, 13500, and 13400 M⁻¹cm⁻¹. The extinction coefficient is a random variable (\\(X\\)), and from each measurement you derive an event (\\(x_1\\), \\(x_2\\), \\(x_3\\)).\nRandom variables can be:\n\nContinuous — takes on any value within a range (e.g. reaction yield, absorbance, extinction coefficient)\nDiscrete — takes on specific, countable values (e.g. the identity of the major product of a reaction)\n\nBecause experimental outcomes contain variability, a single measurement tells you very little about the underlying distribution. Thus, multiple observations are required for robust conclusions, these multiple observations are called replicates.",
+    "crumbs": [
+      "Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>2. Experimental Design</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L02.html#replicates",
+    "href": "parts/sessions/L02.html#replicates",
+    "title": "2. Experimental Design",
+    "section": "Replicates",
+    "text": "Replicates\nReplicates are multiple experimental runs performed under the same conditions. Variability between replicates arises from many sources: human technique, variation in reagents, instrument variations, environmental effects, and so on.\nReplicates serve two purposes:\n\nCharacterize the variability inherent in the measurement\nProvide a best estimate of the unknown true value\n\nReplicate terminology is inconsistent across fields. For this course, we will use the following definitions:\n\n\n\n\n\n\n\n\nTerm\nMeaning\nVariation evaluated\n\n\n\n\nTechnical\nRepeated measurement of the same prepared sample\nInstrument\n\n\nPreparative\nSeparately prepared samples under the same conditions\nInstrument, Scientist\n\n\nBiological\nAgreement between results from the same operator, equipment, and short time interval\nInstrument, Scientist, Complex biology\n\n\nFully independent\nAgreement between results obtained under different conditions (operators, laboratories, equipment, lot numbers)\nEverything\n\n\n\n\n\n\nPyramid of replicates\n\n\nReporting only preparative or technical replicates while presenting them as biological or independent replicates. is one of the more common forms of inadvertent misrepresentation in chemistry papers.\nThe distinction between these replicates is frequently overlooked with real consequences for what can be claimed from the analysis.\nRepeatability vs. Reproducibility is also a source of terminology disagreement. The pyramid above and the definitions below indicate how we will use these terms in this course.\nRepeatability is the ability to achieve agreement between repeated measurements and their results under the same conditions (including operator, procedure, location, instruments etc). This is a lower level claim than reproducibility.\nReproducibility is the ability the achieve agreement between measurement and their results when conditions outside of the procedure differ (such as operatoor, lab, days, calibrations, instruments). This is a higher level claim than repeatability.",
+    "crumbs": [
+      "Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>2. Experimental Design</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L02.html#population-vs.-sample",
+    "href": "parts/sessions/L02.html#population-vs.-sample",
+    "title": "2. Experimental Design",
+    "section": "Population vs. Sample",
+    "text": "Population vs. Sample\nThe population contains all possible observations of a random variable. In principle, every measurement you could ever make under identical conditions. In practice, the population is never fully accessible (except maybe in some humanities cases).\nIn statistics, a sample is the subset of observations/events you actually collect/measure.\n\n\n\nPopulation vs. sample\n\n\n\nDescriptive statistics summarizes the sample that is observed.\nInferential statistics uses the sample to make conclusions about the population.\n\nWhen we are using known information to project an outcome outside a known range, this is called extrapolation. Both inference and extrapolation create inherent uncertainty, and managing that uncertainty rigorously is a central challenge of statistical analysis.\nWe will discuss these two forms of statistics throughout the bulk of the course.\nIn chemistry and biochemistry, the distinction between population and sample is very concrete:\nIf you are measuring the extinction coefficient of a compound, the “population” is every possible measurement of that compound under those exact conditions. This is a number you can approach but never fully realize.\nIf you collect three replicates, this is your sample, with a size (\\(n\\)) of 3. When you report a metrics like mean or standard deviation, you are using your sample to estimate properties of the population. The quality of that estimate depends on how representative your sample is and how many observations you collected.\nIn a later session, we will discuss how to evaluate this estimation.",
+    "crumbs": [
+      "Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>2. Experimental Design</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L02.html#exploratory-vs.-confirmatory-experiments",
+    "href": "parts/sessions/L02.html#exploratory-vs.-confirmatory-experiments",
+    "title": "2. Experimental Design",
+    "section": "Exploratory vs. Confirmatory Experiments",
+    "text": "Exploratory vs. Confirmatory Experiments\nFrom a black-and-white perspective, there are two phases of research discovery.\n\nExploratory research\nConfirmatory research\n\nExploratory research is conducted during the discovery phase. The experiments and results are designed to generate hypotheses and guide future experiments. Statistical restrictions are less stringent, and results should be interpreted with caution.\nConfirmatory research is used to test a specific, pre-stated hypothesis informed by prior exploratory work. They require careful planning, adequate sample sizes, and pre-specified analysis methods. Statistical restrictions are more stringent.\nA practical example: You test 10 catalysts as well as negative and positive controls. You find that “catalyst F” gave the highest product yield compared with an industry standard. You then take catalyst F and perform several replicates to test your hypothesis that catalyst F is superior to your positive control. You include negative and positive controls in your experiment.\nThe surveying of 10 catalysts is an exploratory experiment, whereas the comparison of catalyst F with your industry standard with several replicates and controls is your confirmatory experiment.\nIt is important to recognize that both exploratory and confirmatory experiments are necessary for science! But these two phases necessitate different levels of statistical rigor.\nAlso important is that in reality, there is also a tortured grey space. This tortured space is where much of science functions.\n\n\n\nContinuum between exploratory and confirmatory: “In the grey area of exploration, data are tortured to some extent, and the corresponding statistics are somewhat wonky.”, 10.1177/1745691612463078\n\n\nIMPORTANT: the same dataset cannot be used for exploratory research and confirmatory research.\nWhy? You create a logical loop: I used these data to generate a hypothesis, then I used my hypothesis to re-evaluate those data, and my hypothesis was confirmed. - This is circular reasoning.\n\n\n\nCircular reasoning cartoon\n\n\nThis logical fallacy is a known contributor to inflated false positive rates in the literature and a driver of the reproducibility crisis in science.\nBest practice: pre-determine hypotheses before collecting confirmatory data, or explicitly separate the two datasets prior to any analysis.",
+    "crumbs": [
+      "Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>2. Experimental Design</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L02.html#heterogeneity-of-the-field",
+    "href": "parts/sessions/L02.html#heterogeneity-of-the-field",
+    "title": "2. Experimental Design",
+    "section": "Heterogeneity of the field",
+    "text": "Heterogeneity of the field\nBut my field doesn’t need replicates or controls.\nI hear this argument often. I think it boils down to two factors: experimental complexity and the necessary rigor.\n\nIf your reactions are less complex, there is often less variability and a lower need for controls.\n\nExample: academic synthetic chemistry vs. cell biology\n\n\n\n\n\nExperimental complexity\n\n\n\nIf you are mostly in the exploratory phase of research, you might not find replicates as necessary.\n\nExample: academic vs. industrial synthetic chemistry",
+    "crumbs": [
+      "Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>2. Experimental Design</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L02.html#summary-designing-a-good-experiment",
+    "href": "parts/sessions/L02.html#summary-designing-a-good-experiment",
+    "title": "2. Experimental Design",
+    "section": "Summary: Designing a Good Experiment",
+    "text": "Summary: Designing a Good Experiment\nBefore collecting data, consider:\n\nWhat parameters need controls, and what type of control is appropriate?\nDo the results need to be compared to a reference standard?\nHow many replicates are needed, and of what type?\nWhat are the main sources of variability?\nWhat level of uncertainty is tolerable for the scientific question?\n\nThese questions directly determine which statistical methods will be appropriate when the data are analyzed.\nNote: another important question is “Is the analytical method sensitive and specific enough for the measurement?”. We will discuss this in our session on correlation and regression analysis.",
+    "crumbs": [
+      "Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>2. Experimental Design</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L02.html#storing-experimental-data-in-python",
+    "href": "parts/sessions/L02.html#storing-experimental-data-in-python",
+    "title": "2. Experimental Design",
+    "section": "Storing Experimental Data in Python",
+    "text": "Storing Experimental Data in Python\nGood experimental design produces data that has to be stored and organized before it can be analyzed. Python has several tools for storage and organization. Today, we will discuss four of the core structures for this organization: lists, tuples, sets, and dictionaries. These are essential building blocks for data analysis in Python.\n\n\nLists\nA list stores multiple items in a single variable. Lists are ordered, changeable, and allow duplicates. They don’t have to consist of all the same type of scalar.\n\n\n\n\n\n\n\nAccessing list elements\n\n\n\n\n\n\nImportant\n\n\n\nPython starts counting at zero! So the first item in a list is considered to be in position zero!\n\n\n\n\n\n\n\n\n\n\nSlicing\nThe : operator selects a range. The end index is not included:\n\n\n\n\n\n\n\n\nModifying lists\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nFeel free to alter or add to the cells above to test questions you might have or ensure understanding. Click Start Over on the top of each cell to reset the cell.",
+    "crumbs": [
+      "Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>2. Experimental Design</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L02.html#tuples",
+    "href": "parts/sessions/L02.html#tuples",
+    "title": "2. Experimental Design",
+    "section": "Tuples",
+    "text": "Tuples\nA tuple is ordered but immutable (cannot be changed after creation). Created with parentheses:\n\n\n\n\n\n\nTuples are useful when data should not be accidentally modified. For example, as return values from functions, which we will cover in a later session.",
+    "crumbs": [
+      "Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>2. Experimental Design</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L02.html#sets",
+    "href": "parts/sessions/L02.html#sets",
+    "title": "2. Experimental Design",
+    "section": "Sets",
+    "text": "Sets\nA set is an unordered collection with no duplicates. Created with curly braces:\n\n\n\n\n\n\nSets are useful for removing duplicates from a list and testing membership:\n\n\n\n\n\n\nNote: you do not create an empty set by using empty curly braces, that creates a dictionary!",
+    "crumbs": [
+      "Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>2. Experimental Design</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L02.html#dictionaries",
+    "href": "parts/sessions/L02.html#dictionaries",
+    "title": "2. Experimental Design",
+    "section": "Dictionaries",
+    "text": "Dictionaries\nA dictionary stores data as key:value pairs. As of Python 3.7, dictionaries are ordered and changeable.\n\n\n\n\n\n\n\nAccessing and extending dictionaries\n\n\n\n\n\n\n\n\nChecking the data type\n\n\n\n\n\n\nTip\n\n\n\nDon’t know what type of variable something is? Check the type with type(variable).",
+    "crumbs": [
+      "Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>2. Experimental Design</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L02.html#choosing-the-right-data-structure",
+    "href": "parts/sessions/L02.html#choosing-the-right-data-structure",
+    "title": "2. Experimental Design",
+    "section": "Choosing the Right Data Structure",
+    "text": "Choosing the Right Data Structure\n\n\n\n\n\n\n\n\n\n\nStructure\nOrdered\nChangeable\nDuplicates\nUse case\n\n\n\n\nList\nYes\nYes\nYes\nOrdered collection of measurements\n\n\nTuple\nYes\nNo\nYes\nFixed data (return values, coordinates)\n\n\nSet\nNo\nYes\nNo\nUnique items, membership testing\n\n\nDictionary\nYes\nYes\nNo (keys)\nNamed data (key-value lookup)\n\n\n\n\n\n\n\n\n\n\nTipKey takeaways\n\n\n\n\nConclusions are constrained by experimental design — think statistically before collecting data.\nPositive and negative controls answer different questions; you need both to interpret a result.\nDistinguish technical vs. independent replicates (and repeatability vs. reproducibility).\nNever reuse exploratory data to confirm the hypothesis it generated (double-dipping / HARKing).\nIn Python: a list is ordered/changeable, a tuple immutable, a set unique/unordered, a dictionary key→value.",
+    "crumbs": [
+      "Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>2. Experimental Design</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L02.html#further-information",
+    "href": "parts/sessions/L02.html#further-information",
+    "title": "2. Experimental Design",
+    "section": "Further information",
+    "text": "Further information\nThe information that we talked about today can even be seen in every day life. Remember back to the covid pandemic and the lateral flow tests at home. What are the features on these tests that we learned about today?\n\n\n\nLateral flow COVID test\n\n\nReplication is a hot topic in science, and there is not always a consensus on what constitutes best practices. Below are some references in case you are interested in further reading on the topic.\n\n\n\nCartoon disagreement over best practices\n\n\n\nThe best time to argue about what a replication means? Before you do it - Nature article\nReplication - Nature Methods article",
+    "crumbs": [
+      "Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>2. Experimental Design</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L02.html#in-person-session",
+    "href": "parts/sessions/L02.html#in-person-session",
+    "title": "2. Experimental Design",
+    "section": "In person session",
+    "text": "In person session\nTBD",
+    "crumbs": [
+      "Foundations",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>2. Experimental Design</span>"
+    ]
+  },
+  {
+    "objectID": "parts/describing-data.html",
+    "href": "parts/describing-data.html",
+    "title": "Describing Data",
+    "section": "",
+    "text": "This Describing Data section covers the sessions on descriptive statistics (plus confidence intervals).\nDescriptive statistics is the foundation of analyzing collected data, the starting place.\nThis section introduces you to\n\ndetermination of estimators for samples,\nthe language of probability and distribution,\ncomparison of the frequentist vs. Bayesian approaches,\nvisualization of data in a meaningful way, and\ncomparisons between common error metrics.\n\nThese basics are essential in both exploratory and confirmatory research!",
+    "crumbs": [
+      "Describing Data"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L03.html",
+    "href": "parts/sessions/L03.html",
+    "title": "3. Descriptive Statistics",
+    "section": "",
+    "text": "Descriptive vs. Inferential Statistics\nThis session is about\nWe will also compute those summaries in Python, introducing the two additional scientific data structures:\nRemember that we have already seen lists, tuples, sets, and dictionaries.\nDescriptive statistics summarize and characterize the features of a dataset, typically a sample. Everything in this session is descriptive.\nInferential statistics draw conclusions about a larger population based on a sample. This requires hypothesis testing, confidence intervals, and regression. These topics are covered in the inferential statistics section.\nThe distinction matters: descriptive statistics describe only the data you have. Inferential statistics make claims that extend beyond your data, and those claims often carry more uncertainty, which must be quantified.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>3. Descriptive Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L03.html#precision-and-accuracy",
+    "href": "parts/sessions/L03.html#precision-and-accuracy",
+    "title": "3. Descriptive Statistics",
+    "section": "Precision and Accuracy",
+    "text": "Precision and Accuracy\n\n\n\n\n\n\n\nTerm\nDefinition\n\n\n\n\nPrecise\nResults are tightly clustered (low random error)\n\n\nAccurate\nResults are close to the true value (low systematic error)\n\n\n\n\n\n\nPrecision vs. Accuracy\n\n\nPrecision is measurable from your own data; it is reflected in the spread of replicates. Accuracy is harder to assess because it requires a known reference value. A highly precise but miscalibrated instrument will give tightly clustered results that are consistently wrong. This is why positive controls (detecting accuracy problems) and replicate measurements (characterizing precision) address fundamentally different questions.\nWhat causes this spread in values? Experimental errors.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>3. Descriptive Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L03.html#types-of-experimental-error",
+    "href": "parts/sessions/L03.html#types-of-experimental-error",
+    "title": "3. Descriptive Statistics",
+    "section": "Types of Experimental Error",
+    "text": "Types of Experimental Error\nEvery measurement contains error. The kind of error determines how it is addressed.\nGross errors are serious, identifiable errors that give reason to abandon the experiment or exclude the affected data. Examples include instrument failure, sample contamination, preparation/documentation mistakes. Data derived from gross errors are excluded from statistical analysis, but should still be documented.\n\n\n\nGross errors\n\n\nSystematic (determinate) errors cause a global shift in results in one direction, affecting accuracy. They do not average out with more replicates. Common sources:\n\n\n\nSystematic error\n\n\n\nUncalibrated pipettes, balances, or spectrophotometers\nUnaccounted background signal (cuvette absorbance, blank fluorescence)\nZero-setting errors\nRounding in analysis software\n\nSystematic errors are addressed during experimental design through calibration, proper controls, and comparative trials.\nRandom (indeterminate) errors cause results to scatter on both sides of the true value, affecting precision. They average out as sample size increases. Most statistical methods in this course assume that only random errors are present!\n\n\n\nRandom error\n\n\nIn order to evaluate errors, we need a way to store replicate data from samples and controls! We can do this in Python with a DataFrame from the tool “Pandas”.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>3. Descriptive Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L03.html#storing-replicate-data-in-python-the-dataframe",
+    "href": "parts/sessions/L03.html#storing-replicate-data-in-python-the-dataframe",
+    "title": "3. Descriptive Statistics",
+    "section": "Storing Replicate Data in Python: the DataFrame",
+    "text": "Storing Replicate Data in Python: the DataFrame\nTo compute statistics, we first need a “container” for the data. The DataFrame (from Pandas) is a two-dimensional table that can be used to store data. Think of a DataFrame as a much more advanced Excel spreadsheet. DataFrames are extremely useful for data analytics, and as such are a primary structure used throughout this course!\nLet’s look at how we can make a DataFrame and what a DataFrame looks like. Run this cell first to load the libraries used in this session and build a DataFrame of replicate measurements:\n\n\n\n\n\n\nA DataFrame is not static. We can extract information from a DataFrame, and we can modify a DataFrame. A few essential operations are shown below: select a column, add a column, and take a slice of rows:\n\n\n\n\n\n\nTip\n\n\n\nAlways think row first, column second: this convention applies throughout pandas and numpy.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nWant to do more things with DataFrames? Check out the Pandas documentation.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>3. Descriptive Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L03.html#population-vs.-sample",
+    "href": "parts/sessions/L03.html#population-vs.-sample",
+    "title": "3. Descriptive Statistics",
+    "section": "Population vs. Sample",
+    "text": "Population vs. Sample\nWe discussed populations and samples in the last session. As we collect replicates, we sample from a population.\n\n\n\nPopulation vs. sample\n\n\n\n\n\n\n\n\n\n\n\nPopulation\nSample\n\n\n\n\nMean\nμ (fixed, unknown)\n\\(\\bar{x}\\) (estimated, varies between samples)\n\n\nStandard deviation\nσ (fixed, unknown)\ns (estimated, varies between samples)\n\n\nVariance denominator\nN\nn − 1\n\n\n\nAs sample size increases, sample statistics converge toward their population counterparts. This convergence is one of several reasons larger sample sizes are preferred.\n\nEstimators\nA sample statistic used to estimate a population parameter is called an estimator. For example, the sample mean \\(\\bar{x}\\) estimates the true mean (μ). A good estimator is\n\nunbiased - its expected value equals the true parameter,\nconsistent - converges as n grows, and\nefficient - smallest variance among unbiased estimators.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>3. Descriptive Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L03.html#central-tendency",
+    "href": "parts/sessions/L03.html#central-tendency",
+    "title": "3. Descriptive Statistics",
+    "section": "Central Tendency",
+    "text": "Central Tendency\nDescriptive statistics summarize the features of a dataset. The three measures of central tendency are: mean, median, and mode.\n\n\n\nCentral tendency\n\n\nMean: the arithmetic average; sensitive to outliers.\n\\[\\bar{x} = \\frac{1}{n}\\sum_{i=1}^{n} x_i\\]\nMedian: the middle value when observations are ranked; robust to outliers. For \\(n\\) ordered values \\(x_{(1)} \\le \\dots \\le x_{(n)}\\):\n\\[\\tilde{x} = \\begin{cases} x_{\\left(\\frac{n+1}{2}\\right)} & n \\text{ odd} \\\\[4pt] \\tfrac{1}{2}\\left(x_{\\left(\\frac{n}{2}\\right)} + x_{\\left(\\frac{n}{2}+1\\right)}\\right) & n \\text{ even} \\end{cases}\\]\nMode: the most frequently occurring value; most meaningful for discrete or categorical data.\nThe right measure depends on the data structure and the question. - For symmetric, approximately normal distributions, the mean is the best estimator of the population center. - For skewed distributions or datasets with outliers, the median better represents the typical value. - For categorical data such as the outcome of a vote, only the mode is meaningful because averaging numerical labels assigned to categories produces a result with no interpretable meaning.\nCompute all three in Python:\n\n\n\n\n\n\nYour turn! Compute the median of condition c2 by replacing the ______ with the correct code:\n\n\n\n\n\n\n\n\nUse pystats.median() on the list c2.\n\n\nmedian_c2 = pystats.median(c2)\nprint(median_c2)\nmedian_c2 = pystats.median(c2)\nprint(median_c2)\n\nIn each of the plots below, is mean, median, or mode the best descriptor of the results?\n\n\n\nSelecting a summary statistic",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>3. Descriptive Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L03.html#variance-and-standard-deviation",
+    "href": "parts/sessions/L03.html#variance-and-standard-deviation",
+    "title": "3. Descriptive Statistics",
+    "section": "Variance and Standard Deviation",
+    "text": "Variance and Standard Deviation\nVariance describes how spread out the data are around the mean.\nPopulation variance (when all possible observations are known, uncommon): \\[\\sigma^2 = \\frac{1}{N}\\sum_{i=1}^{N}(x_i - \\mu)^2\\]\nwhere \\(N\\) is the number of replicates, \\(x_i\\) represents the replicate values, and \\(\\mu\\) is the true mean.\nSample variance (the estimator used in practice): \\[s^2 = \\frac{1}{n-1}\\sum_{i=1}^{n}(x_i - \\bar{x})^2\\]\nwhere \\(n\\) is the number of replicates, \\(x_i\\) represents the replicate values, and \\(\\bar{x}\\) is the estimated mean from the sample.\nNotice two main differences:\n\nthe true mean must be know for the population variance, whereas the the mean estimate is used for the sample, and\nThe sample variance divides by \\(n-1\\), not \\(n\\). This is Bessel’s correction.\n\nThe intuition for Bessel’s correction: calculating the sample mean \\(\\bar{x}\\) first consumes one piece of information from the data, leaving only \\(n-1\\) independent deviations from the mean. Dividing by \\(n\\) systematically underestimates the true population variance because the sample mean is always pulled toward the data points, making the deviations appear smaller than they truly are. Dividing by \\(n-1\\) corrects this bias, making the sample variance an unbiased estimator.\nBecause variance has squared units (if data are in units, variance is in units²), the units of variance are thus not directly interpretable alongside the raw data.\nSo what can we do?\nThe standard deviation takes the square root, restoring the original units: \\(s = \\sqrt{s^2}\\).\nImportantly, Bessel’s correction is propagated to the standard deviation, and thus, the difference between the population vs. sample must be considered when doing the calculations in python! Most packages use Bessel’s correction by default (such as statistics.stdev()), but numpy.std() uses \\(n\\) by default and needs to be corrected by passing ddof=1:\n\n\n\n\n\n\nYour turn. Compute the sample standard deviation of c2 with numpy, choosing the correct ddof:\n\n\n\n\n\n\n\n\nFor a sample, the divisor is n − 1, so ddof should be 1.\n\n\nsd_c2 = np.std(c2, ddof=1)\nprint(sd_c2)\nsd_c2 = np.std(c2, ddof=1)\nprint(sd_c2)",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>3. Descriptive Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L03.html#summarizing-a-whole-dataframe-at-once",
+    "href": "parts/sessions/L03.html#summarizing-a-whole-dataframe-at-once",
+    "title": "3. Descriptive Statistics",
+    "section": "Summarizing a Whole DataFrame at Once",
+    "text": "Summarizing a Whole DataFrame at Once\nInstead of individually finding each statistic from a DataFrame, we can use a short line of code to describe the statistics of each column in a DataFrame: describe().\ndescribe() reports count, mean, standard deviation (it uses \\(n-1\\), correctly), the minimum and maximum, and the quartiles for every column in one call. We will cover more of these metrics in later sessions. An example of how to use the code is provided below.\n\n\n\n\n\n\nThis single line is usually the first thing to run on a new dataset.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>3. Descriptive Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L03.html#error-propagation",
+    "href": "parts/sessions/L03.html#error-propagation",
+    "title": "3. Descriptive Statistics",
+    "section": "Error Propagation",
+    "text": "Error Propagation\nWhen a calculated result depends on multiple measured quantities, each with their own uncertainty, the uncertainties combine according to specific rules.\nAddition and subtraction — absolute uncertainties combine in quadrature: \\[\\sigma_z = \\sqrt{\\sigma_a^2 + \\sigma_b^2} \\quad \\text{for} \\quad z = a \\pm b\\]\nMultiplication and division — relative uncertainties combine in quadrature: \\[\\frac{\\sigma_z}{z} = \\sqrt{\\left(\\frac{\\sigma_a}{a}\\right)^2 + \\left(\\frac{\\sigma_b}{b}\\right)^2} \\quad \\text{for} \\quad z = a \\cdot b \\;\\text{or}\\; z = a/b\\]\nReporting conventions: the ± notation carries two significant figures in the uncertainty; parenthetical notation carries one.\n\n\n\n\n\n\nNoteWhen the inputs are not independent\n\n\n\n\n\nThe formulas above assume \\(a\\) and \\(b\\) are independent. If they are correlated, a covariance term must be added.\nFor a addition: \\[\\sigma_z^2 = \\sigma_a^2 + \\sigma_b^2 + 2\\,\\mathrm{cov}(a,b)\\]\nFor a subtraction: \\[\\sigma_z^2 = \\sigma_a^2 + \\sigma_b^2 - 2\\,\\mathrm{cov}(a,b)\\]\nFor multiplication: \\[\\left(\\frac{\\sigma_z}{z}\\right)^2 = \\left(\\frac{\\sigma_a}{a}\\right)^2 + \\left(\\frac{\\sigma_b}{b}\\right)^2 +\n\\frac{2\\,\\mathrm{cov}(a,b)}{a\\,b}\\]\nDivision: same as multiplication, but the covariance term flips sign: \\[\\left(\\frac{\\sigma_z}{z}\\right)^2 = \\left(\\frac{\\sigma_a}{a}\\right)^2 + \\left(\\frac{\\sigma_b}{b}\\right)^2 -\n\\frac{2\\,\\mathrm{cov}(a,b)}{a\\,b}\\]\nIn this course we assume independent measurements; the correlated case is noted here only for awareness.\n\n\n\nThe same rules in Python:\n\n\n\n\n\n\nError propagation is everywhere in quantitative chemistry. Whenever a reported quantity is calculated from several measured values, the uncertainties of those inputs must be propagated so that the final uncertainty is honest. Software often handles the arithmetic, but understanding the principle determines whether reported uncertainties can be trusted.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>3. Descriptive Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L03.html#numpy-arrays",
+    "href": "parts/sessions/L03.html#numpy-arrays",
+    "title": "3. Descriptive Statistics",
+    "section": "Numpy Arrays",
+    "text": "Numpy Arrays\nAlongside the DataFrame, the numpy array is the other core structure. The DataFrame is a two dimensional structure (spreadsheet). In contrast, the numpy array can be multidimensional. Arrays hold purely numerical data, are memory-efficient, and support vectorized operations (a calculation applied to every element at once). They appear mainly in regression, PCA, and Machine Learning; all of which will be covered in later sessions. Importantly, any DataFrame can be converted to one with .to_numpy().\n\n\n\n\n\n\nWhen to use each: DataFrames are better for labeled, heterogeneous data (columns with different types, named indices). Arrays are better for pure numerical computation and as inputs to machine-learning functions, which always expect numerical arrays.\n\n\n\n\n\n\n\nTipKey takeaways\n\n\n\n\nPrecision ≠ accuracy.\nError types: gross (document and exclude), systematic (impacts accuracy), random (impacts precision).\nCentral tendency: mean (sensitive to outliers), median (robust), mode (categorical).\nSample variance/SD divide by n−1 (Bessel’s correction) — numpy.std needs ddof=1.\nError propagation: absolute errors add in quadrature for ±; relative errors for ×/÷.\nIn Python, store data in a DataFrame (or array) and summarize it with statistics / numpy / pandas.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>3. Descriptive Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L03.html#in-person-session",
+    "href": "parts/sessions/L03.html#in-person-session",
+    "title": "3. Descriptive Statistics",
+    "section": "In person session",
+    "text": "In person session\nTBD",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>3. Descriptive Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L04.html",
+    "href": "parts/sessions/L04.html",
+    "title": "4. Probability: Frequentist",
+    "section": "",
+    "text": "What is Probability?\nThis session covers probability and statistical distributions. These topics form the foundation for every hypothesis test and confidence interval later in the course. Alongside it, the Python introduces iteration (loops and comprehensions) framed as the first tool of programmatic thinking.\nProbability is fundamentally about repeating an experiment many times, and programmatic iteration is how we express repetition in code.\nProbability is the measure of the certainty with which we expect a particular outcome to occur. It is a number between 0 (impossible) and 1 (inevitable).\nWe use probability when the outcome of an event appears to be governed by chance, which, in experimental science, is essentially always the case. Understanding probability is the foundation for understanding statistical distributions, and distributions are the foundation for both descriptive statistics and inferential statistics.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>4. Probability: Frequentist</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L04.html#what-is-probability",
+    "href": "parts/sessions/L04.html#what-is-probability",
+    "title": "4. Probability: Frequentist",
+    "section": "",
+    "text": "Probability\n\n\n\n\nThe Frequentist Approach\nIn frequentist statistics, probability is the long-run relative frequency of an event over many repeated trials.\nwhere frequency is the number of times an observation (\\(x\\)) occurs; and the frequency of \\(x\\) is often denoted by the function \\(f(x)\\).\n\\[P(X = x) \\approx \\frac{ f(x) }{n_{\\text{total trials}}}\\]\n\n\n\nFrequentist conceptual vs. examples\n\n\nNumerical example:\nThe probability that a reaction yields above 50% is estimated as the proportion of times this occurs across many replicate experiments.\nIn contrast, the Bayesian approach (which interprets probability differently) is covered in the next session and again at the end of inferential statistics section.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>4. Probability: Frequentist</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L04.html#thinking-programmatically-iteration",
+    "href": "parts/sessions/L04.html#thinking-programmatically-iteration",
+    "title": "4. Probability: Frequentist",
+    "section": "Thinking Programmatically: Iteration",
+    "text": "Thinking Programmatically: Iteration\nNotice the theme in that definition: “over many repeated trials.” Probability is about repetition, and repetition is the heart of programmatic thinking, which is the habit of solving a problem by recognizing a pattern and designing an efficient way for a computer to do the repeating.\nA useful mental checklist before writing any code:\n\nWhat do I have, and what do I need?\nIs there repetition? — if you are about to do the same thing many times, write a loop or a comprehension.\nChoose the tool — a loop, a comprehension, or (later sessions) a function.\nPlan in plain language first, then translate to code.\n\nThe tool for repetition is the for loop. range() generates a sequence of integers the range function can take two or three inputs: start, stop exclusive, and an optional step (in that order).\n\n\n\n\n\n\nA for loop runs a block once per item; the loop body is indented:\n\n\n\n\n\n\nA very common pattern is to build up a list across iterations:\n\n\n\n\n\n\nYou can loop over a dictionary (e.g. yields keyed by base) and use enumerate() to get position and value together:\n\n\n\n\n\n\n\nList Comprehension\nA list comprehension builds a list in one readable line — the same loop, compressed:\n[output_expression for item in collection]\n[output_expression for item in collection if condition]\nConverting reaction masses to percent yield (theoretical yield = 1.54 g), the long way and the short way:\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFormatting numbers: f\"{value:.1f}\" shows one decimal place; :.2f gives two, :.4f four. This affects only the display, not the stored value.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>4. Probability: Frequentist</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L04.html#discrete-vs.-continuous-distributions",
+    "href": "parts/sessions/L04.html#discrete-vs.-continuous-distributions",
+    "title": "4. Probability: Frequentist",
+    "section": "Discrete vs. Continuous Distributions",
+    "text": "Discrete vs. Continuous Distributions\nFor a discrete random variable, the probability of the variable equalling a specific value is described by the probability mass function (PMF). The total probability across all possible outcomes must sum to 1.\n\n\n\nPMF example: discrete final grades\n\n\nFor a continuous random variable, the probability of observing any single exact value is zero (there are infinitely many possible values). Probability is expressed as the area under a probability density function (PDF).\n\n\n\nPDF example: Distance\n\n\nFor a continuous variable, there are infinitely many possible exact values. The probability of observing exactly 73.14285…% yield (to infinite decimal places) is mathematically zero. What we can meaningfully ask is: what is the probability of observing a yield between 70% and 75%? That is the area under the PDF between those limits, which is computed by integration rather than summation.\nCommon shapes for continuous distributions in this course:\n\n\n\nDistribution\nPrimary application\n\n\n\n\nNormal (Gaussian)\nFoundation of most parametric tests\n\n\nStudent’s t\nParametric tests with small n\n\n\nExponential\nDecay processes, time-to-event data\n\n\nLognormal\nPositive data with a right skew\n\n\nChi-squared (χ²)\nVariance testing; goodness-of-fit\n\n\nF\nANOVA; comparison of variances\n\n\n\n\nSimulating and Visualizing Distributions\nA histogram shows the frequency of observations across bins — and “simulate many draws, then count how often each outcome appears” is exactly the frequentist idea, expressed with repetition. We can draw 1000 values from a distribution and plot them:\n\n\n\n\n\n\n\n\n\nThree example distributions: normal, exponential, and lognormal.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>4. Probability: Frequentist</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L04.html#the-normal-distribution",
+    "href": "parts/sessions/L04.html#the-normal-distribution",
+    "title": "4. Probability: Frequentist",
+    "section": "The Normal Distribution",
+    "text": "The Normal Distribution\nThe normal (Gaussian) distribution is the most important distribution in this course. It is symmetric and bell-shaped, centered on the mean (μ) with spread described by the standard deviation (σ).\n\n\n\nNormal distribution and standard deviation\n\n\nThe 68–95–99.7 rule:\n\n68% of observations fall within μ ± σ\n95% of observations fall within μ ± 2σ\n99.7% of observations fall within μ ± 3σ\n\nWe can check this rule by simulation — draw a large normal sample and count the fraction within each band (probability as a long-run frequency):\n\n\n\n\n\n\nThe 68–95–99.7 rule enables rapid mental estimation of how unusual any observation is. An observation more than 2σ from the mean should occur only 5% of the time by chance. This is precisely the intuition behind the conventional p &lt; 0.05 significance threshold. An observation more than 3σ away is genuinely rare (0.3%), which is why outlier detection methods often use 3σ as a threshold. Knowing these percentages allows you to sanity-check statistical results without software.\n\nWhy does the normal distribution dominate?\n1. The Central Limit Theorem (CLT): regardless of the distribution of individual measurements, the distribution of the sample mean approaches normal as sample size increases. This is why parametric tests — which compare means between conditions — work even when raw data are not perfectly normal.\n2. Natural prevalence: many physical phenomena, particularly measurement errors, are approximately normally distributed.\n3. Mathematical tractability: the normal distribution has simple, well-studied properties that form the foundation of t-tests, ANOVA, and regression.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>4. Probability: Frequentist</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L04.html#describing-distribution-shape",
+    "href": "parts/sessions/L04.html#describing-distribution-shape",
+    "title": "4. Probability: Frequentist",
+    "section": "Describing Distribution Shape",
+    "text": "Describing Distribution Shape\nTwo additional metrics describe shape beyond mean and variance:\nSkewness — how much the distribution leans to one side. Positive skew: long right tail. Negative skew: long left tail. Normal distribution: zero skewness.\nKurtosis — the “tailedness”. High kurtosis (leptokurtic): heavy tails, sharp peak. Low kurtosis (platykurtic): light tails, flat peak.\n\n\n\nDistributions illustrating variance, skewness, and kurtosis.\n\n\nQuantiles divide a distribution into equal-probability intervals. Quartiles (Q1 = 25th percentile, Q2 = median = 50th percentile, Q3 = 75th percentile) are the most commonly used.\n\n\n\nDistribution and quantiles",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>4. Probability: Frequentist</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L04.html#the-students-t-distribution",
+    "href": "parts/sessions/L04.html#the-students-t-distribution",
+    "title": "4. Probability: Frequentist",
+    "section": "The Student’s t-Distribution",
+    "text": "The Student’s t-Distribution\nThe t-distribution resembles the normal distribution but has heavier tails (kurtosis) — more probability is assigned to extreme values. Its shape depends on the degrees of freedom (df = n − 1).\n\n\n\nt-distribution PDF for different degrees of freedom.\n\n\nAt small n, the tails are substantially heavier than the normal distribution. As n increases, the t-distribution converges to normal.\n\n\n\nOverlay of normal and t-distributions highlighting heavier tails at low n.\n\n\nWith few observations, the population standard deviation must be estimated from the data, and that estimate itself carries uncertainty. The t-distribution accounts for this by spreading probability into the tails: extreme observations are more plausible because the spread could be larger than estimated. For n &gt; 20, the difference between t and normal is small. But for n = 3–5 (common in chemistry), using the normal distribution would significantly underestimate uncertainty.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>4. Probability: Frequentist</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L04.html#common-violations-of-normality",
+    "href": "parts/sessions/L04.html#common-violations-of-normality",
+    "title": "4. Probability: Frequentist",
+    "section": "Common Violations of Normality",
+    "text": "Common Violations of Normality\n\nFundamentally discrete or categorical data\nNon-linear responses (saturation, threshold, sigmoidal)\nValues approaching a natural limit (enzyme activity near Vmax, survival times)\nVery small sample sizes (n &lt; 5)\nUncontrolled factors introducing structured variability\nExtreme outliers\n\nWhen normality cannot be assumed, non-parametric alternatives are required — covered in Session 11.\n\nTransforming Data\nSometimes a non-normal variable can be transformed to approximate normality. The most common example is the log transformation: if raw data follow a lognormal distribution (right-skewed, positive values only), taking the logarithm produces approximately normal values.\n \nTransformations must be justified: they change the interpretation of results, and some are standard practice in specific fields while others would be considered arbitrary without strong prior reasoning.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>4. Probability: Frequentist</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L04.html#programmatic-thinking-the-method",
+    "href": "parts/sessions/L04.html#programmatic-thinking-the-method",
+    "title": "4. Probability: Frequentist",
+    "section": "Programmatic Thinking: The Method",
+    "text": "Programmatic Thinking: The Method\nThe iteration above is the first piece of a reusable habit you will lean on for the rest of the course. The common patterns:\n\n\n\n\n\n\n\nPattern\nConstruct\n\n\n\n\nApply the same operation to every item\nfor loop or comprehension\n\n\nFilter items by a condition\ncomprehension with if\n\n\nAccumulate a running total\nloop with a counter\n\n\nCompare consecutive items\nrange(len(data) - 1), use [i] and [i+1]\n\n\nRepeat a multi-step calculation\n(Session 7) write a function\n\n\n\nThe scaffolding approach for any non-trivial task: solve one case → test it → wrap it in a loop → test again → (later) refactor into a function. This same decompose-and-test habit is exactly what lets you direct — and check — code written by an LLM.\nA worked example combining loops, dictionaries, and f-strings — a molecular-weight calculator with a nested loop (outer over compounds, inner over elements):\n\n\n\n\n\n\nLoops are also the everyday way to add computed columns to a DataFrame:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTipKey takeaways\n\n\n\n\nFrequentist probability = long-run relative frequency (repeat the experiment many times).\nDiscrete variables → PMF (binomial, Poisson); continuous → PDF (normal, t, …).\nThe normal distribution dominates via the Central Limit Theorem (which applies to means, not raw data); remember 68–95–99.7.\nThe t-distribution has heavier tails at small n.\nProgrammatic thinking: spot the repetition → use a loop or comprehension; plan first, then scaffold (solve one case → loop → refactor).",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>4. Probability: Frequentist</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L04.html#in-person-session",
+    "href": "parts/sessions/L04.html#in-person-session",
+    "title": "4. Probability: Frequentist",
+    "section": "In person session",
+    "text": "In person session\nTBD",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>4. Probability: Frequentist</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L05.html",
+    "href": "parts/sessions/L05.html",
+    "title": "5. Probability: Frequentist (cont) and Bayesian",
+    "section": "",
+    "text": "Calculating Probabilities\nThis session covers combining probabilities and the Bayesian view of probability as a degree of belief updated by evidence. The Python introduces conditional statements (if/elif/else) — how code makes decisions — along with controlling the display precision of numbers.\nThe probability of an outcome is the predicted relative frequency of that outcome, assuming the same situation could be repeated many times:\n\\[P(X = x) \\approx \\frac{\\text{number of times } x \\text{ occurs}}{\\text{total number of trials}}\\]\nProbabilities can be theoretical (from reasoning about the structure of the experiment, e.g. a fair six-sided die gives P = 1/6 for each face) or experimental (from actual data). In science, experimental probabilities are more reliable but require sufficient data.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>5. Probability: Frequentist (cont) and Bayesian</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L05.html#combining-probabilities",
+    "href": "parts/sessions/L05.html#combining-probabilities",
+    "title": "5. Probability: Frequentist (cont) and Bayesian",
+    "section": "Combining Probabilities",
+    "text": "Combining Probabilities\nWhen combining probabilities, the independence of events is often required. Two events A and B are statistically independent if and only if P(A and B) = P(A) · P(B).\nAND (intersection): probability that both A and B occur. \\[P(A \\text{ and } B) = P(A) \\cdot P(B) \\quad \\text{(for independent events)}\\]\nOR (union): probability that A, B, or both occur. \\[P(A \\text{ or } B) = P(A) + P(B) - P(A \\text{ and } B)\\]\nFor mutually exclusive events: \\(P(A \\text{ or } B) = P(A) + P(B)\\)\nConditional probability: probability of A given that B has occurred. \\[P(A \\mid B) = \\frac{P(A \\text{ and } B)}{P(B)}\\]\nThe independence assumption is frequently violated in experimental data. Some examples:\n\nTwo measurements of the same prepared sample on the same instrument on the same day share systematic sources of error and are not independent.\nReplicates run by the same operator in the same session may be correlated.\n\nTreating correlated measurements as independent inflates the apparent amount of information and can produce spuriously small p-values. This is one reason the distinction between technical replicates and independent replicates matters so much.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>5. Probability: Frequentist (cont) and Bayesian</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L05.html#the-bayesian-approach",
+    "href": "parts/sessions/L05.html#the-bayesian-approach",
+    "title": "5. Probability: Frequentist (cont) and Bayesian",
+    "section": "The Bayesian Approach",
+    "text": "The Bayesian Approach\nIn the frequentist approach (Session 4), probability is the long-run frequency of an event. In the Bayesian approach, probability is a degree of belief — how strongly one believes a hypothesis to be true, given all available evidence.\nBayesian statistics provides a framework for updating beliefs in light of new data: starting from a prior estimate and producing a revised posterior estimate.\nBrief history: Reverend Thomas Bayes formulated this approach in the mid-1700s. Pierre-Simon Laplace independently arrived at similar conclusions a few years later — a useful reminder of how slowly scientific ideas once spread.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>5. Probability: Frequentist (cont) and Bayesian</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L05.html#bayes-theorem",
+    "href": "parts/sessions/L05.html#bayes-theorem",
+    "title": "5. Probability: Frequentist (cont) and Bayesian",
+    "section": "Bayes’ Theorem",
+    "text": "Bayes’ Theorem\n\\[P(H \\mid D) = \\frac{P(D \\mid H) \\cdot P(H)}{P(D)}\\]\n\n\n\n\n\n\n\n\nTerm\nName\nMeaning\n\n\n\n\nP(H | D)\nPosterior\nProbability of the hypothesis after seeing the data\n\n\nP(H)\nPrior\nProbability of the hypothesis before seeing the data\n\n\nP(D | H)\nLikelihood\nProbability of observing the data if the hypothesis is true\n\n\nP(D)\nMarginal probability\nTotal probability of the data across all hypotheses; normalizes the result\n\n\n\nThe posterior is proportional to the prior multiplied by the likelihood. When comparing two hypotheses, P(D) is the same for both and can often be set aside.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>5. Probability: Frequentist (cont) and Bayesian</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L05.html#a-worked-example-frequentist-vs.-bayesian",
+    "href": "parts/sessions/L05.html#a-worked-example-frequentist-vs.-bayesian",
+    "title": "5. Probability: Frequentist (cont) and Bayesian",
+    "section": "A Worked Example: Frequentist vs. Bayesian",
+    "text": "A Worked Example: Frequentist vs. Bayesian\nScenario: testing a water supply for a harmful contaminant.\n\nTest sensitivity: 90% (correctly identifies contaminated samples)\nTest specificity: 95% (correctly clears clean samples)\nPrior information: the contaminant is present in ~1% of water samples from this region\n\nThe test returns positive. How should this be interpreted?\nA frequentist reports the test statistics (sensitivity and specificity) and notes the result is positive, but does not naturally incorporate the 1% base rate.\nA Bayesian calculates the actual probability that the positive test is truly a positive:\n\nOut of 10000 samples from this region:\n\n100 are truly contaminated (1%)\n9900 are clean (99%)\n\nOf the 100 contaminated: 90 test positive (true positives), 10 test negative (false negatives) Of the 9900 clean: 495 test positive (false positives, 5% of 9900), 9405 test negative\nTotal positive tests: 90 + 495 = 585\nProbability that a positive result is truly a positive: 90 ÷ 585 ≈ 15%\nDespite the test appearing reliable (90% sensitivity, 95% specificity), most positive results are false positives because the prior probability of contamination is very low. This is the base rate fallacy, and it has had serious real-world consequences in medical testing and legal proceedings.\nThe frequentist approach does not naturally surface this conclusion. The Bayesian approach requires you to state your prior and makes the result explicit.\nLet’s consider how this might change in a region with much higher contamination prevalence: recalculate the posterior if\n\nthe base rate were 20% instead of 1%\nthe base rate were 50% instead of 1%",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>5. Probability: Frequentist (cont) and Bayesian</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L05.html#comparing-the-two-approaches",
+    "href": "parts/sessions/L05.html#comparing-the-two-approaches",
+    "title": "5. Probability: Frequentist (cont) and Bayesian",
+    "section": "Comparing the Two Approaches",
+    "text": "Comparing the Two Approaches\n\n\n\n\n\n\n\n\n\nFrequentist\nBayesian\n\n\n\n\nProbability means\nLong-run frequency\nDegree of belief\n\n\nIncorporates prior information\nNo\nYes\n\n\nOutput\np-value, confidence interval\nPosterior probability distribution\n\n\nDominant in\nMost published literature\nGrowing; especially in modeling and clinical trials\n\n\n\nBayesian statistics are increasingly used across all fields. However, the vast majority of published tests in chemistry and biology are still frequentist. This course focuses primarily on frequentist methods, while providing enough conceptual background to understand Bayesian results when you encounter them.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>5. Probability: Frequentist (cont) and Bayesian</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L05.html#other-approaches-for-awareness",
+    "href": "parts/sessions/L05.html#other-approaches-for-awareness",
+    "title": "5. Probability: Frequentist (cont) and Bayesian",
+    "section": "Other Approaches (for Awareness)",
+    "text": "Other Approaches (for Awareness)\nLikelihood approach: focuses on estimation rather than testing. Provides a middle ground between frequentist and Bayesian frameworks. Does not rely on p-values or arbitrary significance thresholds.\nInformation-theoretic approach: focuses on the information content of models. AIC and BIC — covered in Sessions 20 and 21 — are information-theoretic metrics. Uses relative model support rather than absolute significance.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>5. Probability: Frequentist (cont) and Bayesian</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L05.html#a-caution-on-misuse-of-probability",
+    "href": "parts/sessions/L05.html#a-caution-on-misuse-of-probability",
+    "title": "5. Probability: Frequentist (cont) and Bayesian",
+    "section": "A Caution on Misuse of Probability",
+    "text": "A Caution on Misuse of Probability\nMisunderstandings about how probabilities combine have had serious real-world consequences — courts have convicted individuals based on incorrectly combined probabilities where independence was assumed when events were correlated. The principle applies directly to science: always verify that the independence assumption is satisfied before multiplying probabilities together.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>5. Probability: Frequentist (cont) and Bayesian</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L05.html#making-decisions-in-python-conditional-statements",
+    "href": "parts/sessions/L05.html#making-decisions-in-python-conditional-statements",
+    "title": "5. Probability: Frequentist (cont) and Bayesian",
+    "section": "Making Decisions in Python: Conditional Statements",
+    "text": "Making Decisions in Python: Conditional Statements\nBayesian reasoning updates a decision as evidence arrives; in code, decisions are made with conditional statements. This part covers if/elif/else, their use inside loops and comprehensions, and how to control the display precision of numerical output with f-strings.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>5. Probability: Frequentist (cont) and Bayesian</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L05.html#conditional-statements",
+    "href": "parts/sessions/L05.html#conditional-statements",
+    "title": "5. Probability: Frequentist (cont) and Bayesian",
+    "section": "Conditional Statements",
+    "text": "Conditional Statements\nConditional statements execute code only when a condition is met.\n\nif\n\n\n\n\n\n\n\n\nif / else\n\n\n\n\n\n\n\n\nif / elif / else\n\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\nif/if/else vs if/elif/else: Using multiple if statements tests all conditions independently. Using elif stops at the first true condition. These give different results when conditions overlap.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>5. Probability: Frequentist (cont) and Bayesian</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L05.html#membership-testing",
+    "href": "parts/sessions/L05.html#membership-testing",
+    "title": "5. Probability: Frequentist (cont) and Bayesian",
+    "section": "Membership Testing",
+    "text": "Membership Testing\nThe in operator checks if an item is in a collection:",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>5. Probability: Frequentist (cont) and Bayesian</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L05.html#conditionals-in-for-loops",
+    "href": "parts/sessions/L05.html#conditionals-in-for-loops",
+    "title": "5. Probability: Frequentist (cont) and Bayesian",
+    "section": "Conditionals in For Loops",
+    "text": "Conditionals in For Loops\nConditions can be placed inside loops to categorize data:\n\n\n\n\n\n\nCounting with a loop:",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>5. Probability: Frequentist (cont) and Bayesian</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L05.html#conditionals-in-list-comprehension",
+    "href": "parts/sessions/L05.html#conditionals-in-list-comprehension",
+    "title": "5. Probability: Frequentist (cont) and Bayesian",
+    "section": "Conditionals in List Comprehension",
+    "text": "Conditionals in List Comprehension",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>5. Probability: Frequentist (cont) and Bayesian</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L05.html#python-operators",
+    "href": "parts/sessions/L05.html#python-operators",
+    "title": "5. Probability: Frequentist (cont) and Bayesian",
+    "section": "Python Operators",
+    "text": "Python Operators\nComparison: ==, !=, &gt;, &gt;=, &lt;, &lt;=\nLogic: and, or, not\nMembership: in, not in\nIdentity: is, is not",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>5. Probability: Frequentist (cont) and Bayesian</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L05.html#controlling-decimal-display-with-f-strings",
+    "href": "parts/sessions/L05.html#controlling-decimal-display-with-f-strings",
+    "title": "5. Probability: Frequentist (cont) and Bayesian",
+    "section": "Controlling Decimal Display with f-strings",
+    "text": "Controlling Decimal Display with f-strings\nTo display a number to a specific number of decimal places, use :.Nf in an f-string:\n\n\n\n\n\n\nThis applies everywhere output is reported in this course. For example, reaction metrics:\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nWhy :.Nf and not round()?\nround(x, 2) changes the stored value to 2 decimal places — which can introduce floating-point rounding artefacts in subsequent calculations.\nf\"{x:.2f}\" formats only the display. The full-precision value is retained internally, so downstream calculations are unaffected. Use :.Nf whenever you want to control what is shown, not what is stored.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>5. Probability: Frequentist (cont) and Bayesian</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L05.html#practical-example-reaction-quality-assessment",
+    "href": "parts/sessions/L05.html#practical-example-reaction-quality-assessment",
+    "title": "5. Probability: Frequentist (cont) and Bayesian",
+    "section": "Practical Example: Reaction Quality Assessment",
+    "text": "Practical Example: Reaction Quality Assessment\n\n\n\n\n\n\n\n\n\n\n\n\n\nTipKey takeaways\n\n\n\n\nCombine probabilities: AND = × (independent events), OR = + − overlap — always check independence.\nBayesian probability = degree of belief; update prior → posterior with Bayes’ theorem.\nBase rates matter: a ‘reliable’ test can still yield mostly false positives when prevalence is low.\nThis course is primarily frequentist; know enough Bayesian reasoning to read results.\nIn Python, if/elif/else make decisions; :.Nf controls display precision without changing the stored value.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>5. Probability: Frequentist (cont) and Bayesian</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L05.html#in-person-session",
+    "href": "parts/sessions/L05.html#in-person-session",
+    "title": "5. Probability: Frequentist (cont) and Bayesian",
+    "section": "In person session",
+    "text": "In person session\nTBD",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>5. Probability: Frequentist (cont) and Bayesian</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L06.html",
+    "href": "parts/sessions/L06.html",
+    "title": "6. Data Visualization",
+    "section": "",
+    "text": "Why Does Data Visualization Matter?\nThis session is about data visualization for both continuous and categorical data. Data visualization is one of the most fun, artistic, and subjective aspects of statistics. It provides some of the most instant gratification in coding! The following topics are covered in this session.\nPeople are visual: most readers assess data by visual inspection before engaging with the underlying statistics. A well-designed figure communicates the substance of an experiment efficiently and honestly. A poorly designed one — intentionally or not — can mislead.\nData visualization is the last step in the analysis pipeline, not the first. Substance, correct experimental design, and rigorous statistical analysis must precede design. A visually striking figure built on weak analysis is still weak analysis.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>6. Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L06.html#why-does-data-visualization-matter",
+    "href": "parts/sessions/L06.html#why-does-data-visualization-matter",
+    "title": "6. Data Visualization",
+    "section": "",
+    "text": "What Makes Good Data Visualization?\nThe standard reference is Edward Tufte’s The Visual Display of Quantitative Information. The key principles:\n\nClarity — the viewer should understand the message without ambiguity\nAccuracy — the visual representation must faithfully reflect the data\nIntegrity — the figure should not suggest conclusions the data do not support\nEfficiency — “gives the viewer the greatest number of ideas in the shortest time with the least ink” (Tufte)\n\nDesign is the icing on the cake. Without sound substance and analysis, design is meaningless.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>6. Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L06.html#misleading-data-visualization",
+    "href": "parts/sessions/L06.html#misleading-data-visualization",
+    "title": "6. Data Visualization",
+    "section": "Misleading Data Visualization",
+    "text": "Misleading Data Visualization\n“But you push too hard, even numbers got limits” - Mos Def, Mathematics 🎵\nSeveral common violations distort the honest representation of data:\nLaw of proportional ink: the area of graphical elements must be proportional to the quantity they represent. Violations include truncated y-axes on bar plots and unnecessary 3D effects.\nAs an example: in which of the datasets below is the difference between condition 1 and condition 2 larger?\n\n\n\nLaw of proportional ink test\n\n\nWhen we violate the law of proportional ink, a quick inspection of the figure gives a deeply incorrect impression.\nUnnecessary 3D: three-dimensional representations of two-dimensional data distort areas and angles, making it impossible to read values accurately.\n\n\n\nUnnecessary 3D graphs: The data in each of these plots is the same. Just because you can use Python doesn’t mean it is a good idea to roll out all the fancy features!\n\n\nSuggesting causation from correlation: plotting two unrelated trends on the same axis implies a relationship that does not exist.\nA VERY common example of a misleading correlation is showing the rates of publication in a field over time, and commenting on how much more important or common the field is becoming.\n\n\n\nAnalysis of publication rates in fields\n\n\nWow. It looks like chemistry, biology, and these two subfields of each are really becoming more important! What are these subfields? The chemistry subfield is the study of Alchemy, an ancient practice of trying to turn metal into gold. The biology subfield is phrenology, the discredited 19th century pseudoscience that promoted the prediction of a person’s physchological traits and mental abilities to the topology of their skull.\nWHAT? These are not growing fields. What is going on here?\nThe total number of publications in almost any field has risen continuously for decades, simply because more research is being conducted. The trend you are seeing may be entirely explained by the overall growth of publications, not by any increased importance of the topic.\nSpurious correlations are entertainingly cataloged at a website dedicated to spurious correlations. The statistical lesson is serious: two variables can exhibit high numerical correlation for no causal reason whatsoever.\n\n\n\nShould we all be eating more chocolate? attribution: business insider",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>6. Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L06.html#choosing-software",
+    "href": "parts/sessions/L06.html#choosing-software",
+    "title": "6. Data Visualization",
+    "section": "Choosing Software",
+    "text": "Choosing Software\n\n\n\nCommon plotting software\n\n\nPlug-and-play tools (e.g. GraphPad Prism, Excel) are suitable when\n\ndata volumes are low to medium,\nlittle transformation is required, and\ncommon plot types are sufficient.\n\nThey are faster to learn but offer limited customization.\nScripting tools (Python with matplotlib/seaborn, R) are required when\n\ndata need significant transformation,\nthe plot type needs customization,\ndata volumes are large, or\nthe analysis must be repeated many times.\n\nThe initial learning curve is higher for scripting tools, but the long-term payoff in flexibility and reproducibility is substantial.\nIn this course, we plot with matplotlib (the foundational library) and seaborn (a higher-level wrapper with sensible defaults). Before choosing a plot type, ask: what type of data do I have (discrete, categorical, continuous)? what message am I conveying, and is it a fair representation? is the information density appropriate? what conventions apply in my field?",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>6. Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L06.html#plotting-in-python-getting-started",
+    "href": "parts/sessions/L06.html#plotting-in-python-getting-started",
+    "title": "6. Data Visualization",
+    "section": "Plotting in Python: Getting Started",
+    "text": "Plotting in Python: Getting Started\nRun this cell first, then set consistent plot aesthetics with a parameter dictionary (a nice use of a dictionary loop):\n\n\n\n\n\n\nThe zip() function pairs corresponding elements from several lists — a convenient way to build a DataFrame:\n\n\n\n\n\n\n\nTwo matplotlib interfaces\nThe state-based interface is simplest for a single plot:\n\n\n\n\n\n\nThe object-oriented interface (fig, ax = ...) is required for multi-panel figures and fine control:",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>6. Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L06.html#continuous-x-continuous-y-line-and-scatter",
+    "href": "parts/sessions/L06.html#continuous-x-continuous-y-line-and-scatter",
+    "title": "6. Data Visualization",
+    "section": "Continuous x, Continuous y: Line and Scatter",
+    "text": "Continuous x, Continuous y: Line and Scatter\n\n\n\n\n\n\nA histogram shows the distribution of a single variable — one of the first plots to make on new data:\n\n\n\n\n\n\n\nSubplots\nplt.subplots() with nrows/ncols creates multi-panel figures; access each panel via axes[i]:\n\n\n\n\n\n\nsharex=True makes panels share an x-axis; tight_layout() prevents overlap.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>6. Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L06.html#categorical-x-continuous-y-bar-box-violin",
+    "href": "parts/sessions/L06.html#categorical-x-continuous-y-bar-box-violin",
+    "title": "6. Data Visualization",
+    "section": "Categorical x, Continuous y: Bar, Box, Violin",
+    "text": "Categorical x, Continuous y: Bar, Box, Violin\nFor categorical x-values (different catalysts, conditions, pH levels), the choice of plot should be driven by the message:\n\n\n\n\n\n\n\n\nPlot type\nFocus\nBaseline requirement\n\n\n\n\nBar plot\nMagnitude of central value (mean or median)\nMust start at zero\n\n\nBox plot\nInterquartile range (the spread)\nNone\n\n\nViolin plot\nFull distribution shape\nNone\n\n\n\n\nUse a bar plot when the message is “this condition produces approximately X units on average.” Use a box plot when the message is “here is the range of typical values and their spread.” Use a violin plot when the distribution shape is itself informative; for example, to show a dataset is bimodal or strongly skewed.\nTip: Many authors now overlay individual data points on top of bar, box, or violin plots, which is strongly recommended when n is small (as is common in chemistry), because it prevents the summary statistics from hiding the raw data.\nAnatomy of box and violin plots: Q1 (25th percentile), Q2 (median), Q3 (75th percentile); IQR = Q3 − Q1 (spread of the middle 50%); whiskers by one of two conventions — absolute min/max, or Q1 − 1.5·IQR and Q3 + 1.5·IQR with outliers as individual points.\n\n\n\nAnatomy of box and violin plots.\n\n\n\n\n\n\n\n\nComparing the three side by side with seaborn directed to specific panels (ax=axes[i]):",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>6. Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L06.html#your-first-plotting-function",
+    "href": "parts/sessions/L06.html#your-first-plotting-function",
+    "title": "6. Data Visualization",
+    "section": "Your First Plotting Function",
+    "text": "Your First Plotting Function\nA function wraps code you reuse. For a plot you make repeatedly, define it once and call it with different data (functions themselves are covered fully in Session 7):\n\n\n\n\n\n\nWhy write a plotting function? If you make the same plot 20 times, a function means changing one line instead of 20 if the style needs updating, and every plot in the project looks identical, which matters for clear scientific communication.\n\nSaving figures\n\n\n\n\n\n\nbbox_inches=\"tight\" prevents labels from being cropped. Prefer PDF or SVG (vector, publication quality); PNG for raster images.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>6. Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L06.html#aesthetic-notes",
+    "href": "parts/sessions/L06.html#aesthetic-notes",
+    "title": "6. Data Visualization",
+    "section": "Aesthetic Notes",
+    "text": "Aesthetic Notes\n\nValues first: substance, thorough analysis, and design with integrity are prerequisites. Aesthetics come last.\nClarity before visual flair. A simple, readable plot beats an impressive but hard-to-read one.\nColor vision: ~8% of males and ~0.5% of females have color vision variations. Avoid relying on red/green contrasts; tools like Color Oracle simulate how a plot looks to color-blind viewers.\nText size: labels must be legible in the final format — what reads on screen may be too small in print or a poster.\nAesthetics are subjective — conventions vary between journals, fields, and groups. Know your audience.\n\nLastly: Remember that figures are often used as superficial evaluations of any published work. If you are proud of your data, you should take care when making your figures!",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>6. Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L06.html#further-reading",
+    "href": "parts/sessions/L06.html#further-reading",
+    "title": "6. Data Visualization",
+    "section": "Further Reading",
+    "text": "Further Reading\n\nTufte, E.R. The Visual Display of Quantitative Information — the foundational reference\n10.1038/520589f — on problems with bar plots\n10.1371/journal.pbio.1002128 — on showing individual data points\nMcGuran: Data-Ink Ratio and Task Complexity in Graph Comprehension — a data-driven defense of bar plots\n\n\n\n\n\n\n\n\nTipKey takeaways\n\n\n\n\nVisualization is the last step — substance and analysis come first.\nHonest figures: proportional ink, no gratuitous 3D, don’t imply causation from correlation.\nBar (mean; start at 0) / box (IQR) / violin (distribution) — overlay individual points at small n.\nDesign for color-vision deficiency and legibility in the final format.\nIn Python: matplotlib (plt) + seaborn (sns); use object-oriented fig, ax = plt.subplots() for multi-panel; save vector PDF/SVG.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>6. Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L06.html#in-person-session",
+    "href": "parts/sessions/L06.html#in-person-session",
+    "title": "6. Data Visualization",
+    "section": "In person session",
+    "text": "In person session\nTBD",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>6. Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L07.html",
+    "href": "parts/sessions/L07.html",
+    "title": "7. Statistics by Estimation",
+    "section": "",
+    "text": "Set up for coding\nThis session covers estimation\n— the standard deviation, - the standard error of the mean, - the confidence interval (actually towards inferential statistics…), and — and the Python to compute them.\nAlong the way, we restart introducing functions, so we can wrap the calculation into a single reusable tool.\nTo run the code blocks below, make sure you run this one first!",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>7. Statistics by Estimation</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L07.html#common-metrics-for-evaluating-variance",
+    "href": "parts/sessions/L07.html#common-metrics-for-evaluating-variance",
+    "title": "7. Statistics by Estimation",
+    "section": "Common metrics for evaluating variance",
+    "text": "Common metrics for evaluating variance\nThree distinct metrics re often used to describe the spread or uncertainty in a dataset (sample): Standard deviation, Standard Error, and Confidence Intervals. These metrics are not interchangeable. Knowing when to use each is one of the most practically important skills in applied statistics. All three derive from variance, but they answer different questions.\n\nStandard Deviation (StDev)\nStandard deviation describes how widely scattered individual data points are around the sample mean, and how accurately the mean represents the collected data.\n\\[s = \\sqrt{\\frac{1}{n-1}\\sum_{i=1}^{n}(x_i - \\bar{x})^2}\\]\nNote: the StDev for the sample is used (with the n-1 correction, Bessel’s correction).\n\nDescribes the spread of individual data points.\nA descriptive statistic — it reflects variability in the data itself, not the precision of an estimate.\nReport it when describing how variable the measurements are (e.g. the scatter of replicates on a bar or box plot).\n\nHow can we calculate the StDev in python? There are actually many built in tools already, so we don’t NEED to explicitly code the math above if we know the standard tools.\nLet’s first calculate the StDev with Python’s built-in statistics package. You can read about the syntax at the documentation link.\n\n\n\n\n\n\nLet’s next calculate the StDev with the scipy stats package. Again, you can read about the syntax at the documentation link.\n\n\n\n\n\n\nOkay, now let’s try the StDev with the Numpy package. Again, you can read about the syntax at the documentation link.\n\n\n\n\n\n\nWait, why are they not all the same?\nCheck out the numpy documentation for standard deviation and see if you can identify and fix the problem in the cell with the Numpy calculation.\n\n\n\n\n\n\nNoteClick to reveal solution\n\n\n\n\n\nNumpy does not automatically make the correction for a sample instead of a population. So you need to specify that the delta degrees of freedom (the amount that you are subtracting from n) is 1. np_stdev = np.std(data, ddof=1)\n\n\n\n\n\nStandard Error of the Mean (SEM)\nThe SEM describes how precisely the sample mean estimates the true population mean.\n\\[\\text{SEM} = \\frac{s}{\\sqrt{n}}\\]\n\nDescribes the precision of the estimated mean, not the variability of the data.\nReport it for inferential purposes — calculating confidence intervals and p-values.\n\n\n\n\n\n\n\nWarning\n\n\n\nSEM always looks smaller than StDev. Not because the data are tighter — because SEM measures something different. Illustrating SEM when StDev is the appropriate metric makes data look more reproducible than it is. This is a common form of misleading presentation.\n\n\nBelow can you add code to calculate and print the SEM for the dataset?\n\nTest out calculating directly, using the square root function math.sqrt(value)\nSearch the documentation for scipy to learn the pre-built tool.\n\nDo the methods match?\n\n\n\n\n\n\n\n\n\n\n\n\nNoteClick to reveal solution\n\n\n\n\n\nSome solutions\ncalc_sem = pystats.stdev(data)/math.sqrt(len(data))\nprint(f\"{calc_sem:.2f}\")\nscipy_sem = spstats.sem(data)\nprint(f\"{scipy_sem:.2f}\")\n\n\n\n\n\nConfidence Intervals (CI)\nA confidence interval quantifies the uncertainty around an estimated parameter, such as the mean.\nDefinition: a 95% CI is a range computed such that, if you were to repeat the experiment many times, building a CI each time, 95% of those intervals would contain the true population mean.\nCIs can be any percentage. Below you can see how different CIs cover a dataset.\n\n\n\nIllustration of different CI cutoffs\n\n\n\nCommon Misunderstandings of CIs\nThese statements are incorrect:\n\n“There is a 95% probability that the true mean lies within this specific interval.”\n“95% of the data fall within the 95% CI.”\n\nThe 95% refers to the procedure, not to any specific calculated interval. Once you have a specific interval, the true mean either is or is not inside it. The correct mental model is about the reliability of the estimation procedure.\nThe second misconception confuses the CI with a prediction interval: the CI is about the mean, not where individual data points fall. For n = 5 or 10, the CI is much narrower than the spread of the data.\n\n\n\n\n\n\nTipUnsatisfied by CIs?\n\n\n\nOften, students find the meaning of the CI to be frustratingly unsatisfying. They are still important to learn because of their high frequency in data reporting.\nHowever, if you too feel like this, I encourage you to stick around for session 14 on Bayes statistics, where we will consider an estimation method that might be more satisfying. We still need to learn a lot more before we can get there though!\n\n\n\n\nMathematics of CIs\nFor the data from a normal distribution, the 95% CI for the mean is:\n\\[\\text{CI} = \\bar{x} \\pm z \\cdot \\text{SEM}\\]\nwhere \\(z\\) is the critical value from the z-distribution with \\(n-1\\) degrees of freedom.\nFor data from a t-distribution, the 95% CI for the mean is:\n\\[\\text{CI} = \\bar{x} \\pm t_{\\alpha/2,\\, n-1} \\cdot \\text{SEM}\\]\nwhere \\(t_{\\alpha/2,\\,n-1}\\) is the critical value from the t-distribution with \\(n-1\\) degrees of freedom (for a 95% CI, \\(\\alpha = 0.05\\), so \\(t_{0.025,\\,n-1}\\)).\nBoth \\(z\\) and \\(t_{\\alpha/2,\\,n-1}\\) can be found in look up tables, but in practice, we don’t calculate the CIs by hand, we use a computer that can determine these values.\nBelow is an example of how we can calculate the CI for a dataset using scipy’s tool for confidence intervals.\n\n\n\n\n\n\nRefresher: why is it ci95[0] and ci95[1]? what is this doing? Hint: what does print(ci95) show: a scalar variable or a more complex output? Do you remember how to check the “type” of a variable\n\n\n\n\n\n\nNoteextraneous information\n\n\n\nIn this course, we will not cover the mathematics behind CI calculations, but if you are interested the relevant information can be found through researching the cumulative distribution function (CDF) and the percent point function (PPF).\n\n\nWhy are CIs different for the normal distribution and the t-distribution?\nIf we think back to the normal distribution and the t-distribution, they have different shapes. Thus the math used to describe the expected shape of the dataset is different.\n\n\n\nDistribution and CI",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>7. Statistics by Estimation</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L07.html#reusable-code-blocks-in-python-functions",
+    "href": "parts/sessions/L07.html#reusable-code-blocks-in-python-functions",
+    "title": "7. Statistics by Estimation",
+    "section": "Reusable code blocks in Python: Functions",
+    "text": "Reusable code blocks in Python: Functions\n\nIntroduction to python functions\nAbove, we generated code each time we wanted to calculate a parameter, this gets tedious if we want to perform the same calculations multiple times. For example, for every dataset, we might want to calculate the mean, sample size, stdev, SEM, CI95. Instead of explicitly writing each step out every time, we very often we want to build reusable code. Why?\n\nSo that we don’t have to do the same thing over and over again. Efficiency!\nSo that we don’t introduce errors when we are having to repeat ourselves. Reliability!\nSo that anyone running the code gets the same result the same way every time. Reproducibility!\nSo the logic is written and tested once, then trusted everywhere it’s used. Consistency!\nSo that when requirements change, you fix the logic in one place instead of hunting down every copy. Maintainability!\nSo the code can be read, checked, and reused by others. Transparency and Shareability!\n\nOne of the simplest forms of reusable code in Python is a Function. Most functions that users write follow the shape below.\ndef function_name(parameter1, parameter2, optional_param=default_value):\n    \"\"\"Optional text (termed docstring) describing the function.\"\"\"\n    # operations here (termed the body of the function)\n    return result\nWe have already used many functions in the sessions: print(), len(), pd.DataFrame().\nParameters vs. arguments: These two words are often used interchangeably, but they refer to different things. A parameter is the variable named in the function definition, a placeholder. An argument is the actual value you supply for that parameter when you call the function.\ndef greet(name):          # `name` is a parameter\n    print(\"Hello, \" + name)\n\ngreet(\"Students\")              # \"Students\" is an argument\nLet’s read and then try to build some functions, so that we can better understand their structure and purpose.\nFirst, let’s check out a function to perform a simple calculation: return the square of a number.\n\n\n\n\n\n\nIn the code above, change the argument so that you can test the function for different inputs.\nBased on the shape of a function that is described above, in the cell below, can you create a power function that returns the result of a number raised to a given power?\n\\[result = number^{power}\\]\n\n\n\n\n\n\nCan you also set default values for the inputs?\n\n\n\n\n\n\nNoteClick for an example solution\n\n\n\n\n\ndef power_function(number, power=2):`\n    return number ** power\nNOTE: in the function definition line, parameters that have default values must come after parameters without default values.\n\n\n\nA function can return several values at once using a dictionary, list, or tuple:\n\n\n\n\n\n\n\n\nBuilding functions for statistics\nNow that we have seen a few functions, let’s apply this knowledge to build functions for statistical calculations.\nIn Python:\n\n\n\n\n\n\n\n\n\n\n\n\nNoteClick for an example solution\n\n\n\n\n\ndef analysis(dataset, confidence=0.95):\n    \"\"\"Return mean, StDev, SEM, and CI for a dataset (list).\"\"\"\n    n = len(dataset)\n    mean = pystats.mean(dataset)\n    stdev = pystats.stdev(dataset)\n    sem = spstats.sem(dataset)\n    ci_lower_upper = spstats.t.interval(confidence=confidence, df=n-1)\n    return {\n        \"n\": n,\n        \"mean\": mean, \n        \"stdev\": stdev, \n        \"sem\": sem, \n        f\"ci{confidence}_interval\": ci_lower_upper, \n        }\n\nresult = analysis(data)\nprint(result)",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>7. Statistics by Estimation</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L07.html#observing-features-of-stdev-sem-and-ci",
+    "href": "parts/sessions/L07.html#observing-features-of-stdev-sem-and-ci",
+    "title": "7. Statistics by Estimation",
+    "section": "Observing features of StDev, SEM, and CI",
+    "text": "Observing features of StDev, SEM, and CI\nIn the in person session, we will use the function that you created above to study features of these metrics and to analyze datasets.\n\n\n\n\n\n\n\n\n\nMetric\nWhat it measures\nChanges with n?\nUse case\n\n\n\n\nStDev\nSpread of individual values\nNot systematically\nDescribing data variability\n\n\nSEM\nPrecision of the mean estimate\nShrinks as 1/√n\nCalculating CI and p-values\n\n\nCI\nUncertainty around the mean estimate\nShrinks with n\nReporting estimates and comparisons\n\n\n\nIt is important to use the appropriate metric when reporting data, AND also labeling the dataset so that observers can correctly interpret your data. The figure below illustrates why visualization with these metrics can be confusing without approprate labeling.\n\n\n\nComparing StDev, SEM, and CI\n\n\nWithout clear labeling of which metric is shown, one can incorrectly interpret the data.",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>7. Statistics by Estimation</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L07.html#further-reading",
+    "href": "parts/sessions/L07.html#further-reading",
+    "title": "7. Statistics by Estimation",
+    "section": "Further Reading",
+    "text": "Further Reading\n\n10.1007/s10654-016-0149-3 — Statistical tests, P values, confidence intervals, and power: a guide to misinterpretations (recommended before Session 8)\n10.1038/nmeth.2659 — on error bars in figures\n10.1083/jcb.200611141 — on error bars in cell biology\n\n\n\n\n\n\n\n\nTipKey takeaways\n\n\n\n\nStDev describes the spread of the data (≈constant with n); SEM describes the precision of the mean (shrinks as 1/√n).\n95% CI = x̄ ± t·SEM, and refers to the procedure, not a specific interval.\nDon’t show SEM when StDev is the honest metric; always label error bars and report n.\nIn Python: wrap reusable calculations in a function (def, optional defaults, return a dict for multiple values).",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>7. Statistics by Estimation</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L07.html#practice",
+    "href": "parts/sessions/L07.html#practice",
+    "title": "7. Statistics by Estimation",
+    "section": "Practice",
+    "text": "Practice\nThe exercises for this session are provided as a Jupyter notebook on OLAT. Try calling estimate() on one of your own datasets, and confirm the SEM equals StDev / sqrt(n).",
+    "crumbs": [
+      "Describing Data",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>7. Statistics by Estimation</span>"
+    ]
+  },
+  {
+    "objectID": "parts/inferential-statistics.html",
+    "href": "parts/inferential-statistics.html",
+    "title": "Inferential Statistics",
+    "section": "",
+    "text": "Here we move from describing a single sample to drawing conclusions about the population behind it. You will learn to test hypotheses with t-tests, ANOVA, and post-hoc comparisons; to quantify how large and how reliable an effect is through effect sizes, p-values, and statistical power; and to choose the right approach when the assumptions of normality or equal variance break down. The block also covers how to identify outliers and apply data transformations honestly, and Case Studies I brings these tools together on realistic chemical data. It closes with Bayesian statistics — now that you know the frequentist toolkit, we revisit probability as a degree of belief and contrast the two frameworks.",
+    "crumbs": [
+      "Inferential Statistics"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L08.html",
+    "href": "parts/sessions/L08.html",
+    "title": "8. Hypothesis Testing",
+    "section": "",
+    "text": "Hypothesis Testing\nThis session introduces the framework of hypothesis testing and, alongside it, how to run the most common test — the t-test — in Python with pingouin.\nGeneral imports for this lecture\nScientific questions often seek yes/no answers: Is the vaccine effective? Is catalyst A better than catalyst B?\nWhy can’t we just compare the mean values and see if one mean is larger than another? As we discussed in prior sessions, all experimental measurements have variance and uncertainty. Thus, we need a way to interpret the data including the variance and uncertainty.\nHypothesis testing provides a formal framework for answering such questions using data. Estimation can then add additional context to indicate by how much for these questions.\nIn hypothesis testing, there are two foundational parts:",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>8. Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L08.html#the-null-hypothesis",
+    "href": "parts/sessions/L08.html#the-null-hypothesis",
+    "title": "8. Hypothesis Testing",
+    "section": "The Null Hypothesis",
+    "text": "The Null Hypothesis\nHypothesis testing uses the null hypothesis (H₀), which is typically the negation of the working hypothesis.\nIf the alternative hypothesis (H₁) states that there is an effect, the null hypothesis states that there is NO effect. Examples of the construction of these hypotheses are below.\n\n\n\n\n\n\n\n\nResearch question\nNull hypothesis (H₀)\nAlternative hypothesis (H₁)\n\n\n\n\nIs plant growth affected by classical music?\nGrowth is not affected\nGrowth is affected\n\n\nIs catalyst A better than catalyst B?\nNo difference in yield\nCatalyst A gives higher yield\n\n\nIs antibiotic A more toxic to S. aureus than antibiotic B?\nNo difference in toxicity\nAntibiotic A is more toxic than antibiotic B\n\n\n\nWhy would we do this? It might seem more natural to test the alternative hypothesis directly.\nThe reason for testing the null is rooted in the logic of falsification (Karl Popper): no number of confirmatory observations can prove a hypothesis correct, but a single contradictory observation can prove it incorrect. By testing H₀, we ask: “would these data be this extreme if there were truly no effect?” If the answer is “very unlikely” (p &lt; threshold), we have grounds to reject H₀ in favor of H₁. This avoids confirmation bias and encourages seeking disconfirming evidence.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>8. Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L08.html#logic-deductive-vs.-inductive",
+    "href": "parts/sessions/L08.html#logic-deductive-vs.-inductive",
+    "title": "8. Hypothesis Testing",
+    "section": "Logic: deductive vs. inductive",
+    "text": "Logic: deductive vs. inductive\nDeductive reasoning is a logical process in which a conclusion is drawn from a set of premises. If all the premises are true, then the conclusion must be true.\n\nPremise 1: All acids donate protons in aqueous solutions\nPremise 2: HCl is an acid.\nDeductive conclusion: HCl donates protons in aqueous solutions\n\nInductive reasoning is a logical process in which a broader, general conclusion is drawn from specific observations or examples. The conclusion is likely, but not certain.\n\nObservation 1: Na reacts vigorously with water.\nObservation 2: K reacts vigorously with water.\nObservation 3: Li reacts vigorously with water.\nInductive conclusion: all alkali metals probably react vigorously with water.\n\nInductive reasoning is generally for hypothesis generation, and deductive reasoning is typically for hypothesis testing.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>8. Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L08.html#type-i-and-type-ii-errors",
+    "href": "parts/sessions/L08.html#type-i-and-type-ii-errors",
+    "title": "8. Hypothesis Testing",
+    "section": "Type I and Type II Errors",
+    "text": "Type I and Type II Errors\nWhen testing H₀, four outcomes are possible, including two types of error:\n\n\n\n\n\n\n\n\n\nH₀ is actually true\nH₀ is actually false\n\n\n\n\nReject H₀\nType I error (false positive)\nCorrect decision\n\n\nFail to reject H₀\nCorrect decision\nType II error (false negative)\n\n\n\n\nType I error rate (α): the probability of incorrectly rejecting H₀. Conventionally set at α = 0.05.\nType II error rate (β): the probability of failing to detect a real effect. Related to power = 1 − β (covered in Session 9).\n\nA common point of confusion:\nType I and Type II errors are defined conditional on H₀ being true or false, which we cannot observe directly. In practice, you usually don’t know which type of error, if any, occurred in a specific experiment.\nWhat you control in the design phase is the probability of each type of error: α is set by the significance threshold, and power (1 - β) is controlled by sample size and effect size. Today, we will focus on the significance threshold, but in Session 9, we will discuss power: why it is important, how to evaluate it, and how to get more of it…",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>8. Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L08.html#mathematical-tests-to-evaluate-the-null-hypothesis",
+    "href": "parts/sessions/L08.html#mathematical-tests-to-evaluate-the-null-hypothesis",
+    "title": "8. Hypothesis Testing",
+    "section": "Mathematical tests to evaluate the null hypothesis",
+    "text": "Mathematical tests to evaluate the null hypothesis\nAcross this session and the next six sessions, we will discuss mathematical methods for testing a null hypothesis. Like reactions in organic chemistry, these tests have names (often derived from the person who developed or popularized the test). It is important to remember the names of these tests and their purpose. Later in the course, you may find the Cheat sheet in the reference section of this website useful for reminding yourself of this information.\nToday, we are going to focus on one statistical test called the t-test.\n\nThe t-Test\nA common question that the t-test asks is: Are two outputs statistically different?\n\n\n\nExample of comparison made in a t-test\n\n\nFormally, the t-test is used to evaluate a null hypothesis in which there are two quantities to be compared and the input data (independent variable) is categorical or discrete and the output data (dependent variable) is continuous.\nThe two quantities being compared can be either the means of two samples or the mean of a sample against a standard.\n\nOne-sample t-test: compare the mean of a dataset to a known standard value (e.g. is this yield significantly above 50%?)\nTwo-sample t-test: compare the means of two independent conditions\n\n\n\n\n\n\n\nTipFun fact\n\n\n\nThe t-test was developed by William Gosset (writing under the pseudonym “Student”) to monitor beer quality at the Guinness brewery in the early 1900s. The test is also sometimes referred to by a more formal name: the “Student’s t-test.”\n\n\nWhat is the output of the t-test?\nThe t-test has an intermediate output (t-statistic) and a final output (p-value). Additionally, other parameters are important for interpreting the final output (p-value), including the descriptive statistics, CIs, as well as some topics that we will cover next session (effect size and power).\nBefore we get into how to interpret the intermediate and final outputs, let’s talk about these outputs and what they mean.\n\nThe t-Statistic\nThe t-statistic quantifies how many standard errors the observed difference is from zero (or from the null hypothesis value).\nMathematically:\n\nLet \\(∆\\) be the true difference between the known value (\\(\\mu\\)) and the experimental mean (\\(\\mu_{1}\\)): \\(∆\\) = \\(\\mu\\) - \\(\\mu_{1}\\).\nLet \\(\\hat{\\Delta}\\) be the estimated difference between the known value and the experimental mean: \\(\\hat{\\Delta}\\) = \\(\\hat{\\mu}\\) - \\(\\hat{\\mu_1}\\).\n\n\\[t_{stat} = \\frac{\\bar{\\mu} - \\bar{\\mu}_1}{\\sqrt{\\dfrac{x\\hat{\\sigma}^2}{n}}} = \\frac{\\hat{\\Delta}}{\\text{SEM}_{\\text{pooled}}}\\]\nWhere \\(x\\) is 1 or 2 for the one-sample and two-sample t-test, respectively; and \\(∆\\) = \\(\\mu\\) - \\(\\mu_{1}\\)\nSometimes it is helpful to visualize what this means in graphical form.\n\n\n\nGraphical illustration of a t-test\n\n\nA larger absolute t-statistic means the observed difference is more extreme relative to the variability in the data. The t-statistic and the distribution are then used to calculate the final output metric: the p-value.\n\n\nThe p-Value\nThe p-value is the probability of observing a test statistic as extreme or more extreme than the one calculated if the null hypothesis and the full statistical model are correct.\n\n\n\n\n\n\nImportant\n\n\n\nA p-value is NOT an error probability. It does not tell you the probability that H₀ is true, nor the probability that the result occurred by chance. It reports the probability of the data (or more extreme data) given the model, not the probability of the model given the data. This distinction is explored further in Session 9.\n\n\nCommon notation (but giving numbers is now preferred):\n\n\n\nSymbol\nThreshold\n\n\n\n\n*\np &lt; 0.05\n\n\n**\np &lt; 0.01\n\n\n***\np &lt; 0.001\n\n\n****\np &lt; 0.0001\n\n\n\n\n\nThe t-test in practice\nUsually, the workflow is as follows:\n\n**Generate the alternative and null hypotheses as well as set a threshold.\nCollect the data.\nPlot the data showing the samples to be compared.\nInspect the plot visually.\nInspect the descriptive statistics for the data: number of replicates (n), mean, median, stdev, fold change, and also CI.\nSelect and perform the appropriate statistical test.\nEvaluate the results of the statistical test.\n\nBelow is an example of the workflow described above.\nAlternative hypothesis: Condition 1 and 2 give different mean yields.\nNull hypothesis: there is no difference in mean yield between conditions 1 and 2.\nSignificance threshold: the significance threshold is \\(\\alpha\\) which is equal to 1 - desired percent confidence interval (such as 90%, 95%, 99%). A lower alpha is a stricter metric.\nPlot the data and inspect\n\n\n\n\n\n\nReport descriptive statistics and evaluate\nHere instead of explicitly writing each of the calculations, we will use a tool from statsmodels.\n\n\n\n\n\n\nSelect and perform the appropriate statistical test\nHere, we will use a new tool in python called pingouin, which we imported as pg. Please see the documentation for pingouin.\n\n\n\n\n\n\nJust as a quick example, if you just wanted to perform a one-sample t-test the following code is suitable.\n\n\n\n\n\n\nEvaluate the results of the statistical test\nOur primary output is the p-value, but we need to revisit our threshold for significance \\(\\alpha\\). In this example, our \\(\\alpha\\) was 0.05 (95% CI).\nIf the p-value is below the significance cutoff, the probability of observing a test statistic at least as extreme as ours is low assuming the null hypothesis is true. Thus, we reject the null hypothesis, and our analysis supports the alternative hypothesis: the mean yields under conditions 1 and 2 are different.\nIf the p-value is equal to or above the significance cutoff, it did not clear the statistical threshold and the probability of observing a test statistic at least as extreme as ours, assuming the null hypothesis is true, is not small enough to warrant rejection of the null hypothesis. Thus, we fail to reject the null hypothesis, and we conclude that we did not find evidence to indicate that the mean yields under conditions 1 and 2 are different.\nBased on this information, what is your conclusion of our worked example with conditions 1 and 2?\n\n\n\n\n\n\nNoteHelpful but not necessary\n\n\n\n\n\nYou can directly extract information from a row and column of a dataframe with the following: df_name.at[\"row\", \"column\"]. An example is below\np_value = result.at[\"T_test\", \"p_val\"]\nprint(f\"p-value: {p_value:.4f}\")\n\nif p_value &lt; 0.05:\n    print(\"p &lt; 0.05 → reject H₀: the means differ.\")\nelse:\n    print(\"p ≥ 0.05 → fail to reject H₀.\")",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>8. Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L08.html#variations-of-the-t-test",
+    "href": "parts/sessions/L08.html#variations-of-the-t-test",
+    "title": "8. Hypothesis Testing",
+    "section": "Variations of the t-Test",
+    "text": "Variations of the t-Test\nOne-tailed vs. two-tailed:\n\nTwo-tailed: the effect can operate in either direction (example: is A different from B, includes both better or worse?)\nOne-tailed: the effect is being tested in only one direction (example: is A better than B?)\n\nIf you can legitimately simplify from a two-tailed to a one-tailed test, you halve the p-value for the favored direction — because all the rejection region is concentrated in one tail instead of two.\nOne-tailed tests are only justified when you have a strong scientific reason to test only one direction before seeing the data. The practical guideline: use two-tailed unless the study design explicitly committed to a directional hypothesis from the start.\nIf you switch to a one-tailed test after seeing the results of a two-tailed t-test, this is termed p-hacking (= very, very bad): you are using the data to choose the test, which invalidates the conclusions.\nPaired vs. independent:\n\nIndependent: no meaningful relationship between individual measurements in the two groups (e.g. the yields of two different catalysts in separate experiments).\nPaired: the same subject or sample is measured under both conditions (e.g. heart rate in the same 20 people before and after a presentation). Pairing reduces noise by controlling for between-subject variation.\n\nBoth one-sided vs. two-sided and paired vs. independent are controlled by single arguments. The only thing in the code that changes are the arguments. Please check the pingouin documentation.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>8. Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L08.html#assumptions-of-the-t-test",
+    "href": "parts/sessions/L08.html#assumptions-of-the-t-test",
+    "title": "8. Hypothesis Testing",
+    "section": "Assumptions of the t-Test",
+    "text": "Assumptions of the t-Test\nEach statistical test that we will cover in this course holds certain assumptions. It is important to understand these assumptions, so that you know if you need to make variations to the statistical test or change to another statistical test.\nThe t-test assumes:\n\nThe data are drawn from a normal (or t-) distribution\nThe variances of the two groups are similar (homoscedasticity)\nThe datasets are sufficiently large to accurately assess normality and homoscedasticity.\nThe observations are randomly sampled and independent\n\nIn session 11, we will discuss what to do when assumptions of normality, variance, or sample size are not met.\n\n\n\n\n\n\nWarning\n\n\n\nIn this session small datasets were used for comparisons owing to the online format. However, with sample sizes less than 20, a correction should normally be applied. We will apply that correction in a later lecture.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>8. Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L08.html#statistical-significance-scientific-significance",
+    "href": "parts/sessions/L08.html#statistical-significance-scientific-significance",
+    "title": "8. Hypothesis Testing",
+    "section": "Statistical Significance ≠ Scientific Significance",
+    "text": "Statistical Significance ≠ Scientific Significance\nStatistical significance does not imply practical or scientific significance.\n\nA statistically significant result with a tiny effect size may be scientifically irrelevant\nA non-significant result does not mean there is no effect — it may mean the study lacked power to detect it\nStatistical significance depends on sample size: with enough replicates, even trivially small effects become “significant”\n\nThese limitations motivate the use of effect sizes and power analysis — the topics of Session 9, where we extend exactly this t-test workflow. The p-value should always be reported with context: sample size, effect size, and the actual numerical p-value (not just a significance symbol).",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>8. Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L08.html#the-fault-in-hypothesis-testing",
+    "href": "parts/sessions/L08.html#the-fault-in-hypothesis-testing",
+    "title": "8. Hypothesis Testing",
+    "section": "The fault in hypothesis testing",
+    "text": "The fault in hypothesis testing\nHypothesis testing as conventionally practiced has been criticized for reducing scientific conclusions to a binary: “statistically significant” or “not statistically significant.” A movement in modern statistics advocates for using estimation (confidence intervals and effect sizes) to better convey the uncertainty and practical meaning of results. Estimation is not a replacement for hypothesis testing but a complement to it.\nGoodhart’s Law (stated wittily by Marilyn Strathern):\nWhen a measure becomes a target, it ceases to be a good measure.\np &lt; 0.05 became the dominant target for publication in the 20th century, which incentivized practices–from subtle data selection to outright p-hacking–that inflated false positive rates. Being aware of this history helps you read the literature critically and practice statistics more fully.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>8. Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L08.html#arbitrary-thresholds",
+    "href": "parts/sessions/L08.html#arbitrary-thresholds",
+    "title": "8. Hypothesis Testing",
+    "section": "Arbitrary thresholds",
+    "text": "Arbitrary thresholds\nThere is nothing particularly special about an \\(\\alpha\\) of 0.05, but it is routinely used almost without thought. The pervasiveness of arbitrary thresholds is a common critique of hypothesis testing. Because this course is an introductory course, we will stick to common thresholds, so that you gain familiarity with standard practices. However, I will try to indicate when a threshold is arbitrary, AND if you continue in statistical thinking for any later career or hobby, I would encourage you to explore more alternative statistical methods (some of which are mentioned in Session 14).",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>8. Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L08.html#in-person",
+    "href": "parts/sessions/L08.html#in-person",
+    "title": "8. Hypothesis Testing",
+    "section": "In person",
+    "text": "In person\nTBD",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>8. Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L09.html",
+    "href": "parts/sessions/L09.html",
+    "title": "9. Effect Sizes, p-Values, and Statistical Power",
+    "section": "",
+    "text": "Code set up\nThis session is about putting a p-value in context by adding additional important parameters, such as fold-change, effect size, and statistical power. We will also cover computing each of these metrics in Python with pingouin.\nNote: You do not need to memorize formulas for the exam.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>9. Effect Sizes, p-Values, and Statistical Power</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L09.html#p-values-revisited",
+    "href": "parts/sessions/L09.html#p-values-revisited",
+    "title": "9. Effect Sizes, p-Values, and Statistical Power",
+    "section": "p-Values Revisited",
+    "text": "p-Values Revisited\nThe p-value is widely misunderstood, even by trained scientists.\nMuch more than chemistry, psychology research and psychology education is very, very focused on statistics, but even those trained more rigorously in statistics can be wrong sometimes.\n\n\n\nA study of psychology professors and students found that most agreed with at least one false statement about the meaning of a p-value: research article and news article.\n\n\nA p-value is: The probability of obtaining a test statistic at least as extreme as the one observed, assuming the model — including H₀ and all statistical assumptions — is correct.\nA p-value is NOT: - The probability that H₀ is true - The probability that the result occurred by chance - A measure of effect size - Sufficient alone to evaluate a result\nThe phrase “assuming the model is correct” is important and often overlooked. The p-value reflects not only H₀ but also the assumptions of the test (normality, homoscedasticity, independence), the quality of the data collection, and the choice of test statistic. A small p-value may reflect a true effect, a violated assumption, biased sampling, or all three at once. This is why reporting the full analysis is essential for interpreting a p-value clearly.\nAs discussed in the last session, there is a lot of critique of p-values, rightly so. But these methods are pervasive in scientific literature. What can help us interpret and report p-values in a useful and honest way?",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>9. Effect Sizes, p-Values, and Statistical Power</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L09.html#fold-change",
+    "href": "parts/sessions/L09.html#fold-change",
+    "title": "9. Effect Sizes, p-Values, and Statistical Power",
+    "section": "Fold-Change",
+    "text": "Fold-Change\nFold-change is the ratio of the means of two conditions:\n\\[\\text{Fold-change} = \\frac{\\bar{x}_{\\text{treatment}}}{\\bar{x}_{\\text{control}}}\\]\nExample: catalysts A and B yield 220 ± 30 and 340 ± 60 turnover numbers (n = 5). The fold-change is 340/220 ≈ 1.55 — catalyst B gives 55% more turnover.\n\n\n\nExample: turnover number of catalysts A and B\n\n\nLimitation: fold-change does not account for the variance in the data. Two results may have the same fold-change but very different reliability depending on the scatter in the measurements.\nSet up the libraries, then compute the fold-change for two catalysts:",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>9. Effect Sizes, p-Values, and Statistical Power</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L09.html#effect-size",
+    "href": "parts/sessions/L09.html#effect-size",
+    "title": "9. Effect Sizes, p-Values, and Statistical Power",
+    "section": "Effect Size",
+    "text": "Effect Size\nThe effect size quantifies the magnitude of the difference between conditions, accounting for the variability in the data. It addresses the question at the heart of every comparative experiment: how meaningful is this difference?\nEffect sizes are strangely under-reported in the chemistry literature, despite being recommended by statisticians and major journals for decades.\nThe type of effect size that you use will be linked to the type of statistical test that you use. For a t-test, there are two common effect sizes used: Cohen’s d and Hedges g. The decision of which of these two use depends on the sample size.\n\nCohen’s d\nFor large samples (n &gt; ~20, see warning below):\n\\[d = \\frac{\\bar{x}_1 - \\bar{x}_2}{s_{\\text{pooled}}}\\]\n\\[\nd = \\frac{\\hat{\\mu}_2 - \\hat{\\mu}_1}{\\sqrt{(s_1^2 + s_2^2)/2}} = \\frac{\\hat{\\Delta}}{\\hat{s_{pooled}}}\n\\]\nA larger Cohen’s d indicates a larger magnitude of the effect.\n\n\nHedges’ g\nFor small samples (n &lt; ~20, common in chemistry), Hedges’ g applies a correction factor to Cohen’s d to account for bias:\n\\[g = d \\cdot \\left(1 - \\frac{3}{4(n_1 + n_2) - 9}\\right)\\]\nA larger Hedges’ g indicates a larger magnitude of the effect.\nHedges’ g is more appropriate than Cohen’s d for the typical sample sizes encountered in chemistry (n = 4–10).\n\n\n\n\n\n\nWarningArbitrary cutoffs\n\n\n\nLike the significance threshold (\\(\\alpha\\)) has a common arbitrary cutoff, there are arbitrary cutoffs for n being considered small or large as well as arbitrary cutoffs for evaluating effect sizes.\nThe use of n ~ 20 is arbitrary. In some texts, you will see the cutoff as 40. Cutoffs around 20-40 will be considered valid in this course. More importantly, you will always need to justify decisions made in the analysis process.\nThe arbitrary cutoffs for evaluating effect size are often just not relevant to experimental results in chemistry, so these have been removed from the course. Instead, you should consider the values that you obtain relative to similar data.\n\n\nOften with pingouin, when we perform a statistical test, the effect size is included in the output. This is the case for the t-test(target=“blank”).\n\n\n\n\n\n\nUnfortunately, when we directly perform the t-test in pingouin, the effect size metric is fixed as Cohen’s d.  Thus, if Hedges’ g is more appropriate, you will need to compute the effect size as indicated below (documentation(target=“blank”)).\n\n\n\n\n\n\nWhich effect size is more appropriate for the example data for catalyst A and catalyst B?",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>9. Effect Sizes, p-Values, and Statistical Power</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L09.html#power",
+    "href": "parts/sessions/L09.html#power",
+    "title": "9. Effect Sizes, p-Values, and Statistical Power",
+    "section": "Power",
+    "text": "Power\nStatistical power is the (pre-study) probability that a statistical test will correctly reject H₀ when H₀ is false, i.e. the probability of detecting a true effect.\n\\[\\text{Power} = 1 - \\beta\\]\nwhere β is the Type II error rate (the probability of a false negative).\nThe most common uses of power:\n\nProspective (a priori): after collecting a small preliminary dataset to plan the full experiment to calculate the minimum sample size needed to achieve a target power for the full experiment (given a desired effect size and significance threshold)\nPost-hoc: after an experiment to assess the power of the study to detect the observed effect\n\nThe conventional, arbitrary target is 80% power at α = 0.05, but these thresholds are themselves arbitrary.\n\n\n\n\n\n\nWarningArbitrary cutoff: power\n\n\n\nOften, a power cutoff of 80% is often used. However, this is arbitrary. A higher cutoff or a lower cutoff may be more appropriate depending on the research question.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>9. Effect Sizes, p-Values, and Statistical Power</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L09.html#power-depends-on-four-parameters",
+    "href": "parts/sessions/L09.html#power-depends-on-four-parameters",
+    "title": "9. Effect Sizes, p-Values, and Statistical Power",
+    "section": "Power Depends on Four Parameters",
+    "text": "Power Depends on Four Parameters\n\n\n\n\n\n\n\nParameter\nEffect on power\n\n\n\n\nSample size (n)\n↑ n → ↑ power\n\n\nEffect size\nLarger effect → ↑ power\n\n\nSignificance threshold (α)\nLarger α (e.g. 0.10) → ↑ power, but ↑ Type I error rate\n\n\nStandard deviation (σ)\nLower StDev → ↑ power\n\n\n\n\nCalculating Required Sample Size\nIf you want to acheive a given power, you can use a selected power value and then calculate the number of replicates needed given the effect size, significance threshold, and the standard deviation.\nFor this calculation the equation for a two-sample comparison is\n\\[n = \\frac{(z_{1-\\frac{\\alpha}{2}} + z_{1-\\beta})^2 \\cdot 2s^2}{\\delta^2}\\]\nwhere δ is the minimum detectable difference between means, \\(s\\) is the estimated standard deviation, and \\(z_{1-\\frac{\\alpha}{2}}\\) and \\(z_{1-\\beta}\\) are derived from the probability density function. In practice, this calculation is always done with software.\nFor this course, I would suggest using a tool from statsmodels TTestIndPower().solve_power.\n\n\n\n\n\n\nA critical point: to calculate the required sample size, you need an estimate of both the expected effect size (δ) and the standard deviation (\\(s\\)). This is one reason why exploratory experiments are necessary before confirmatory studies! There is no way to calculate a meaningful sample size without some prior knowledge of the system.\n\n\nCalculating the power of an experiment\nTo calculate the power of an experiment, you need the sample size, effect size, significance threshold, and standard deviation.\nThis calculation can be done directly in pingouin from the input data.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>9. Effect Sizes, p-Values, and Statistical Power</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L09.html#understanding-power",
+    "href": "parts/sessions/L09.html#understanding-power",
+    "title": "9. Effect Sizes, p-Values, and Statistical Power",
+    "section": "Understanding power",
+    "text": "Understanding power\nThe connection between p-value, effect size, and sample size is important: for a fixed effect size, increasing n will always eventually produce a significant p-value. A p-value of &lt;0.001 from n = 1000 per group may reflect a tiny, possibly irrelevant difference. A non-significant p-value from n = 3 per group may reflect a large, practically important difference that the study simply lacked power to detect. Effect size and power thus convey information the p-value cannot.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>9. Effect Sizes, p-Values, and Statistical Power</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L09.html#how-to-gain-power",
+    "href": "parts/sessions/L09.html#how-to-gain-power",
+    "title": "9. Effect Sizes, p-Values, and Statistical Power",
+    "section": "How to gain power",
+    "text": "How to gain power\n\nIncrease sample size — most direct, but limited by cost and practicality\nReduce measurement variability — better controls, more standardized protocols\nSimplify the research question — a one-tailed test halves the p-value compared to a two-tailed test for the same direction of effect\nData blocking — grouping replicates to remove a known source of variability (covered in Session 17)",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>9. Effect Sizes, p-Values, and Statistical Power</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L09.html#further-reading",
+    "href": "parts/sessions/L09.html#further-reading",
+    "title": "9. Effect Sizes, p-Values, and Statistical Power",
+    "section": "Further Reading",
+    "text": "Further Reading\nThe following papers address the relationship between p-values, power, and effect sizes in depth:\n\n10.1080/00031305.2016.1154108 — American Statistical Association statement on p-values\n10.1038/nmeth.4120 — P values and the search for significance\n10.1038/d41586-019-00857-9 — Scientists rise up against statistical significance\n10.1098/rsbl.2019.0174 — What alternatives could fill the power vacuum?\n10.4300/JGME-D-12-00156.1 — Importance of effect size\n\n\n\n\n\n\n\n\n\nTipKey takeaways\n\n\n\n\nContextualize a p-value with fold-change, effect size, and power.\nThere are specific effect sizes for significance tests. For the t-test, common effect sizes are Cohen’s d, or Hedges’ g.\nPower is the (pre-study) probability of detecting a true effect\nLarge n makes trivial effects “significant”; small n can miss real effects.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>9. Effect Sizes, p-Values, and Statistical Power</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L09.html#in-person",
+    "href": "parts/sessions/L09.html#in-person",
+    "title": "9. Effect Sizes, p-Values, and Statistical Power",
+    "section": "In person",
+    "text": "In person\nTBD",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>9. Effect Sizes, p-Values, and Statistical Power</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L10.html",
+    "href": "parts/sessions/L10.html",
+    "title": "10. Comparing more than two samples",
+    "section": "",
+    "text": "Code set up\nThis session is about comparing more than two groups with ANOVA (and post-hoc tests), and running that workflow in Python with pingouin.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>10. Comparing more than two samples</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L10.html#choosing-a-statistical-significance-test",
+    "href": "parts/sessions/L10.html#choosing-a-statistical-significance-test",
+    "title": "10. Comparing more than two samples",
+    "section": "Choosing a Statistical Significance Test",
+    "text": "Choosing a Statistical Significance Test\nSo far we have seen the the t-test, which is specifically for comparing data that meet the following criteria:\n\nthere is a single outcome variable that is continuous (such as percent yield),\nthe input variable is categorical or discrete (such as the catalyst type),\nthe data are from a normally distributed population,\nthe desired comparison is between one sample to a standard or two samples.\n\nHowever, there are many more statistical significance tests. The choice of statistical test depends on the types of variables involved. The decision tree below summarizes the options for data in which the following criteria are met:\n\na single, continuous outcome variable and\na normal distribution (we will discuss violations of this in session 11).\n\n\n\n\nDecision tree (assuming normality and one outcome variable)\n\n\nKey terms:\n\nOutcome variable (dependent variable): what you are measuring (e.g. reaction yield)\nInput variable (independent variable): what you are manipulating (e.g. solvent identity, catalyst identity, temperature)\nConditions / treatments: the specific values of the input variable being compared (e.g. five different solvents = 5 conditions)\n\nIn this session, we are going to focus on the top branch that has one outcome variable, which is continuous, and input variables that are discrete or categorical. This branch includes the t-test, one-way ANOVA, and N-way ANOVA.\n\n\n\n\n\n\n\nSituation\nTest\n\n\n\n\n1 continuous outcome, 1 input variable, 1–2 conditions\nt-test\n\n\n1 continuous outcome, 1 input variable, &gt;2 conditions\nOne-way ANOVA\n\n\n1 continuous outcome, &gt;1 input variable,\nN-way ANOVA",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>10. Comparing more than two samples</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L10.html#what-is-anova",
+    "href": "parts/sessions/L10.html#what-is-anova",
+    "title": "10. Comparing more than two samples",
+    "section": "What is ANOVA?",
+    "text": "What is ANOVA?\nANalysis Of VAriance (ANOVA) compares means across multiple conditions by decomposing variance into two components:\n\nWithin-condition variation: the scatter among replicates within each condition, which can be attributed to measurement uncertainty and random variation (or uncontroled variables)\nBetween-condition variation: the differences between condition means, which can be attributed to the factor being tested\n\n\n\n\nANOVA math\n\n\nANOVA computes the F-statistic (analogous to the t-statistic of the t-test): the ratio of between-condition variance to within-condition variance. If this ratio is large (the conditions differ more than expected from chance), H₀ is rejected.\n\\[F_{stat} = \\frac{\\text{Variance between groups}}{\\text{Variance within groups}}\\]\n\n\n\n\n\n\nNoteIn case you are interested, ANOVA math\n\n\n\n\n\n\n\n\nANOVA math\n\n\n\n\n\nANOVA outputs a p-value (just like the t-test). A p-value from ANOVA indicates the probability of observing an F-statistic at least as extreme as the one obtained, if the null hypothesis were true. A small p-value means the observed group differences would be unlikely under the null hypothesis; it does not quantify the probability that the means differ.\n\n\n\n\n\n\nTo work with this dataset, we will have to reshape the dataframe from a wide dataframe to a long dataframe. Please see the example below. The code is melt from pandas.\n\n\n\n\n\n\nOnce we have our long, melted dataframe, we can perform ANOVA with pingoin.\n\n\n\n\n\n\nFrom the ANOVA p-value, you can only learn about the group means collectively to identify if there is one condition that differs. You cannot determine which condition differs from the others.\nIf we obtain a statistically significant p-value from the ANOVA test, how can we identify the condition(s) that are statistically significantly different?",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>10. Comparing more than two samples</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L10.html#post-hoc-tests-after-a-significant-anova",
+    "href": "parts/sessions/L10.html#post-hoc-tests-after-a-significant-anova",
+    "title": "10. Comparing more than two samples",
+    "section": "Post-Hoc Tests: After a Significant ANOVA",
+    "text": "Post-Hoc Tests: After a Significant ANOVA\nNOTE: if the ANOVA p-value is not below the threshold, you should not perform a post-hoc test!!!\nIf ANOVA finds a significant effect, it tells you that at least one condition is different, but not which ones.\nPost-hoc tests identify which specific pair(s) of group means differ significantly, while controlling for family-wise error rate across all the comparisons.\nFor the ANOVA test, there are two appropriate post-hoc tests: Tukey’s and Games-Howell.\nTukey’s test: assumes similar variances and equal sample sizes.\nGames-Howell test: more robust when variances or sample sizes differ between conditions.\nWe have not yet discussed how to test differences in variances, but this will be covered in the next session.\nThe output of a post-hoc test in pingouin also indicates the effect size for the pair-wise comparisons.\nBelow is an example of the Tukey test with pingouin.\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nThis remainder of this session will be released later in the semester.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>10. Comparing more than two samples</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L10.html#in-person",
+    "href": "parts/sessions/L10.html#in-person",
+    "title": "10. Comparing more than two samples",
+    "section": "In Person",
+    "text": "In Person\nTBD",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>10. Comparing more than two samples</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L11.html",
+    "href": "parts/sessions/L11.html",
+    "title": "11. Non-normal data",
+    "section": "",
+    "text": "This session is about checking whether the assumptions of normality and equal variance hold and what to do when they don’t: non-parametric tests.\n\n\n\n\n\n\n\nNote\n\n\n\nThis session will be released later in the semester.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>11. Non-normal data</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L12.html",
+    "href": "parts/sessions/L12.html",
+    "title": "12. Case Studies I",
+    "section": "",
+    "text": "This session is only intended for the in-person session and brings together everything from Sessions 1–11 in three worked case studies, then adds two practical Python tools: outlier detection and handling missing values with np.nan.\n\n\n\n\n\n\n\nNote\n\n\n\nThis session will be released later in the semester.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>12. Case Studies I</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L13.html",
+    "href": "parts/sessions/L13.html",
+    "title": "13. Outliers, Data Blocking, and Transformations",
+    "section": "",
+    "text": "This session covers data blocking, outliers, and transformations, applied in Python with pingouin and scikit-learn.\n\n\n\n\n\n\n\nNote\n\n\n\nThis session will be released later in the semester.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>13. Outliers, Data Blocking, and Transformations</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L14.html",
+    "href": "parts/sessions/L14.html",
+    "title": "14. Bayesian and beyond",
+    "section": "",
+    "text": "Session 5 introduced the Bayesian idea briefly, alongside the rules for combining probabilities. Now that you have worked through frequentist inference (hypothesis testing, p-values, effect size, ANOVA), this session develops the Bayesian framework properly and contrasts the two. We will also briefly discuss other approaches in statistics.\n\n\n\n\n\n\nNote\n\n\n\nThis session will be released later in the semester.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>14. Bayesian and beyond</span>"
+    ]
+  },
+  {
+    "objectID": "parts/modeling-regression.html",
+    "href": "parts/modeling-regression.html",
+    "title": "Modeling & Regression",
+    "section": "",
+    "text": "Beyond comparing groups, we often want to model the relationship between variables. This block develops correlation and linear regression, extends to multiple linear regression with principled model comparison, tackles nonlinear regression for systems such as reaction kinetics and dose–response curves, and treats the analysis of categorical and discrete outcomes. Case Studies II applies the full modeling workflow from raw data to a justified model.",
+    "crumbs": [
+      "Modeling & Regression"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L19.html",
+    "href": "parts/sessions/L19.html",
+    "title": "19. Correlation and Simple Linear Regression",
+    "section": "",
+    "text": "This session covers correlation and simple linear regression — measuring, then modeling, the relationship between two continuous variables — implemented in Python with pingouin and scipy.\n\n\n\n\n\n\n\nNote\n\n\n\nThis session will be released later in the semester.",
+    "crumbs": [
+      "Modeling & Regression",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>19. Correlation and Simple Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L20.html",
+    "href": "parts/sessions/L20.html",
+    "title": "20. Multiple Linear Regression and Model Comparison",
+    "section": "",
+    "text": "This session extends regression to multiple predictors (MLR) and covers model comparison (F-test, AIC, BIC), implemented with scikit-learn and statsmodels.\n\n\n\n\n\n\n\nNote\n\n\n\nThis session will be released later in the semester.",
+    "crumbs": [
+      "Modeling & Regression",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>20. Multiple Linear Regression and Model Comparison</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L21.html",
+    "href": "parts/sessions/L21.html",
+    "title": "21. Nonlinear Regression",
+    "section": "",
+    "text": "This session covers nonlinear regression: fitting models such as exponential decay and Michaelis–Menten with scipy.optimize.curve_fit, and choosing between competing models.\n\n\n\n\n\n\n\nNote\n\n\n\nThis session will be released later in the semester.",
+    "crumbs": [
+      "Modeling & Regression",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>21. Nonlinear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L22.html",
+    "href": "parts/sessions/L22.html",
+    "title": "22. Analysis of Categorical and Discrete Outcomes",
+    "section": "",
+    "text": "This session covers analysis of categorical and discrete outcomes: logistic regression, the chi-squared test, and log-linear models.\n\n\n\n\n\n\n\nNote\n\n\n\nThis session will be released later in the semester.",
+    "crumbs": [
+      "Modeling & Regression",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>22. Analysis of Categorical and Discrete Outcomes</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L23.html",
+    "href": "parts/sessions/L23.html",
+    "title": "23. Case Studies II",
+    "section": "",
+    "text": "This session is intended to be completed in person and applies the regression toolkit (Sessions 19–22) to three analytical-chemistry case studies: calibration, kinetics, and a multi-part fluorescence analysis. Try each scenario, then check the worked Python solution.\n\n\n\n\n\n\n\nNote\n\n\n\nThis session will be released later in the semester.",
+    "crumbs": [
+      "Modeling & Regression",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>23. Case Studies II</span>"
+    ]
+  },
+  {
+    "objectID": "parts/advanced-analysis.html",
+    "href": "parts/advanced-analysis.html",
+    "title": "Advanced Analysis",
+    "section": "",
+    "text": "The final block introduces higher-order, multivariate methods for complex chemical datasets. You will meet principal component analysis and other multivariate techniques, design of experiments (DoE) for exploring many variables efficiently, and a first look at machine learning. These sessions are gateways: each points toward a broader field you can pursue further beyond this course.",
+    "crumbs": [
+      "Advanced Analysis"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L24.html",
+    "href": "parts/sessions/L24.html",
+    "title": "24. Multivariate Analysis and Dimensionality reduction",
+    "section": "",
+    "text": "Note\n\n\n\nThis session will be released later in the semester.",
+    "crumbs": [
+      "Advanced Analysis",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>24. Multivariate Analysis and Dimensionality reduction</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L25.html",
+    "href": "parts/sessions/L25.html",
+    "title": "25. Design of Experiments & Machine Learning",
+    "section": "",
+    "text": "Note\n\n\n\nThis session will be released later in the semester.",
+    "crumbs": [
+      "Advanced Analysis",
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>25. Design of Experiments & Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "parts/cheatsheet.html",
+    "href": "parts/cheatsheet.html",
+    "title": "Cheat Sheet: Choosing a Statistical Test",
+    "section": "",
+    "text": "Note\n\n\n\nThis section will be released later in the semester.",
+    "crumbs": [
+      "Reference",
+      "<span class='chapter-number'>24</span>  <span class='chapter-title'>Cheat Sheet: Choosing a Statistical Test</span>"
+    ]
+  },
+  {
+    "objectID": "parts/about.html",
+    "href": "parts/about.html",
+    "title": "The Human in the Loop",
+    "section": "",
+    "text": "About\nI am Alexandria (Ali) Deliz Liang, a chemistry professor at the University of Zurich (UZH). Most of my time is dedicated to running my research group at UZH. But I am also passionate about data analytics and teaching! This course started out as a book suggestion when I was a postdoc (Thanks to Tom Ward at University of Basel), and developed into a short course (2 h/wk) for BSc, MSc, and PhD students. Since then the content has expanded, and the course has grown to 4 h/wk. Because of wide-spread interest in the material and requests from colleagues outside of UZH, I decided to create an open website.\nYou might notice that some of the material is humorous, that is intentional and a reflection of how I teach the class. I hope that it keeps you engaged and that you find the material instructive and easy to read regardless of your academic stage.\nPlease note that the website will continue to be updated as the course develops further.",
+    "crumbs": [
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>The Human in the Loop</span>"
+    ]
+  }
+]

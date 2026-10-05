@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>13. Outliers, Data Blocking, and Transformations – Introduction to Data Analytics and Python</title>
+<title>13. Case Studies I – Introduction to Data Analytics and Python</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -89,7 +89,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/inferential-statistics.html">Inferential Statistics</a></li><li class="breadcrumb-item"><a href="../../parts/sessions/L13.html"><span class="chapter-title">13. Outliers, Data Blocking, and Transformations</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/inferential-statistics.html">Inferential Statistics</a></li><li class="breadcrumb-item"><a href="../../parts/sessions/L13.html"><span class="chapter-title">13. Case Studies I</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -216,12 +216,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../parts/sessions/L12.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">12. Case Studies I</span></a>
+  <a href="../../parts/sessions/L12.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">12. Outliers and Transformations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../parts/sessions/L13.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">13. Outliers, Data Blocking, and Transformations</span></a>
+  <a href="../../parts/sessions/L13.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">13. Case Studies I</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -314,15 +314,24 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#scenario-1-acid-catalyst-optimization" id="toc-scenario-1-acid-catalyst-optimization" class="nav-link" data-scroll-target="#scenario-1-acid-catalyst-optimization">Scenario 1: Acid Catalyst Optimization</a></li>
+  <li><a href="#scenario-2-fluorescent-probe-characterization" id="toc-scenario-2-fluorescent-probe-characterization" class="nav-link" data-scroll-target="#scenario-2-fluorescent-probe-characterization">Scenario 2: Fluorescent Probe Characterization</a></li>
+  <li><a href="#scenario-3-enzyme-activity-comparison" id="toc-scenario-3-enzyme-activity-comparison" class="nav-link" data-scroll-target="#scenario-3-enzyme-activity-comparison">Scenario 3: Enzyme Activity Comparison</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/inferential-statistics.html">Inferential Statistics</a></li><li class="breadcrumb-item"><a href="../../parts/sessions/L13.html"><span class="chapter-title">13. Outliers, Data Blocking, and Transformations</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/inferential-statistics.html">Inferential Statistics</a></li><li class="breadcrumb-item"><a href="../../parts/sessions/L13.html"><span class="chapter-title">13. Case Studies I</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">13. Outliers, Data Blocking, and Transformations</span></h1>
+<h1 class="title"><span class="chapter-title">13. Case Studies I</span></h1>
 </div>
 
 
@@ -339,21 +348,71 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This session covers <strong>data blocking, outliers, and transformations</strong>, applied in Python with <code>pingouin</code> and <code>scikit-learn</code>.</p>
+<p>This session is only intended for the in-person session and brings together everything from Sessions 1–11 in three worked <strong>case studies</strong>, then adds two practical Python tools: <strong>outlier detection</strong> and <strong>handling missing values</strong> with <code>np.nan</code>.</p>
 <hr>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This session will be released later in the semester.</p>
-</div>
-</div>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This session brings together the statistical methods from Sessions 1–11 in three worked case studies. Each scenario requires you to select the appropriate test, justify the choice, check assumptions, and interpret the results (including effect sizes and practical significance).</p>
+<hr>
+</section>
+<section id="scenario-1-acid-catalyst-optimization" class="level2">
+<h2 class="anchored" data-anchor-id="scenario-1-acid-catalyst-optimization">Scenario 1: Acid Catalyst Optimization</h2>
+<p><strong>Background:</strong> You are optimizing a reaction that requires an acid. You expect that switching from hydrochloric acid (HCl) to acetic acid will give a better reaction yield. You collect the following data with replicates in lists.</p>
+<p><strong>Data (reaction yield, %):</strong></p>
+<pre><code>No acid:          [2.1, 4.9, 2.9, 4.0, 4.4, 5.9, 5.6, 4.2, 5.9, 3.0]
+Hydrochloric acid: [79.3, 76.0, 84.9, 78.0, 82.6, 77.9, 81.0, 77.4, 83.5, 79.2]
+Acetic acid:       [88.2, 86.2, 95.8, 95.7, 79.1, 92.0, 83.4, 83.4, 93.8, 84.8]</code></pre>
+<p><strong>Tasks:</strong></p>
+<ul>
+<li>Identify your negative and positive control experiments from the data above.</li>
+<li>Formulate a null hypothesis.</li>
+<li>Evaluate the data using appropriate statistical methods.</li>
+<li>Justify your choices.</li>
+<li>Describe follow-up experiments.</li>
+</ul>
+<hr>
+</section>
+<section id="scenario-2-fluorescent-probe-characterization" class="level2">
+<h2 class="anchored" data-anchor-id="scenario-2-fluorescent-probe-characterization">Scenario 2: Fluorescent Probe Characterization</h2>
+<p><strong>Background:</strong> You have synthesized four small molecules (S1–S4) with different chemical groups at one position. You want to evaluate the fluorescence response for this family of molecules.</p>
+<p><strong>Data (fluorescence intensity):</strong></p>
+<pre><code>No small molecule: [1033, 997, 898, 957, 996]
+S1: [9856, 9389, 9884, 10020, 9673]
+S2: [16124, 15821, 14955, 15251, 15240]
+S3: [24448, 24260, 26876, 25435, 22777]
+S4: [19498, 18113, 20209, 20305, 21459]
+Commercial fluorophore: [14946, 16995, 21231, 20041, 19364]</code></pre>
+<p><strong>Tasks:</strong></p>
+<ul>
+<li>Identify your negative and positive control experiments from the data above.</li>
+<li>Formulate a null hypothesis.</li>
+<li>Evaluate the data using appropriate statistical methods.</li>
+<li>Justify your choices.</li>
+<li>Describe follow-up experiments.</li>
+</ul>
+<hr>
+</section>
+<section id="scenario-3-enzyme-activity-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="scenario-3-enzyme-activity-comparison">Scenario 3: Enzyme Activity Comparison</h2>
+<p><strong>Background:</strong> You expect that enzyme B has improved turnover numbers compared to enzyme A.</p>
+<p><strong>Data (turnover number, s⁻¹):</strong></p>
+<pre><code>No enzyme: [107, 205, 49, 64, 54, 186, 83, 77, 68, 57]
+Enzyme A: [857000, 821700, 770000, 752800, 787300, 782400, 704300, 738400, 708200, 354700]
+Enzyme B: [2710800, 1774300, 2311700, 1051500, 2432300, 1883400, 1832700, 1536600, 1018900, 842000]</code></pre>
+<p><strong>Tasks:</strong></p>
+<ul>
+<li>Identify your negative and positive control experiments from the data above.</li>
+<li>Formulate a null hypothesis.</li>
+<li>Evaluate the data using appropriate statistical methods.</li>
+<li>Justify your choices.</li>
+<li>Describe follow-up experiments.</li>
+</ul>
+<!--
+INSTRUCTOR NOTES:
+Students have difficulty with the concept of background subtraction. 
+Some of them usually select ANOVA and treated the negative control as a sample. 
+Explain why this is non-ideal.
+-->
 
 
 <script type="ojs-module-contents">
@@ -370,6 +429,7 @@ eyJjb250ZW50cyI6W119
 <script type="vfs-file">
 W10=
 </script>
+</section>
 
 </main> <!-- /main -->
 <script type="ojs-module-contents">
@@ -785,8 +845,8 @@ window._ojs.runtime.interpretFromScriptTags();
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../parts/sessions/L12.html" class="pagination-link" aria-label="12. Case Studies I">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">12. Case Studies I</span></span>
+      <a href="../../parts/sessions/L12.html" class="pagination-link" aria-label="12. Outliers  and Transformations">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">12. Outliers and Transformations</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

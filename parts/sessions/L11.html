@@ -77,6 +77,35 @@ ul.task-list li input[type="checkbox"] {
 <script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
 <link href="../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -216,12 +245,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../parts/sessions/L12.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">12. Case Studies I</span></a>
+  <a href="../../parts/sessions/L12.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">12. Outliers and Transformations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../parts/sessions/L13.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">13. Outliers, Data Blocking, and Transformations</span></a>
+  <a href="../../parts/sessions/L13.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">13. Case Studies I</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -314,8 +343,24 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-does-normally-distributed-mean-here" id="toc-what-does-normally-distributed-mean-here" class="nav-link active" data-scroll-target="#what-does-normally-distributed-mean-here">What Does “Normally Distributed” Mean Here?</a></li>
+  <li><a href="#checking-normality" id="toc-checking-normality" class="nav-link" data-scroll-target="#checking-normality">Checking Normality</a></li>
+  <li><a href="#checking-variance-equality-homoscedasticity" id="toc-checking-variance-equality-homoscedasticity" class="nav-link" data-scroll-target="#checking-variance-equality-homoscedasticity">Checking Variance Equality (Homoscedasticity)</a></li>
+  <li><a href="#non-parametric-tests" id="toc-non-parametric-tests" class="nav-link" data-scroll-target="#non-parametric-tests">Non-Parametric Tests</a>
+  <ul class="collapse">
+  <li><a href="#non-parametric-tests-and-power" id="toc-non-parametric-tests-and-power" class="nav-link" data-scroll-target="#non-parametric-tests-and-power">Non-parametric tests and Power</a></li>
+  </ul></li>
+  <li><a href="#an-overall-statistical-analysis-workflow-when-x-is-discrete-or-categorical-data" id="toc-an-overall-statistical-analysis-workflow-when-x-is-discrete-or-categorical-data" class="nav-link" data-scroll-target="#an-overall-statistical-analysis-workflow-when-x-is-discrete-or-categorical-data">An Overall Statistical Analysis Workflow when x is discrete or categorical data</a></li>
+  <li><a href="#warning-on-mis-use-of-statistics" id="toc-warning-on-mis-use-of-statistics" class="nav-link" data-scroll-target="#warning-on-mis-use-of-statistics">Warning on mis-use of statistics</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further Reading</a></li>
+  <li><a href="#in-person" id="toc-in-person" class="nav-link" data-scroll-target="#in-person">In Person</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -341,23 +386,246 @@ ul.task-list li input[type="checkbox"] {
 
 <p>This session is about checking whether the <strong>assumptions</strong> of <strong>normality</strong> and <strong>equal variance</strong> hold and what to do when they don’t: <strong>non-parametric</strong> tests.</p>
 <hr>
-<div class="callout callout-style-default callout-note callout-titled">
+<section id="what-does-normally-distributed-mean-here" class="level2">
+<h2 class="anchored" data-anchor-id="what-does-normally-distributed-mean-here">What Does “Normally Distributed” Mean Here?</h2>
+<p>When we say a dataset is normally distributed for the purposes of a parametric test, we mean that the <strong>data were randomly sampled from a normally distributed population</strong>; not that the sample itself looks perfectly normal.</p>
+<p>This is an important distinction: a small sample from a normal population will rarely look like a clean bell curve. What matters is whether the assumption of normality is plausible for the underlying data-generating process and whether the sample data represents that normal distribution well.</p>
+<hr>
+</section>
+<section id="checking-normality" class="level2">
+<h2 class="anchored" data-anchor-id="checking-normality">Checking Normality</h2>
+<p><strong>Visual methods:</strong></p>
+<p>A <strong>histogram</strong> or <strong>violin plot</strong> can provide a rough check. Look for approximate symmetry and a single peak (but with small n, even normal data will not look bell-shaped).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/statistics/L11/images/L11_S04_histogram.png" class="img-fluid figure-img" width="500"></p>
+<figcaption>Histogram</figcaption>
+</figure>
+</div>
+<p>A <strong>Q-Q plot</strong> compares your data’s quantiles to a normal distribution’s: points on a straight diagonal mean approximately normal; S-curves suggest heavy/light tails, arcs suggest skew.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/statistics/L11/images/L11_S05_QQ_ref_needed.png" class="img-fluid figure-img" width="500"></p>
+<figcaption>QQ Plot, <a href="https://stats.stackexchange.com/questions/101274/how-to-interpret-a-qq-plot/">reference</a></figcaption>
+</figure>
+</div>
+<p>Let’s load some data that contain several conditions with different spreads and first inspect visually:</p>
+<div>
+<div id="pyodide-1" class="exercise-cell">
+
+</div>
+<script type="pyodide-1-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBSdW4gdGhpcyBjZWxsIGZpcnN0IOKAlCBsb2FkcyB0aGUgbGlicmFyaWVzIHVzZWQgaW4gdGhpcyBzZXNzaW9uXG5pbXBvcnQgbWljcm9waXBcbmF3YWl0IG1pY3JvcGlwLmluc3RhbGwoXCJwaW5nb3VpblwiKVxuaW1wb3J0IHBhbmRhcyBhcyBwZFxuaW1wb3J0IG1hdHBsb3RsaWIucHlwbG90IGFzIHBsdFxuaW1wb3J0IHNlYWJvcm4gYXMgc25zXG5pbXBvcnQgcGluZ291aW4gYXMgcGcifQ==
+</script>
+</div>
+<div>
+<div id="pyodide-2" class="exercise-cell">
+
+</div>
+<script type="pyodide-2-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBhIHNhbXBsZSBvZiB0aGUgY291cnNlIFwibXVsdGlwbGUgc3RhdCB0ZXN0c1wiIGRhdGFzZXQgKHR1cm5vdmVyIG51bWJlcnMpXG5kYXRhID0ge1xuICAgIFwiUzFcIjogWzcuNSwgNi40LCAzLjYsIDUuMSwgOC4yLCA0LjksIDYuOCwgNS41XSxcbiAgICBcIlMyXCI6IFs3LjIsIDMuMywgOC43LCA1LjQsIDYuMSwgOS4wLCA0LjIsIDYuNl0sXG4gICAgXCJTNVwiOiBbMjcuNiwgMjguNSwgMzAuMywgMjYuOSwgMjkuMSwgMzEuMCwgMjcuMCwgMjguOF0sXG4gICAgXCJTNlwiOiBbMTUuMSwgMTAuOCwgMTIuNiwgMTMuOSwgMTEuMiwgMTQuNSwgOS44LCAxMy4wXSxcbn1cbmRmID0gcGQuRGF0YUZyYW1lKGRhdGEpXG5sb25nID0gZGYubWVsdCh2YXJfbmFtZT1cImNhdGFseXN0XCIsIHZhbHVlX25hbWU9XCJ0dXJub3Zlcl9udW1iZXJcIikgICAjIGxvbmcgZm9ybWF0IGZvciBwaW5nb3VpblxuXG5zbnMuYmFycGxvdChkYXRhPWRmLCBlcnJvcmJhcj1cInNkXCIpXG5zbnMuc3dhcm1wbG90KGRhdGE9ZGYsIGNvbG9yPVwiYmxhY2tcIiwgc2l6ZT00KVxucGx0LnlsYWJlbChcIlR1cm5vdmVyIG51bWJlclwiKVxucGx0LnNob3coKVxuXG5wZy5xcXBsb3QoZGZbXCJTMVwiXSwgZGlzdD1cIm5vcm1cIiwgY29uZmlkZW5jZT0wLjk1KVxucGx0LnNob3coKSJ9
+</script>
+</div>
+<p>These visual tests are subjective, and with small sample sizes can be very difficult to assess.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/statistics/L11/images/L11_S07_hist_n.png" class="img-fluid figure-img" width="500"></p>
+<figcaption>Example of challenge in assessing histograms with small sample sizes</figcaption>
+</figure>
+</div>
+<p><em>Is there a way that we can make more objective assessments?</em> <strong>Yes!</strong></p>
+<p><strong>The Shapiro-Wilk test</strong> evaluates the null hypothesis that the data came from a normal distribution: p &gt; 0.05 → cannot reject normality (proceed parametric); p &lt; 0.05 → reject (go non-parametric).</p>
+<div>
+<div id="pyodide-3" class="exercise-cell">
+
+</div>
+<script type="pyodide-3-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicGcubm9ybWFsaXR5KGRhdGE9bG9uZywgZHY9XCJ0dXJub3Zlcl9udW1iZXJcIiwgZ3JvdXA9XCJjYXRhbHlzdFwiLCBtZXRob2Q9XCJzaGFwaXJvXCIpIn0=
+</script>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This session will be released later in the semester.</p>
+<p><strong>Shapiro-Wilk caveats:</strong> at <strong>small n (&lt; 5–10)</strong> it has very low power (rarely rejects even clearly non-normal data); at <strong>large n (&gt; 100–200)</strong> it has so much power it flags trivial, irrelevant deviations. It is most useful for n ≈ 10–50; at the extremes, it is advisable to include domain knowledge and the Q-Q plot.</p>
 </div>
 </div>
+<hr>
+</section>
+<section id="checking-variance-equality-homoscedasticity" class="level2">
+<h2 class="anchored" data-anchor-id="checking-variance-equality-homoscedasticity">Checking Variance Equality (Homoscedasticity)</h2>
+<p>If the data are normal, the next question is whether the groups have similar variances.</p>
+<ul>
+<li><strong>Bartlett’s test</strong> is standard for normal data;</li>
+<li><strong>Levene’s test</strong> is more robust when normality is uncertain.</li>
+</ul>
+<div>
+<div id="pyodide-4" class="exercise-cell">
+
+</div>
+<script type="pyodide-4-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicHJpbnQocGcuaG9tb3NjZWRhc3RpY2l0eShkYXRhPWxvbmcsIGR2PVwidHVybm92ZXJfbnVtYmVyXCIsIGdyb3VwPVwiY2F0YWx5c3RcIiwgbWV0aG9kPVwiYmFydGxldHRcIikpXG5wcmludChwZy5ob21vc2NlZGFzdGljaXR5KGRhdGE9bG9uZywgZHY9XCJ0dXJub3Zlcl9udW1iZXJcIiwgZ3JvdXA9XCJjYXRhbHlzdFwiLCBtZXRob2Q9XCJsZXZlbmVcIikpIn0=
+</script>
+</div>
+<p>If the data are <strong>normal but heteroscedastic</strong> (unequal variances), apply the <strong>Welch correction</strong>:</p>
+<p><span class="math display">\[t_{\text{Welch}} = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}\]</span></p>
+<p>The Welch correction adjusts the degrees of freedom for unequal variances; it is also appropriate when the two groups have different sample sizes, even if variances are equal. (In <code>pingouin.ttest</code>, <code>correction="auto"</code> applies it automatically — Session 8.)</p>
+<hr>
+</section>
+<section id="non-parametric-tests" class="level2">
+<h2 class="anchored" data-anchor-id="non-parametric-tests">Non-Parametric Tests</h2>
+<p>When data are <strong>not normally distributed</strong>, non-parametric tests are used (regardless of homoscedasticity). Instead of directly using measured values, non-parametric tests evaluate <strong>ranked</strong> data.</p>
+<p>Converting data to ranks discards information about the magnitude of differences: you only know that one value is larger than another, not by how much. This is why non-parametric tests have lower statistical power than their parametric equivalents. However, when the normality assumption is strongly violated, p-values derived from parametric tests can be unreliable. A valid, lower-powered test is preferable to an invalid, higher-powered one.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parametric</th>
+<th>Non-parametric</th>
+<th>Use case</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Independent t-test</td>
+<td><strong>Mann-Whitney U</strong></td>
+<td>Two independent groups</td>
+</tr>
+<tr class="even">
+<td>Paired t-test</td>
+<td><strong>Wilcoxon signed-rank</strong></td>
+<td>Two paired measurements</td>
+</tr>
+<tr class="odd">
+<td>One-way ANOVA</td>
+<td><strong>Kruskal-Wallis</strong></td>
+<td>Three or more independent groups</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Mann-Whitney U</strong> tests whether one group’s median differs from another’s.</li>
+<li><strong>Wilcoxon signed-rank</strong> is the paired version (same sample measured twice).</li>
+<li><strong>Kruskal-Wallis</strong> generalizes to three or more independent groups.</li>
+</ul>
+<div>
+<div id="pyodide-5" class="exercise-cell">
+
+</div>
+<script type="pyodide-5-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBNYW5uLVdoaXRuZXkg4oCUIHR3byBpbmRlcGVuZGVudCBncm91cHNcbnByaW50KHBnLm13dShkZltcIlMxXCJdLCBkZltcIlM1XCJdLCBhbHRlcm5hdGl2ZT1cInR3by1zaWRlZFwiKSlcblxuIyBLcnVza2FsLVdhbGxpcyDigJQgYWxsIGdyb3VwcyBhdCBvbmNlXG5wcmludChwZy5rcnVza2FsKGRhdGE9bG9uZywgZHY9XCJ0dXJub3Zlcl9udW1iZXJcIiwgYmV0d2Vlbj1cImNhdGFseXN0XCIpKSJ9
+</script>
+</div>
+<div>
+<div id="pyodide-6" class="exercise-cell">
+
+</div>
+<script type="pyodide-6-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBXaWxjb3hvbiBzaWduZWQtcmFuayDigJQgc2FtZSBzYW1wbGVzIG1lYXN1cmVkIGJlZm9yZSB2cy4gYWZ0ZXJcbmJlZm9yZSA9IFs3LjUsIDYuNCwgMy42LCA1LjEsIDguMiwgNC45XVxuYWZ0ZXIgID0gWzkuMSwgNy4wLCA1LjIsIDYuOCwgOS4wLCA2LjFdXG5wcmludChwZy53aWxjb3hvbihiZWZvcmUsIGFmdGVyLCBhbHRlcm5hdGl2ZT1cInR3by1zaWRlZFwiKSkifQ==
+</script>
+</div>
+<p><em>What about the effect size for these non-parametric tests?</em></p>
+<p>A standard effect size for these three non-parametric tests is the <strong>Common Language Effect Size (CLES)</strong>. The CLES gives the probability a random value from A exceeds a random value from B. A CLES value of 0.5 (or 50%) indicates no effect. Values closer to 0 or 1 have larger effects. In pingouin, the effect size for the non-parametric tests can requested with <code>eftype="CLES"</code> in <code>pg.compute_effsize</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Levene's test">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Levene’s test
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Often students are confused: why would we even perform a Levene’s test if there is no homoscedasticity correction for non-parameteric tests?</p>
+<p>While Bartlett is to assess if modifications to a subsequent test are necessary, Levene’s test is to directly evaluate homoscedasticity.</p>
+<p>Maybe your research question is <em>Which method yields a lower variance in outcome?</em> Then you need a statistical method to evaluate a null hypothesis related directly to comparing variance. If your data is normally distributed, use Barlett’s test, and if the data is non-normally distributed, use Levene’s test.</p>
+</div>
+</div>
+<section id="non-parametric-tests-and-power" class="level3">
+<h3 class="anchored" data-anchor-id="non-parametric-tests-and-power">Non-parametric tests and Power</h3>
+<p>Power calculations for non-parametric tests require explicit assumptions about the underlying distribution. Without those assumptions, true sample size calculations are impossible. A common <strong>rule of thumb</strong> is that non-parametric analyses require approximately 15% larger sample sizes than equivalent parametric analyses, but this is a rough approximation and should not replace formal power analysis when it is feasible.</p>
+<hr>
+</section>
+</section>
+<section id="an-overall-statistical-analysis-workflow-when-x-is-discrete-or-categorical-data" class="level2">
+<h2 class="anchored" data-anchor-id="an-overall-statistical-analysis-workflow-when-x-is-discrete-or-categorical-data">An Overall Statistical Analysis Workflow when x is discrete or categorical data</h2>
+<p><em>How do these evaluations fit into a statistical analysis workflow?</em> A typical workflow is provided below.</p>
+<ol type="1">
+<li>Define research question and hypotheses</li>
+<li>Design the experiment (controls and replicates)</li>
+<li>Collect the data</li>
+<li>Visualize the data and transform if necessary*</li>
+<li>Determine descriptive statistics and error metrics</li>
+<li>Assess normality</li>
+<li>If normal, test variance. If non-normal, test for outliers (if any are removed, re-assess normality and variance, but do NOT detect outliers again)*</li>
+<li>Assess inferential statistics (including power and effect size)</li>
+<li>Visualize data with inferential statistics</li>
+<li>Formulate conclusions</li>
+<li>Report methods, results, and conclusions</li>
+</ol>
+<p>*We will discuss transformations and outliers next week!</p>
+<hr>
+</section>
+<section id="warning-on-mis-use-of-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="warning-on-mis-use-of-statistics">Warning on mis-use of statistics</h2>
+<p>Once you have chosen a statistical test based on your data type and distribution, <strong>do not change the test after seeing the results</strong>. Using the Mann-Whitney test, finding a non-significant result, and then switching to a t-test because it gives p &lt; 0.05 is a form of <strong>significance chasing</strong> (or <strong>p-hacking</strong>).</p>
+<p>A specific example: for non-normally distributed data, the Mann-Whitney test correctly returns a non-significant result (<span class="math inline">\(\alpha\)</span> = 0.050, p = 0.055). The t-test, applied to the same data, returns a significant result (<span class="math inline">\(\alpha\)</span> = 0.050, p = 0.029). If you select the t-test result because it supports your hypothesis, you have effectively found a 50/50 vote and picked the result you preferred. <em>This is an example of both p-hacking and cherry-picking.</em> The pre-specified test (Mann-Whitney, appropriate for non-normal data) is the correct analysis; the t-test result is irrelevant.</p>
+<p><strong>Please note: in the exam, logic that relies on p-hacking will result in zero points for the question.</strong></p>
+<hr>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further Reading</h2>
+<ul>
+<li>10.3758/s13428-021-01587-5 — on how much the normality assumption matters in practice</li>
+<li>https://www.itl.nist.gov/div898/handbook/eda/section3/eda35.htm — NIST resource on normality and variance tests</li>
+</ul>
+<!--
+NOTES from previous lectures
+- Slide 27/28: CI for non-symmetric distributions (non-parametric CI uses median and an asymmetric interval).
+- Note in slide 11: the textbook "Essential Mathematics and Statistics for Science" (Currell and Dowman) has an error in the Mann-Whitney section.
+-->
+<hr>
+<div class="callout callout-style-default callout-tip callout-titled" title="Key takeaways">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Key takeaways
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Check normality (Q-Q plot, Shapiro–Wilk — unreliable at very small/large n) and variance (Bartlett/Levene).</li>
+<li>Normal but unequal variances → apply the Welch correction.</li>
+<li>Non-normal → non-parametric tests (Mann–Whitney, Wilcoxon, Kruskal–Wallis): rank-based, lower power but valid.</li>
+<li>Pre-specify the test; switching tests to chase significance is p-hacking.</li>
+<li>In Python: <code>pg.normality(...)</code>, <code>pg.homoscedasticity(..., method=)</code>, <code>pg.mwu(...)</code>, <code>pg.wilcoxon(...)</code>, <code>pg.kruskal(...)</code>.</li>
+</ul>
+</div>
+</div>
+<hr>
+</section>
+<section id="in-person" class="level2">
+<h2 class="anchored" data-anchor-id="in-person">In Person</h2>
+<p>TBD</p>
 
 
+<script type="pyodide-data">
+eyJvcHRpb25zIjp7ImVudiI6eyJQTE9UTFlfUkVOREVSRVIiOiJwbG90bHlfbWltZXR5cGUifSwiaW5kZXhVUkwiOiJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvcHlvZGlkZS92MC4yOC4xL2Z1bGwvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsicHlvZGlkZV9odHRwIiwibWljcm9waXAiLCJpcHl0aG9uIiwibnVtcHkiLCJwYW5kYXMiLCJtYXRwbG90bGliIiwic2VhYm9ybiIsInNjaXB5Iiwic2Npa2l0LWxlYXJuIiwic3RhdHNtb2RlbHMiLCJtaWNyb3BpcCJdfX0=
+</script>
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W119
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTYiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl82ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS02LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzYgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzYsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl81ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS01LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzUgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzUsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTQiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl80ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS00LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzQgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzQsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTMiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8zID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0zLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzMgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzMsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8yID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzIgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzIsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTEiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8xID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzEgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzEsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLXByZWx1ZGUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJweW9kaWRlT2pzID0ge1xuICBjb25zdCB7XG4gICAgUHlvZGlkZUV2YWx1YXRvcixcbiAgICBQeW9kaWRlRW52aXJvbm1lbnRNYW5hZ2VyLFxuICAgIHNldHVwUHl0aG9uLFxuICAgIHN0YXJ0UHlvZGlkZVdvcmtlcixcbiAgICBiNjREZWNvZGUsXG4gICAgY29sbGFwc2VQYXRoLFxuICB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzdGF0dXNDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctc3RhdHVzXCIpO1xuICBjb25zdCBpbmRpY2F0b3JDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpbmRpY2F0b3JDb250YWluZXIuY2xhc3NMaXN0LnJlbW92ZShcImQtbm9uZVwiKTtcblxuICBsZXQgc3RhdHVzVGV4dCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIilcbiAgc3RhdHVzVGV4dC5jbGFzc0xpc3QgPSBcImV4ZXJjaXNlLWxvYWRpbmctZGV0YWlsc1wiO1xuICBzdGF0dXNUZXh0ID0gc3RhdHVzQ29udGFpbmVyLmFwcGVuZENoaWxkKHN0YXR1c1RleHQpO1xuICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYEluaXRpYWxpc2VgO1xuXG4gIC8vIEhvaXN0IGluZGljYXRvciBvdXQgZnJvbSBmaW5hbCBzbGlkZSB3aGVuIHJ1bm5pbmcgdW5kZXIgcmV2ZWFsXG4gIGNvbnN0IHJldmVhbFN0YXR1cyA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsIC5leGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaWYgKHJldmVhbFN0YXR1cykge1xuICAgIHJldmVhbFN0YXR1cy5yZW1vdmUoKTtcbiAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCA+IC5zbGlkZXNcIikuYXBwZW5kQ2hpbGQocmV2ZWFsU3RhdHVzKTtcbiAgfVxuXG4gIC8vIE1ha2UgYW55IHJldmVhbCBzbGlkZXMgd2l0aCBsaXZlIGNlbGxzIHNjcm9sbGFibGVcbiAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChcIi5yZXZlYWwgLmV4ZXJjaXNlLWNlbGxcIikuZm9yRWFjaCgoZWwpID0+IHtcbiAgICBlbC5jbG9zZXN0KCdzZWN0aW9uLnNsaWRlJykuY2xhc3NMaXN0LmFkZChcInNjcm9sbGFibGVcIik7XG4gIH0pXG5cbiAgLy8gUHlvZGlkZSBzdXBwbGVtZW50YWwgZGF0YSBhbmQgb3B0aW9uc1xuICBjb25zdCBkYXRhQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLWRhdGFcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBkYXRhID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZGF0YUNvbnRlbnQpKTtcblxuICAvLyBHcmFiIGxpc3Qgb2YgcmVzb3VyY2VzIHRvIGJlIGRvd25sb2FkZWRcbiAgY29uc3QgZmlsZXNDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInZmcy1maWxlXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZmlsZXMgPSBKU09OLnBhcnNlKGI2NERlY29kZShmaWxlc0NvbnRlbnQpKTtcblxuICBsZXQgcHlvZGlkZVByb21pc2UgPSAoYXN5bmMgKCkgPT4ge1xuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgUHlvZGlkZWA7XG4gICAgY29uc3QgcHlvZGlkZSA9IGF3YWl0IHN0YXJ0UHlvZGlkZVdvcmtlcihkYXRhLm9wdGlvbnMpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiBtaWNyb3BpcGA7XG4gICAgYXdhaXQgcHlvZGlkZS5sb2FkUGFja2FnZShcIm1pY3JvcGlwXCIpO1xuICAgIGNvbnN0IG1pY3JvcGlwID0gYXdhaXQgcHlvZGlkZS5weWltcG9ydChcIm1pY3JvcGlwXCIpO1xuICAgIGF3YWl0IGRhdGEucGFja2FnZXMucGtncy5tYXAoKHBrZykgPT4gKCkgPT4ge1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiAke3BrZ31gO1xuICAgICAgcmV0dXJuIG1pY3JvcGlwLmluc3RhbGwocGtnKTtcbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcbiAgICBhd2FpdCBtaWNyb3BpcC5kZXN0cm95KCk7XG5cbiAgICAvLyBEb3dubG9hZCBhbmQgaW5zdGFsbCByZXNvdXJjZXNcbiAgICBhd2FpdCBmaWxlcy5tYXAoKGZpbGUpID0+IGFzeW5jICgpID0+IHtcbiAgICAgIGNvbnN0IG5hbWUgPSBmaWxlLnN1YnN0cmluZyhmaWxlLmxhc3RJbmRleE9mKCcvJykgKyAxKTtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcmVzb3VyY2U6ICR7bmFtZX1gO1xuICAgICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaChmaWxlKTtcbiAgICAgIGlmICghcmVzcG9uc2Uub2spIHtcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBDYW4ndCBkb3dubG9hZCBcXGAke2ZpbGV9XFxgLiBFcnJvciAke3Jlc3BvbnNlLnN0YXR1c306IFwiJHtyZXNwb25zZS5zdGF0dXNUZXh0fVwiLmApO1xuICAgICAgfVxuICAgICAgY29uc3QgZGF0YSA9IGF3YWl0IHJlc3BvbnNlLmFycmF5QnVmZmVyKCk7XG5cbiAgICAgIC8vIFN0b3JlIFVSTHMgaW4gdGhlIGN3ZCB3aXRob3V0IGFueSBzdWJkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBpZiAoZmlsZS5pbmNsdWRlcyhcIjovL1wiKSkge1xuICAgICAgICBmaWxlID0gbmFtZTtcbiAgICAgIH1cblxuICAgICAgLy8gQ29sbGFwc2UgaGlnaGVyIGRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGZpbGUgPSBjb2xsYXBzZVBhdGgoZmlsZSk7XG5cbiAgICAgIC8vIENyZWF0ZSBkaXJlY3RvcnkgdHJlZSwgaWdub3JpbmcgXCJkaXJlY3RvcnkgZXhpc3RzXCIgVkZTIGVycm9yc1xuICAgICAgY29uc3QgcGFydHMgPSBmaWxlLnNwbGl0KCcvJykuc2xpY2UoMCwgLTEpO1xuICAgICAgbGV0IHBhdGggPSAnJztcbiAgICAgIHdoaWxlIChwYXJ0cy5sZW5ndGggPiAwKSB7XG4gICAgICAgIHBhdGggKz0gcGFydHMuc2hpZnQoKSArICcvJztcbiAgICAgICAgdHJ5IHtcbiAgICAgICAgICBhd2FpdCBweW9kaWRlLkZTLm1rZGlyKHBhdGgpO1xuICAgICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgICAgaWYgKGUubmFtZSAhPT0gXCJFcnJub0Vycm9yXCIpIHRocm93IGU7XG4gICAgICAgICAgaWYgKGUuZXJybm8gIT09IDIwKSB7XG4gICAgICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICAgICAgY29uc3QgZXJyb3JUZXh0ID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLlVURjhUb1N0cmluZyhlcnJvclRleHRQdHIpO1xuICAgICAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBGaWxlc3lzdGVtIEVycm9yICR7ZS5lcnJub30gXCIke2Vycm9yVGV4dH1cIi5gKTtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cblxuICAgICAgLy8gV3JpdGUgdGhpcyBmaWxlIHRvIHRoZSBWRlNcbiAgICAgIHRyeSB7XG4gICAgICAgIHJldHVybiBhd2FpdCBweW9kaWRlLkZTLndyaXRlRmlsZShmaWxlLCBuZXcgVWludDhBcnJheShkYXRhKSk7XG4gICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgIGlmIChlLm5hbWUgIT09IFwiRXJybm9FcnJvclwiKSB0aHJvdyBlO1xuICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICBjb25zdCBlcnJvclRleHQgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuVVRGOFRvU3RyaW5nKGVycm9yVGV4dFB0cik7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvciAke2UuZXJybm99IFwiJHtlcnJvclRleHR9XCIuYCk7XG4gICAgICB9XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYFB5b2RpZGUgZW52aXJvbm1lbnQgc2V0dXBgO1xuICAgIGF3YWl0IHNldHVwUHl0aG9uKHB5b2RpZGUpO1xuXG4gICAgc3RhdHVzVGV4dC5yZW1vdmUoKTtcbiAgICBpZiAoc3RhdHVzQ29udGFpbmVyLmNoaWxkcmVuLmxlbmd0aCA9PSAwKSB7XG4gICAgICBzdGF0dXNDb250YWluZXIucGFyZW50Tm9kZS5yZW1vdmUoKTtcbiAgICB9XG4gICAgcmV0dXJuIHB5b2RpZGU7XG4gIH0pKCkuY2F0Y2goKGVycikgPT4ge1xuICAgIHN0YXR1c1RleHQuc3R5bGUuY29sb3IgPSBcInZhcigtLWV4ZXJjaXNlLWVkaXRvci1obC1lciwgI0FEMDAwMClcIjtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gZXJyLm1lc3NhZ2U7XG4gICAgLy9pbmRpY2F0b3JDb250YWluZXIucXVlcnlTZWxlY3RvcihcIi5zcGlubmVyLWdyb3dcIikuY2xhc3NMaXN0LmFkZChcImQtbm9uZVwiKTtcbiAgICB0aHJvdyBlcnI7XG4gIH0pO1xuXG4gIC8vIEtlZXAgdHJhY2sgb2YgaW5pdGlhbCBPSlMgYmxvY2sgcmVuZGVyXG4gIGNvbnN0IHJlbmRlcmVkT2pzID0ge307XG5cbiAgY29uc3QgcHJvY2VzcyA9IGFzeW5jIChjb250ZXh0LCBpbnB1dHMpID0+IHtcbiAgICBjb25zdCBweW9kaWRlID0gYXdhaXQgcHlvZGlkZVByb21pc2U7XG4gICAgY29uc3QgZXZhbHVhdG9yID0gbmV3IFB5b2RpZGVFdmFsdWF0b3IocHlvZGlkZSwgY29udGV4dCk7XG4gICAgYXdhaXQgZXZhbHVhdG9yLnByb2Nlc3MoaW5wdXRzKTtcbiAgICByZXR1cm4gZXZhbHVhdG9yLmNvbnRhaW5lcjtcbiAgfVxuXG4gIHJldHVybiB7XG4gICAgcHlvZGlkZVByb21pc2UsXG4gICAgcmVuZGVyZWRPanMsXG4gICAgcHJvY2VzcyxcbiAgfTtcbn1cbiJ9XX0=
 </script>
 <div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
 <div id="exercise-loading-status" class="d-flex gap-2">
@@ -370,6 +638,7 @@ eyJjb250ZW50cyI6W119
 <script type="vfs-file">
 W10=
 </script>
+</section>
 
 </main> <!-- /main -->
 <script type="ojs-module-contents">
@@ -790,8 +1059,8 @@ window._ojs.runtime.interpretFromScriptTags();
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../parts/sessions/L12.html" class="pagination-link" aria-label="12. Case Studies I">
-        <span class="nav-page-text"><span class="chapter-title">12. Case Studies I</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../parts/sessions/L12.html" class="pagination-link" aria-label="12. Outliers  and Transformations">
+        <span class="nav-page-text"><span class="chapter-title">12. Outliers and Transformations</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

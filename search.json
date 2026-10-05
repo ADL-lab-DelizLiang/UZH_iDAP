@@ -1265,7 +1265,84 @@
     "href": "parts/sessions/L11.html",
     "title": "11. Non-normal data",
     "section": "",
-    "text": "This session is about checking whether the assumptions of normality and equal variance hold and what to do when they don’t: non-parametric tests.\n\n\n\n\n\n\n\nNote\n\n\n\nThis session will be released later in the semester.",
+    "text": "What Does “Normally Distributed” Mean Here?\nThis session is about checking whether the assumptions of normality and equal variance hold and what to do when they don’t: non-parametric tests.\nWhen we say a dataset is normally distributed for the purposes of a parametric test, we mean that the data were randomly sampled from a normally distributed population; not that the sample itself looks perfectly normal.\nThis is an important distinction: a small sample from a normal population will rarely look like a clean bell curve. What matters is whether the assumption of normality is plausible for the underlying data-generating process and whether the sample data represents that normal distribution well.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>11. Non-normal data</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L11.html#checking-normality",
+    "href": "parts/sessions/L11.html#checking-normality",
+    "title": "11. Non-normal data",
+    "section": "Checking Normality",
+    "text": "Checking Normality\nVisual methods:\nA histogram or violin plot can provide a rough check. Look for approximate symmetry and a single peak (but with small n, even normal data will not look bell-shaped).\n\n\n\nHistogram\n\n\nA Q-Q plot compares your data’s quantiles to a normal distribution’s: points on a straight diagonal mean approximately normal; S-curves suggest heavy/light tails, arcs suggest skew.\n\n\n\nQQ Plot, reference\n\n\nLet’s load some data that contain several conditions with different spreads and first inspect visually:\n\n\n\n\n\n\n\n\n\n\n\n\nThese visual tests are subjective, and with small sample sizes can be very difficult to assess.\n\n\n\nExample of challenge in assessing histograms with small sample sizes\n\n\nIs there a way that we can make more objective assessments? Yes!\nThe Shapiro-Wilk test evaluates the null hypothesis that the data came from a normal distribution: p &gt; 0.05 → cannot reject normality (proceed parametric); p &lt; 0.05 → reject (go non-parametric).\n\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\nShapiro-Wilk caveats: at small n (&lt; 5–10) it has very low power (rarely rejects even clearly non-normal data); at large n (&gt; 100–200) it has so much power it flags trivial, irrelevant deviations. It is most useful for n ≈ 10–50; at the extremes, it is advisable to include domain knowledge and the Q-Q plot.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>11. Non-normal data</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L11.html#checking-variance-equality-homoscedasticity",
+    "href": "parts/sessions/L11.html#checking-variance-equality-homoscedasticity",
+    "title": "11. Non-normal data",
+    "section": "Checking Variance Equality (Homoscedasticity)",
+    "text": "Checking Variance Equality (Homoscedasticity)\nIf the data are normal, the next question is whether the groups have similar variances.\n\nBartlett’s test is standard for normal data;\nLevene’s test is more robust when normality is uncertain.\n\n\n\n\n\n\n\nIf the data are normal but heteroscedastic (unequal variances), apply the Welch correction:\n\\[t_{\\text{Welch}} = \\frac{\\bar{x}_1 - \\bar{x}_2}{\\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}}\\]\nThe Welch correction adjusts the degrees of freedom for unequal variances; it is also appropriate when the two groups have different sample sizes, even if variances are equal. (In pingouin.ttest, correction=\"auto\" applies it automatically — Session 8.)",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>11. Non-normal data</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L11.html#non-parametric-tests",
+    "href": "parts/sessions/L11.html#non-parametric-tests",
+    "title": "11. Non-normal data",
+    "section": "Non-Parametric Tests",
+    "text": "Non-Parametric Tests\nWhen data are not normally distributed, non-parametric tests are used (regardless of homoscedasticity). Instead of directly using measured values, non-parametric tests evaluate ranked data.\nConverting data to ranks discards information about the magnitude of differences: you only know that one value is larger than another, not by how much. This is why non-parametric tests have lower statistical power than their parametric equivalents. However, when the normality assumption is strongly violated, p-values derived from parametric tests can be unreliable. A valid, lower-powered test is preferable to an invalid, higher-powered one.\n\n\n\n\n\n\n\n\nParametric\nNon-parametric\nUse case\n\n\n\n\nIndependent t-test\nMann-Whitney U\nTwo independent groups\n\n\nPaired t-test\nWilcoxon signed-rank\nTwo paired measurements\n\n\nOne-way ANOVA\nKruskal-Wallis\nThree or more independent groups\n\n\n\n\nMann-Whitney U tests whether one group’s median differs from another’s.\nWilcoxon signed-rank is the paired version (same sample measured twice).\nKruskal-Wallis generalizes to three or more independent groups.\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhat about the effect size for these non-parametric tests?\nA standard effect size for these three non-parametric tests is the Common Language Effect Size (CLES). The CLES gives the probability a random value from A exceeds a random value from B. A CLES value of 0.5 (or 50%) indicates no effect. Values closer to 0 or 1 have larger effects. In pingouin, the effect size for the non-parametric tests can requested with eftype=\"CLES\" in pg.compute_effsize.\n\n\n\n\n\n\nNoteLevene’s test\n\n\n\nOften students are confused: why would we even perform a Levene’s test if there is no homoscedasticity correction for non-parameteric tests?\nWhile Bartlett is to assess if modifications to a subsequent test are necessary, Levene’s test is to directly evaluate homoscedasticity.\nMaybe your research question is Which method yields a lower variance in outcome? Then you need a statistical method to evaluate a null hypothesis related directly to comparing variance. If your data is normally distributed, use Barlett’s test, and if the data is non-normally distributed, use Levene’s test.\n\n\n\nNon-parametric tests and Power\nPower calculations for non-parametric tests require explicit assumptions about the underlying distribution. Without those assumptions, true sample size calculations are impossible. A common rule of thumb is that non-parametric analyses require approximately 15% larger sample sizes than equivalent parametric analyses, but this is a rough approximation and should not replace formal power analysis when it is feasible.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>11. Non-normal data</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L11.html#an-overall-statistical-analysis-workflow-when-x-is-discrete-or-categorical-data",
+    "href": "parts/sessions/L11.html#an-overall-statistical-analysis-workflow-when-x-is-discrete-or-categorical-data",
+    "title": "11. Non-normal data",
+    "section": "An Overall Statistical Analysis Workflow when x is discrete or categorical data",
+    "text": "An Overall Statistical Analysis Workflow when x is discrete or categorical data\nHow do these evaluations fit into a statistical analysis workflow? A typical workflow is provided below.\n\nDefine research question and hypotheses\nDesign the experiment (controls and replicates)\nCollect the data\nVisualize the data and transform if necessary*\nDetermine descriptive statistics and error metrics\nAssess normality\nIf normal, test variance. If non-normal, test for outliers (if any are removed, re-assess normality and variance, but do NOT detect outliers again)*\nAssess inferential statistics (including power and effect size)\nVisualize data with inferential statistics\nFormulate conclusions\nReport methods, results, and conclusions\n\n*We will discuss transformations and outliers next week!",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>11. Non-normal data</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L11.html#warning-on-mis-use-of-statistics",
+    "href": "parts/sessions/L11.html#warning-on-mis-use-of-statistics",
+    "title": "11. Non-normal data",
+    "section": "Warning on mis-use of statistics",
+    "text": "Warning on mis-use of statistics\nOnce you have chosen a statistical test based on your data type and distribution, do not change the test after seeing the results. Using the Mann-Whitney test, finding a non-significant result, and then switching to a t-test because it gives p &lt; 0.05 is a form of significance chasing (or p-hacking).\nA specific example: for non-normally distributed data, the Mann-Whitney test correctly returns a non-significant result (\\(\\alpha\\) = 0.050, p = 0.055). The t-test, applied to the same data, returns a significant result (\\(\\alpha\\) = 0.050, p = 0.029). If you select the t-test result because it supports your hypothesis, you have effectively found a 50/50 vote and picked the result you preferred. This is an example of both p-hacking and cherry-picking. The pre-specified test (Mann-Whitney, appropriate for non-normal data) is the correct analysis; the t-test result is irrelevant.\nPlease note: in the exam, logic that relies on p-hacking will result in zero points for the question.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>11. Non-normal data</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L11.html#further-reading",
+    "href": "parts/sessions/L11.html#further-reading",
+    "title": "11. Non-normal data",
+    "section": "Further Reading",
+    "text": "Further Reading\n\n10.3758/s13428-021-01587-5 — on how much the normality assumption matters in practice\nhttps://www.itl.nist.gov/div898/handbook/eda/section3/eda35.htm — NIST resource on normality and variance tests\n\n\n\n\n\n\n\n\n\nTipKey takeaways\n\n\n\n\nCheck normality (Q-Q plot, Shapiro–Wilk — unreliable at very small/large n) and variance (Bartlett/Levene).\nNormal but unequal variances → apply the Welch correction.\nNon-normal → non-parametric tests (Mann–Whitney, Wilcoxon, Kruskal–Wallis): rank-based, lower power but valid.\nPre-specify the test; switching tests to chase significance is p-hacking.\nIn Python: pg.normality(...), pg.homoscedasticity(..., method=), pg.mwu(...), pg.wilcoxon(...), pg.kruskal(...).",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>11. Non-normal data</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L11.html#in-person",
+    "href": "parts/sessions/L11.html#in-person",
+    "title": "11. Non-normal data",
+    "section": "In Person",
+    "text": "In Person\nTBD",
     "crumbs": [
       "Inferential Statistics",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>11. Non-normal data</span>"
@@ -1274,23 +1351,100 @@
   {
     "objectID": "parts/sessions/L12.html",
     "href": "parts/sessions/L12.html",
-    "title": "12. Case Studies I",
+    "title": "12. Outliers and Transformations",
     "section": "",
-    "text": "This session is only intended for the in-person session and brings together everything from Sessions 1–11 in three worked case studies, then adds two practical Python tools: outlier detection and handling missing values with np.nan.\n\n\n\n\n\n\n\nNote\n\n\n\nThis session will be released later in the semester.",
+    "text": "Identifying Outliers\nThis session covers outliers and transformations, applied in Python with pingouin and scikit-learn.\nHumorous video about outliers\nAn outlier is an observation that is unusually far from the rest of the data. Outliers require careful treatment: they should only be removed with a clear, documented justification. They should not simply because they are inconvenient!\nLegitimate reasons to remove an outlier: - Gross error (confirmed equipment failure, contamination, transcription error) - Significant reason to believe there was a measurement error at that specific point - The observation is the result of an uncontrolled factor that was identified independently",
     "crumbs": [
       "Inferential Statistics",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>12. Case Studies I</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>12. Outliers  and Transformations</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L12.html#identifying-outliers",
+    "href": "parts/sessions/L12.html#identifying-outliers",
+    "title": "12. Outliers and Transformations",
+    "section": "",
+    "text": "Methods for Identifying Outliers\nVisual inspection: histogram or Q-Q plot — look for isolated points far from the main distribution.\nInner fence method: \\[\\text{Lower fence} = Q1 - 1.5 \\times \\text{IQR}\\] \\[\\text{Upper fence} = Q3 + 1.5 \\times \\text{IQR}\\] Points outside these fences are potential outliers. Box plots with whiskers at the fence limits show these automatically.\nGrubbs’ test: hypothesis test using the mean; applicable for identifying one outlier at a time.\nMedian Absolute Deviation (MAD) rule (pg.madmedianrule(a) in pingouin): uses the median instead of the mean; robust for identifying multiple outliers when the dataset may contain more than one.\nThe mean and standard deviation are themselves sensitive to outliers. An extreme value distorts both, making it harder to detect the very outlier you are looking for (a phenomenon called “masking”). The median-based MAD rule reduces this problem by using measures of central tendency and spread that are robust to extremes. For datasets where you suspect multiple outliers, the MAD rule is generally preferred.\n\n\nOutliers detection and processing in Python\nBefore we get started, let’s import the necessary packages.\n\n\n\n\n\n\nLet’s assume that we have already defined our research question and hypotheses, designed our experiment, collected, transformed and visualized our data (below).\n\n\n\n\n\n\nAt this stage, we want to assess normality and variance, (if non-normal) identify outliers, and decide how to move forward.\nFirst, let’s test for normality. Is the data from an approximately normally distributed population?\n\n\n\n\n\n\nSo the data look like they are not from a normally distributed population. Could that be because of an outlier?\n\n\n\n\n\n\nHow else could we do this to more easily determine which values were outliers?\nLet’s hypothetically say that we have reason to suspect that these are true outliers to be removed. If we want to remove the outliers, one of the most common methods is to replace the outlier with numpy’s not-a-number np.nan. np.nan is a special float value representing “not a number” (missing data). It is the standard way to mark removed values for compatibility with pandas DataFrames. Let’s see an example of how we can do that in python.\n\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\nlen() vs count():\nlen(df[\"col\"]) returns the total number of rows including NaN. df[\"col\"].count() returns the number of non-NaN entries.\nAlways use count() after removing outliers to verify the effective sample size.\n\n\nCould you also do this with a for loop? Why might you pick comprehension rather than a for loop?\nAfter we have removed an outlier, we need to re-evaluate the processed/cleaned data for normality.\n\n\n\n\n\n\nSince the data appears to be from an approximately normal distribution (after having removed the outlier - which was ideally motivated by a real reason), we can test for homoscedasticity and then select an approprate statistical significance test.\n\n\n\n\n\n\nDo NOT detect outliers again — this would inflate the false discovery rate!",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>12. Outliers  and Transformations</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L12.html#data-transformations",
+    "href": "parts/sessions/L12.html#data-transformations",
+    "title": "12. Outliers and Transformations",
+    "section": "Data Transformations",
+    "text": "Data Transformations\nWe have referenced data transformations a few times now, but what are data transformations, and when and how are they applied?\nData transformations are operations applied to the raw data to increase interpretability or to remove effects not related to the treatment being studied.\nBackground subtraction: removes an unwanted baseline signal. Appropriate when the blank represents noise affecting all measurements equally. Be cautious: in some contexts, the background itself contains scientifically relevant information.\n\n\n\nExamples of background subtraction\n\n\nStandard normalization: divides by a reference value (e.g. catalyst concentration, maximum signal) to enable fair comparisons across conditions.\n\n\n\nExamples of normalization\n\n\n“Normalization” and “standardization” are used inconsistently across fields. In this course, the following distinction applies:\n\nStandard normalization: dividing by a specific reference value meaningful to the domain (e.g. catalytic activity per mg of enzyme)\nMin-max scaling: rescaling all values to the range [0, 1]: \\(x' = (x - x_{\\min}) / (x_{\\max} - x_{\\min})\\). Useful for combining variables with different units. Sensitive to outliers.\nZ-score standardization: subtracting the mean and dividing by the standard deviation: \\(z = (x - \\bar{x}) / s\\). Centers the data at zero with unit variance. Very common in machine learning (preprocessing for PCA, linear regression with multiple inputs).\n\n\n\n\nComparison of Min-max and z-scoring\n\n\nZ-score standardization is particularly important in PCA (Session 24) because features with larger ranges would otherwise dominate the first principal components.\nSometimes, both background subtraction and normalization are necessary to work up a dataset.\n\n\n\nComparison of Min-max and z-scoring\n\n\nNote: we will discuss more complex data transformations when we get to regression analysis.\n\nCommon data transformations in Python\n\nBackground subtraction\nRemove a blank/baseline signal to isolate the true signal:\n\n\n\n\n\n\n\n\nnormalizations\nStandard normalization\nRescales data to mean = 0, standard deviation = 1. Required before PCA (Session 24):\n\n\n\n\n\n\nZ-score standardization\nRescales data to mean = 0, standard deviation = 1. Required before PCA (Session 24):\n\n\n\n\n\n\nNote: there are also tools to do z-scoring, but here we did it manually.\nMin-max scaling\nRescales all values to the range [0, 1]:\n\n\n\n\n\n\nComparing the different normalizations\n\n\n\n\n\n\nWhen to apply:\n\nBackground subtraction: Use when a blank/control measurement captures assay noise that applies equally to all samples.\nStandard normalization: When a comparison to a known standard is necessary for clear interpretation.\nZ-score standardization: When comparing/combining variables measured in different units (often the case in PCA or many ML tasks). Creates normally distributed data if the original is approximately normal.\nMin-max scaling: Use when you need values bounded between 0 and 1 and are not concerned about outlier sensitivity. Skews the data distribution.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>12. Outliers  and Transformations</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L12.html#an-overall-statistical-analysis-workflow-when-x-is-discrete-or-categorical-data",
+    "href": "parts/sessions/L12.html#an-overall-statistical-analysis-workflow-when-x-is-discrete-or-categorical-data",
+    "title": "12. Outliers and Transformations",
+    "section": "An Overall Statistical Analysis Workflow when x is discrete or categorical data",
+    "text": "An Overall Statistical Analysis Workflow when x is discrete or categorical data\n\nDefine research question and hypotheses\nDesign the experiment (controls and replicates)\nCollect the data\nVisualize the data and transform if necessary\nDetermine descriptive statistics and error metrics\nAssess normality\nIf normal, test variance. If non-normal, test for outliers (if any are removed, re-assess normality and variance, but do NOT detect outliers again)\nAssess inferential statistics (including power and effect size)\nVisualize data with inferential statistics\nFormulate conclusions\nReport methods, results, and conclusions\n\nIn later sessions, we will create parallel workflows for data with continuous input variables (correlation, regression).\n\n\n\n\n\n\n\nTipKey takeaways\n\n\n\n\nIdentify outliers with IQR fences, Grubbs, or the MAD rule (robust to multiple outliers / masking).\nRemove outliers only with documented justification; re-check assumptions afterward and do not re-detect.\nCommon transforms: background subtraction, min–max scaling, and z-score (required before PCA).\nIn Python: pg.madmedianrule(...), mark with np.nan, then StandardScaler (z-score) or min–max scaling.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>12. Outliers  and Transformations</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L12.html#in-person",
+    "href": "parts/sessions/L12.html#in-person",
+    "title": "12. Outliers and Transformations",
+    "section": "In Person",
+    "text": "In Person\nTBD :::",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>12. Outliers  and Transformations</span>"
     ]
   },
   {
     "objectID": "parts/sessions/L13.html",
     "href": "parts/sessions/L13.html",
-    "title": "13. Outliers, Data Blocking, and Transformations",
+    "title": "13. Case Studies I",
     "section": "",
-    "text": "This session covers data blocking, outliers, and transformations, applied in Python with pingouin and scikit-learn.\n\n\n\n\n\n\n\nNote\n\n\n\nThis session will be released later in the semester.",
+    "text": "Overview\nThis session is only intended for the in-person session and brings together everything from Sessions 1–11 in three worked case studies, then adds two practical Python tools: outlier detection and handling missing values with np.nan.\nThis session brings together the statistical methods from Sessions 1–11 in three worked case studies. Each scenario requires you to select the appropriate test, justify the choice, check assumptions, and interpret the results (including effect sizes and practical significance).",
     "crumbs": [
       "Inferential Statistics",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>13. Outliers, Data Blocking, and Transformations</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>13. Case Studies I</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L13.html#scenario-1-acid-catalyst-optimization",
+    "href": "parts/sessions/L13.html#scenario-1-acid-catalyst-optimization",
+    "title": "13. Case Studies I",
+    "section": "Scenario 1: Acid Catalyst Optimization",
+    "text": "Scenario 1: Acid Catalyst Optimization\nBackground: You are optimizing a reaction that requires an acid. You expect that switching from hydrochloric acid (HCl) to acetic acid will give a better reaction yield. You collect the following data with replicates in lists.\nData (reaction yield, %):\nNo acid:          [2.1, 4.9, 2.9, 4.0, 4.4, 5.9, 5.6, 4.2, 5.9, 3.0]\nHydrochloric acid: [79.3, 76.0, 84.9, 78.0, 82.6, 77.9, 81.0, 77.4, 83.5, 79.2]\nAcetic acid:       [88.2, 86.2, 95.8, 95.7, 79.1, 92.0, 83.4, 83.4, 93.8, 84.8]\nTasks:\n\nIdentify your negative and positive control experiments from the data above.\nFormulate a null hypothesis.\nEvaluate the data using appropriate statistical methods.\nJustify your choices.\nDescribe follow-up experiments.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>13. Case Studies I</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L13.html#scenario-2-fluorescent-probe-characterization",
+    "href": "parts/sessions/L13.html#scenario-2-fluorescent-probe-characterization",
+    "title": "13. Case Studies I",
+    "section": "Scenario 2: Fluorescent Probe Characterization",
+    "text": "Scenario 2: Fluorescent Probe Characterization\nBackground: You have synthesized four small molecules (S1–S4) with different chemical groups at one position. You want to evaluate the fluorescence response for this family of molecules.\nData (fluorescence intensity):\nNo small molecule: [1033, 997, 898, 957, 996]\nS1: [9856, 9389, 9884, 10020, 9673]\nS2: [16124, 15821, 14955, 15251, 15240]\nS3: [24448, 24260, 26876, 25435, 22777]\nS4: [19498, 18113, 20209, 20305, 21459]\nCommercial fluorophore: [14946, 16995, 21231, 20041, 19364]\nTasks:\n\nIdentify your negative and positive control experiments from the data above.\nFormulate a null hypothesis.\nEvaluate the data using appropriate statistical methods.\nJustify your choices.\nDescribe follow-up experiments.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>13. Case Studies I</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L13.html#scenario-3-enzyme-activity-comparison",
+    "href": "parts/sessions/L13.html#scenario-3-enzyme-activity-comparison",
+    "title": "13. Case Studies I",
+    "section": "Scenario 3: Enzyme Activity Comparison",
+    "text": "Scenario 3: Enzyme Activity Comparison\nBackground: You expect that enzyme B has improved turnover numbers compared to enzyme A.\nData (turnover number, s⁻¹):\nNo enzyme: [107, 205, 49, 64, 54, 186, 83, 77, 68, 57]\nEnzyme A: [857000, 821700, 770000, 752800, 787300, 782400, 704300, 738400, 708200, 354700]\nEnzyme B: [2710800, 1774300, 2311700, 1051500, 2432300, 1883400, 1832700, 1536600, 1018900, 842000]\nTasks:\n\nIdentify your negative and positive control experiments from the data above.\nFormulate a null hypothesis.\nEvaluate the data using appropriate statistical methods.\nJustify your choices.\nDescribe follow-up experiments.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>13. Case Studies I</span>"
     ]
   },
   {

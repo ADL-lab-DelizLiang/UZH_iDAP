@@ -401,9 +401,9 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBSdW4gdGhpcyBjZWxsIGZp
 </section>
 <section id="a-quick-recap-what-the-frequentist-approach-gives-us" class="level2">
 <h2 class="anchored" data-anchor-id="a-quick-recap-what-the-frequentist-approach-gives-us">A Quick Recap: What the Frequentist Approach Gives Us</h2>
-<p>Recall the logic from the frequentist approach we have so far relied on: a test fixes a null hypothesis H080 (no effect) and computes a <strong>p-value</strong>: the probability of observing data at least as extreme as ours <em>if H080 were true</em>.</p>
+<p>Recall the logic from the frequentist approach we have so far relied on: a test fixes a null hypothesis <span class="math inline">\(H_0\)</span> (no effect) and computes a <strong>p-value</strong>: the probability of observing data at least as extreme as ours <em>if <span class="math inline">\(H_0\)</span> were true</em>.</p>
 <p><span class="math display">\[p = P(\text{data this extreme or more} \mid H_0)\]</span></p>
-<p>This value is a conditional probability pointing in one direction only. It is easy to misread it as the thing we actually want to know: <em>the probability that H080 is true given our data, <span class="math inline">\(P(H_0 \mid \text{data})\)</span>.</em> But both sadly and importantly, the p-value is <strong>not</strong> that quantity! Additionally, the p-value also cannot provide evidence <em>for</em> H080; a large p-value means only “we failed to reject,” never “the null is supported.”</p>
+<p>This value is a conditional probability pointing in one direction only. It is easy to misread it as the thing we actually want to know: <em>the probability that <span class="math inline">\(H_0\)</span> is true given our data, <span class="math inline">\(P(H_0 \mid \text{data})\)</span>.</em> But both sadly and importantly, the p-value is <strong>not</strong> that quantity! Additionally, the p-value also cannot provide evidence <em>for</em> <span class="math inline">\(H_0\)</span>; a large p-value means only “we failed to reject,” never “the null is supported.”</p>
 <p>Bayesian methods address both gaps directly, allowing us to</p>
 <ol type="1">
 <li>quantify evidence <strong>for</strong> a hypothesis (including for the null),</li>
@@ -452,7 +452,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBSdW4gdGhpcyBjZWxsIGZp
 </tr>
 </tbody>
 </table>
-<p>When we compare <strong>two</strong> competing hypotheses (often a null H080 and an alternative H081), we can write Bayes’ theorem for each and divide. The marginal term <span class="math inline">\(P(D)\)</span> is identical in both and cancels:</p>
+<p>When we compare <strong>two</strong> competing hypotheses (often a null <span class="math inline">\(H_0\)</span> and an alternative <span class="math inline">\(H_1\)</span>), we can write Bayes’ theorem for each and divide. The marginal term <span class="math inline">\(P(D)\)</span> is identical in both and cancels:</p>
 <p><span class="math display">\[\underbrace{\frac{P(H_1 \mid D)}{P(H_0 \mid D)}}_{\text{posterior odds}}
 = \underbrace{\frac{P(D \mid H_1)}{P(D \mid H_0)}}_{\text{Bayes factor } BF_{10}}
 \times
@@ -462,13 +462,13 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBSdW4gdGhpcyBjZWxsIGZp
 </section>
 <section id="the-bayes-factor" class="level2">
 <h2 class="anchored" data-anchor-id="the-bayes-factor">The Bayes Factor</h2>
-<p>The <strong>Bayes factor</strong> <span class="math inline">\(BF_{10}\)</span> measures how much more likely the observed data are under H081 than under H080:</p>
+<p>The <strong>Bayes factor</strong> <span class="math inline">\(BF_{10}\)</span> measures how much more likely the observed data are under <span class="math inline">\(H_1\)</span> than under <span class="math inline">\(H_0\)</span>:</p>
 <p><span class="math display">\[BF_{10} = \frac{P(D \mid H_1)}{P(D \mid H_0)}\]</span></p>
 <p>The subscript “10” gives the direction: evidence for hypothesis <strong>1</strong> relative to hypothesis <strong>0</strong>. Its reciprocal, <span class="math inline">\(BF_{01} = 1 / BF_{10}\)</span>, points the other way.</p>
 <ul>
-<li><span class="math inline">\(BF_{10} = 10\)</span> 192 the data are <strong>100d7 more likely</strong> under H081 than under H080.</li>
+<li><span class="math inline">\(BF_{10} = 10\)</span> 192 the data are <strong>100d7 more likely</strong> under <span class="math inline">\(H_1\)</span> than under <span class="math inline">\(H_0\)</span>.</li>
 <li><span class="math inline">\(BF_{10} = 1\)</span> 192 the data are <strong>equally consistent</strong> with both; no evidence either way.</li>
-<li><span class="math inline">\(BF_{10} = 0.1\)</span> 192 the data are <strong>100d7 more likely under H080</strong> 014 genuine evidence <em>for</em> the null, something a p-value cannot provide.</li>
+<li><span class="math inline">\(BF_{10} = 0.1\)</span> 192 the data are <strong>100d7 more likely under <span class="math inline">\(H_0\)</span></strong> 014 genuine evidence <em>for</em> the null, something a p-value cannot provide.</li>
 </ul>
 <p>Unlike the p-value, the Bayes factor is <strong>symmetric</strong>: it can favor the null, favor the alternative, or sit near 1 and tell you the experiment was simply uninformative. There is no “fail to reject” limbo.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -487,16 +487,16 @@ Tip
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../images/statistics/L14/images/L14_bayes_factor_scale.png" class="img-fluid figure-img"></p>
-<figcaption>A Bayes factor is read on a continuous scale. Values above 1 favor H081 (an effect); values below 1 favor H080 (no effect).</figcaption>
+<figcaption>A Bayes factor is read on a continuous scale. Values above 1 favor <span class="math inline">\(H_1\)</span> (an effect); values below 1 favor <span class="math inline">\(H_0\)</span> (no effect).</figcaption>
 </figure>
 </div>
 <table class="caption-top table">
 <thead>
 <tr class="header">
 <th><span class="math inline">\(BF_{10}\)</span></th>
-<th>Evidence for H081</th>
+<th>Evidence for <span class="math inline">\(H_1\)</span></th>
 <th><span class="math inline">\(BF_{10}\)</span></th>
-<th>Evidence for H080</th>
+<th>Evidence for <span class="math inline">\(H_0\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -556,8 +556,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicF92YWx1ZSA9IHJlc3VsdC5h
 </div>
 <p>The two numbers tell a consistent but <strong>differently phrased</strong> story:</p>
 <ul>
-<li>The <strong>p-value</strong> (248 0.02) says: <em>if the two catalysts truly had equal mean yield, data this extreme would be unlikely.</em> Since it falls below the conventional 3b1 = 0.05, we reject H080.</li>
-<li>The <strong>Bayes factor</strong> (248 3) says: <em>the observed data are about 30d7 more likely under “the catalysts differ” than under “they are the same.”</em> On the scale above, that is only <strong>moderate</strong> evidence for H081.</li>
+<li>The <strong>p-value</strong> (248 0.02) says: <em>if the two catalysts truly had equal mean yield, data this extreme would be unlikely.</em> Since it falls below the conventional 3b1 = 0.05, we reject <span class="math inline">\(H_0\)</span>.</li>
+<li>The <strong>Bayes factor</strong> (248 3) says: <em>the observed data are about 30d7 more likely under “the catalysts differ” than under “they are the same.”</em> On the scale above, that is only <strong>moderate</strong> evidence for <span class="math inline">\(H_1\)</span>.</li>
 </ul>
 <p>Consider this further: the p-value crossed its threshold and delivered a “reject” vote, but the Bayes factor indicates the evidence only moderate. <em> </em>The two methods do not map one-to-one<strong>: a result can be “statistically significant” and still represent only modest evidence once you ask <em>how much more likely</em> the data are under one hypothesis than the other. The Bayes factor adds a </strong>statement of evidential strength** on a continuous scale, rather than a binary reject / fail-to-reject verdict.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -594,7 +594,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidF9zdGF0ID0gcmVzdWx0LmF0
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiY2F0X0MgPSBucC5hcnJheShbNzAuMSwgNzEuMywgNjkuNCwgNzAuOCwgNzIuMCwgNjguOSwgNzEuNSwgNzAuMiwgNjkuNywgNzIuNCwgNzAuNiwgNjkuMV0pXG5jYXRfRCA9IG5wLmFycmF5KFs3MC45LCA2OS44LCA3MS4xLCA3MC40LCA2OS4zLCA3MS44LCA3MC4wLCA3Mi4yLCA2OS42LCA3MC43LCA3MS40LCA3MC4zXSlcblxucmVzX2NkID0gcGcudHRlc3QoY2F0X0MsIGNhdF9EKVxucF9jZCA9IHJlc19jZC5hdFtcIlQtdGVzdFwiLCBcInAtdmFsXCJdXG5iZl9jZCA9IGZsb2F0KHJlc19jZC5hdFtcIlQtdGVzdFwiLCBcIkJGMTBcIl0pXG5wcmludChmXCJwLXZhbHVlIDoge3BfY2Q6LjRmfVwiKVxucHJpbnQoZlwiQkYxMCAgICA6IHtiZl9jZDouM2d9ICAgKEJGMDEgPSB7MS9iZl9jZDouMmZ9KVwiKSJ9
 </script>
 </div>
-<p>Here the frequentist test “fails to reject” H080, which is <strong>not</strong> the same as supporting H080! The non-significant p-value is compatible with “no effect” <em>and</em> with “a real effect we lacked power to detect.” It cannot distinguish them, but the Bayes factor can. A <span class="math inline">\(BF_{10}\)</span> below 1 (equivalently <span class="math inline">\(BF_{01} &gt; 1\)</span>) says the data are <strong>positively more consistent with “no difference.”</strong> We have evidence <em>for</em> the null, not merely an absence of evidence against it. Practically, this is the difference between “our assay could not tell these catalysts apart” and “our assay shows these catalysts behave the same.”</p>
+<p>Here the frequentist test “fails to reject” <span class="math inline">\(H_0\)</span>, which is <strong>not</strong> the same as supporting <span class="math inline">\(H_0\)</span>! The non-significant p-value is compatible with “no effect” <em>and</em> with “a real effect we lacked power to detect.” It cannot distinguish them, but the Bayes factor can. A <span class="math inline">\(BF_{10}\)</span> below 1 (equivalently <span class="math inline">\(BF_{01} &gt; 1\)</span>) says the data are <strong>positively more consistent with “no difference.”</strong> We have evidence <em>for</em> the null, not merely an absence of evidence against it. Practically, this is the difference between “our assay could not tell these catalysts apart” and “our assay shows these catalysts behave the same.”</p>
 <hr>
 </section>
 <section id="the-estimation-view-posteriors-and-credible-intervals" class="level2">
@@ -827,7 +827,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1wb3J0IGl0ZXJ0b29sc1xu
 <div class="callout-body-container callout-body">
 <ul>
 <li>The <strong>Bayesian</strong> framework treats probability as degree of belief and updates it with data via Bayes’ theorem (Session 5).</li>
-<li>The <strong>Bayes factor</strong> <span class="math inline">\(BF_{10}\)</span> measures how strongly the data support H081 over H080 — and, unlike the p-value, it can support the null.</li>
+<li>The <strong>Bayes factor</strong> <span class="math inline">\(BF_{10}\)</span> measures how strongly the data support <span class="math inline">\(H_1\)</span> over <span class="math inline">\(H_0\)</span> — and, unlike the p-value, it can support the null.</li>
 <li><code>pingouin</code> reports <code>BF10</code> in every <code>pg.ttest</code>.</li>
 <li><strong>Credible intervals</strong> carry the interpretation students instinctively (and <em>wrongly</em>) give to confidence intervals.</li>
 <li>The ANOVA workflow extends to the Bayesian setting via a BIC-based Bayes factor and pairwise Bayes factors, mirroring post-hoc tests.</li>

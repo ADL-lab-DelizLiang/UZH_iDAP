@@ -466,9 +466,9 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBSdW4gdGhpcyBjZWxsIGZp
 <p><span class="math display">\[BF_{10} = \frac{P(D \mid H_1)}{P(D \mid H_0)}\]</span></p>
 <p>The subscript “10” gives the direction: evidence for hypothesis <strong>1</strong> relative to hypothesis <strong>0</strong>. Its reciprocal, <span class="math inline">\(BF_{01} = 1 / BF_{10}\)</span>, points the other way.</p>
 <ul>
-<li><span class="math inline">\(BF_{10} = 10\)</span> 192 the data are <strong>100d7 more likely</strong> under <span class="math inline">\(H_1\)</span> than under <span class="math inline">\(H_0\)</span>.</li>
-<li><span class="math inline">\(BF_{10} = 1\)</span> 192 the data are <strong>equally consistent</strong> with both; no evidence either way.</li>
-<li><span class="math inline">\(BF_{10} = 0.1\)</span> 192 the data are <strong>100d7 more likely under <span class="math inline">\(H_0\)</span></strong> 014 genuine evidence <em>for</em> the null, something a p-value cannot provide.</li>
+<li><span class="math inline">\(BF_{10} = 10\)</span> → the data are <strong>10X more likely</strong> under <span class="math inline">\(H_1\)</span> than under <span class="math inline">\(H_0\)</span>.</li>
+<li><span class="math inline">\(BF_{10} = 1\)</span> → the data are <strong>equally consistent</strong> with both; no evidence either way.</li>
+<li><span class="math inline">\(BF_{10} = 0.1\)</span> → the data are <strong>10X more likely under <span class="math inline">\(H_0\)</span></strong>, genuine evidence <em>for</em> the null, something a p-value cannot provide.</li>
 </ul>
 <p>Unlike the p-value, the Bayes factor is <strong>symmetric</strong>: it can favor the null, favor the alternative, or sit near 1 and tell you the experiment was simply uninformative. There is no “fail to reject” limbo.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -501,27 +501,27 @@ Tip
 </thead>
 <tbody>
 <tr class="odd">
-<td>1 013 3</td>
+<td>1 - 3</td>
 <td>Anecdotal</td>
-<td>1 013 1/3</td>
+<td>1 - 1/3</td>
 <td>Anecdotal</td>
 </tr>
 <tr class="even">
-<td>3 013 10</td>
+<td>3 - 10</td>
 <td>Moderate</td>
-<td>1/3 013 1/10</td>
+<td>1/3 - 1/10</td>
 <td>Moderate</td>
 </tr>
 <tr class="odd">
-<td>10 013 30</td>
+<td>10 - 30</td>
 <td>Strong</td>
-<td>1/10 013 1/30</td>
+<td>1/10 - 1/30</td>
 <td>Strong</td>
 </tr>
 <tr class="even">
-<td>30 013 100</td>
+<td>30 - 100</td>
 <td>Very strong</td>
-<td>1/30 013 1/100</td>
+<td>1/30 - 1/100</td>
 <td>Very strong</td>
 </tr>
 <tr class="odd">
@@ -556,8 +556,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicF92YWx1ZSA9IHJlc3VsdC5h
 </div>
 <p>The two numbers tell a consistent but <strong>differently phrased</strong> story:</p>
 <ul>
-<li>The <strong>p-value</strong> (248 0.02) says: <em>if the two catalysts truly had equal mean yield, data this extreme would be unlikely.</em> Since it falls below the conventional 3b1 = 0.05, we reject <span class="math inline">\(H_0\)</span>.</li>
-<li>The <strong>Bayes factor</strong> (248 3) says: <em>the observed data are about 30d7 more likely under “the catalysts differ” than under “they are the same.”</em> On the scale above, that is only <strong>moderate</strong> evidence for <span class="math inline">\(H_1\)</span>.</li>
+<li>The <strong>p-value</strong> (≈ 0.02) says: <em>if the two catalysts truly had equal mean yield, data this extreme would be unlikely.</em> Since it falls below the conventional <span class="math inline">\(\alpha\)</span> = 0.05, we reject <span class="math inline">\(H_0\)</span>.</li>
+<li>The <strong>Bayes factor</strong> (≈ 3) says: <em>the observed data are about 3X more likely under “the catalysts differ” than under “they are the same.”</em> On the scale above, that is only <strong>moderate</strong> evidence for <span class="math inline">\(H_1\)</span>.</li>
 </ul>
 <p>Consider this further: the p-value crossed its threshold and delivered a “reject” vote, but the Bayes factor indicates the evidence only moderate. <em> </em>The two methods do not map one-to-one<strong>: a result can be “statistically significant” and still represent only modest evidence once you ask <em>how much more likely</em> the data are under one hypothesis than the other. The Bayes factor adds a </strong>statement of evidential strength** on a continuous scale, rather than a binary reject / fail-to-reject verdict.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -570,7 +570,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicF92YWx1ZSA9IHJlc3VsdC5h
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><code>pingouin</code> computes the Bayes factor for the t-test using the default Jeffreys013Zellner013Siow (JZS) prior with a scale of <span class="math inline">\(r = 0.707\)</span> on the effect size (the <code>r</code> argument of <code>pg.ttest</code>). The prior encodes a mild, reasonable belief that if an effect exists it is more likely to be small-to-moderate than enormous. You can see the same number from the t-statistic and sample sizes alone:</p>
+<p><code>pingouin</code> computes the Bayes factor for the t-test using the default Jeffreys-Zellner-Siow (JZS) prior with a scale of <span class="math inline">\(r = 0.707\)</span> on the effect size (the <code>r</code> argument of <code>pg.ttest</code>). The prior encodes a mild, reasonable belief that if an effect exists it is more likely to be small-to-moderate than enormous. You can see the same number from the t-statistic and sample sizes alone:</p>
 <div>
 <div id="pyodide-4" class="exercise-cell">
 
@@ -612,7 +612,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGlmZiA9IGNhdF9CLm1lYW4o
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../images/statistics/L14/images/L14_posterior_difference.png" class="img-fluid figure-img"></p>
-<figcaption>Posterior distribution for the difference in mean yield (B 212 A) under a flat prior. The shaded band is the 95% credible interval; the dashed line marks zero (no difference).</figcaption>
+<figcaption>Posterior distribution for the difference in mean yield (B - A) under a flat prior. The shaded band is the 95% credible interval; the dashed line marks zero (no difference).</figcaption>
 </figure>
 </div>
 <p>Read the credible interval carefully, because this is where Bayesian and frequentist language <strong>diverge most sharply</strong>:</p>
@@ -807,11 +807,11 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1wb3J0IGl0ZXJ0b29sc1xu
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Statistical significance 260 scientific significance 014 still true
+<span class="screen-reader-only">Important</span>Statistical significance vs practical importance
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Statistical significance or Bayesian strong evidence still does not necessarily imply practical significance. We have added a new framework, but the domain expertise is still relevant for interpreting practical significance.</p>
+<p>Statistical significance or Bayesian strong evidence still does not necessarily imply practical importance/significance. We have added a new framework, but the domain expertise is still relevant for interpreting practical importance/significance.</p>
 </div>
 </div>
 <hr>

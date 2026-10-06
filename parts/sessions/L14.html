@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>14. Bayesian and beyond – Introduction to Data Analytics and Python</title>
+<title>14. Bayesian Statistics: An Alternative to Hypothesis Testing – Introduction to Data Analytics and Python</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -77,6 +77,35 @@ ul.task-list li input[type="checkbox"] {
 <script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
 <link href="../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -89,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/inferential-statistics.html">Inferential Statistics</a></li><li class="breadcrumb-item"><a href="../../parts/sessions/L14.html"><span class="chapter-title">14. Bayesian and beyond</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/inferential-statistics.html">Inferential Statistics</a></li><li class="breadcrumb-item"><a href="../../parts/sessions/L14.html"><span class="chapter-title">14. Bayesian Statistics: An Alternative to Hypothesis Testing</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -226,7 +255,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../parts/sessions/L14.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">14. Bayesian and beyond</span></a>
+  <a href="../../parts/sessions/L14.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">14. Bayesian Statistics: An Alternative to Hypothesis Testing</span></a>
   </div>
 </li>
       </ul>
@@ -314,15 +343,31 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#orientation" id="toc-orientation" class="nav-link active" data-scroll-target="#orientation">Orientation</a></li>
+  <li><a href="#a-quick-recap-what-the-frequentist-approach-gives-us" id="toc-a-quick-recap-what-the-frequentist-approach-gives-us" class="nav-link" data-scroll-target="#a-quick-recap-what-the-frequentist-approach-gives-us">A Quick Recap: What the Frequentist Approach Gives Us</a></li>
+  <li><a href="#bayes-theorem-applied-to-hypotheses" id="toc-bayes-theorem-applied-to-hypotheses" class="nav-link" data-scroll-target="#bayes-theorem-applied-to-hypotheses">Bayes’ Theorem, Applied to Hypotheses</a></li>
+  <li><a href="#the-bayes-factor" id="toc-the-bayes-factor" class="nav-link" data-scroll-target="#the-bayes-factor">The Bayes Factor</a></li>
+  <li><a href="#you-have-already-computed-a-bayes-factor" id="toc-you-have-already-computed-a-bayes-factor" class="nav-link" data-scroll-target="#you-have-already-computed-a-bayes-factor">You Have Already Computed a Bayes Factor</a></li>
+  <li><a href="#bayes-and-the-null" id="toc-bayes-and-the-null" class="nav-link" data-scroll-target="#bayes-and-the-null">Bayes and the Null</a></li>
+  <li><a href="#the-estimation-view-posteriors-and-credible-intervals" id="toc-the-estimation-view-posteriors-and-credible-intervals" class="nav-link" data-scroll-target="#the-estimation-view-posteriors-and-credible-intervals">The Estimation View: Posteriors and Credible Intervals</a></li>
+  <li><a href="#bayesian-comparison-of-more-than-two-groups" id="toc-bayesian-comparison-of-more-than-two-groups" class="nav-link" data-scroll-target="#bayesian-comparison-of-more-than-two-groups">Bayesian Comparison of More Than Two Groups</a></li>
+  <li><a href="#putting-it-together-a-decision-table" id="toc-putting-it-together-a-decision-table" class="nav-link" data-scroll-target="#putting-it-together-a-decision-table">Putting It Together: A Decision Table</a></li>
+  <li><a href="#strengths-costs-and-honest-cautions" id="toc-strengths-costs-and-honest-cautions" class="nav-link" data-scroll-target="#strengths-costs-and-honest-cautions">Strengths, Costs, and Honest Cautions</a></li>
+  <li><a href="#in-person-session" id="toc-in-person-session" class="nav-link" data-scroll-target="#in-person-session">In Person Session</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/inferential-statistics.html">Inferential Statistics</a></li><li class="breadcrumb-item"><a href="../../parts/sessions/L14.html"><span class="chapter-title">14. Bayesian and beyond</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/inferential-statistics.html">Inferential Statistics</a></li><li class="breadcrumb-item"><a href="../../parts/sessions/L14.html"><span class="chapter-title">14. Bayesian Statistics: An Alternative to Hypothesis Testing</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">14. Bayesian and beyond</span></h1>
+<h1 class="title"><span class="chapter-title">14. Bayesian Statistics: An Alternative to Hypothesis Testing</span></h1>
 </div>
 
 
@@ -339,24 +384,474 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Session 5 introduced the Bayesian idea briefly, alongside the rules for combining probabilities. Now that you have worked through frequentist inference (hypothesis testing, p-values, effect size, ANOVA), this session develops the Bayesian framework properly and contrasts the two. We will also briefly discuss other approaches in statistics.</p>
+<p>This session returns to a <strong>Bayesian</strong> view of probability as a degree of belief and uses this framework to answer the <em>same</em> questions that we have been asking with the t-test and ANOVA. The goal is not to replace what you have learned, but to add a second lens: one that reports <strong>how much the data support one hypothesis over another</strong> and <strong>how probable a conclusion is</strong>, rather than only “would these data be this extreme if there were no effect?”</p>
+<hr>
+<section id="orientation" class="level2">
+<h2 class="anchored" data-anchor-id="orientation">Orientation</h2>
+<p>Today, we will return to “alternative statistical methods” but, as far as possible, we will continue to use familiar toolkits:<code>pingouin</code>, <code>scipy</code>, <code>numpy</code>, <code>pandas</code>. Perhaps surprisingly, <em>you have already been computing a Bayesian quantity without knowing it.</em></p>
+<div>
+<div id="pyodide-1" class="exercise-cell">
+
+</div>
+<script type="pyodide-1-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBSdW4gdGhpcyBjZWxsIGZpcnN0IOKAlCBsb2FkcyB0aGUgbGlicmFyaWVzIHVzZWQgaW4gdGhpcyBzZXNzaW9uXG5pbXBvcnQgbWljcm9waXBcbmF3YWl0IG1pY3JvcGlwLmluc3RhbGwoW1wibnVtcHlcIiwgXCJzY2lweVwiLCBcInBhbmRhc1wiLCBcIm1hdHBsb3RsaWJcIiwgXCJzdGF0c21vZGVsc1wiLCBcInNjaWtpdC1sZWFyblwiLCBcInBhbmRhc19mbGF2b3JcIiwgXCJ0YWJ1bGF0ZVwiXSlcbmF3YWl0IG1pY3JvcGlwLmluc3RhbGwoXCJwaW5nb3Vpbj09MC41LjVcIiwgZGVwcz1GYWxzZSlcbmltcG9ydCBudW1weSBhcyBucFxuaW1wb3J0IHBhbmRhcyBhcyBwZFxuZnJvbSBzY2lweSBpbXBvcnQgc3RhdHNcbmltcG9ydCBwaW5nb3VpbiBhcyBwZ1xucHJpbnQoXCJDb21wbGV0ZVwiKSJ9
+</script>
+</div>
+<hr>
+</section>
+<section id="a-quick-recap-what-the-frequentist-approach-gives-us" class="level2">
+<h2 class="anchored" data-anchor-id="a-quick-recap-what-the-frequentist-approach-gives-us">A Quick Recap: What the Frequentist Approach Gives Us</h2>
+<p>Recall the logic from the frequentist approach we have so far relied on: a test fixes a null hypothesis H080 (no effect) and computes a <strong>p-value</strong>: the probability of observing data at least as extreme as ours <em>if H080 were true</em>.</p>
+<p><span class="math display">\[p = P(\text{data this extreme or more} \mid H_0)\]</span></p>
+<p>This value is a conditional probability pointing in one direction only. It is easy to misread it as the thing we actually want to know: <em>the probability that H080 is true given our data, <span class="math inline">\(P(H_0 \mid \text{data})\)</span>.</em> But both sadly and importantly, the p-value is <strong>not</strong> that quantity! Additionally, the p-value also cannot provide evidence <em>for</em> H080; a large p-value means only “we failed to reject,” never “the null is supported.”</p>
+<p>Bayesian methods address both gaps directly, allowing us to</p>
+<ol type="1">
+<li>quantify evidence <strong>for</strong> a hypothesis (including for the null),</li>
+<li>report the probability of a hypothesis <strong>given the data</strong> (a quantity that may feel more satisfying than a p-value), and</li>
+<li>incorporate prior information when we have it.</li>
+</ol>
+<hr>
+</section>
+<section id="bayes-theorem-applied-to-hypotheses" class="level2">
+<h2 class="anchored" data-anchor-id="bayes-theorem-applied-to-hypotheses">Bayes’ Theorem, Applied to Hypotheses</h2>
+<p>Previously, we saw the formalization of Bayes’ theorem for a hypothesis H and data D:</p>
+<p><span class="math display">\[P(H \mid D) = \frac{P(D \mid H)\, P(H)}{P(D)}\]</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Term</th>
+<th>Name</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(P(H \mid D)\)</span></td>
+<td>Posterior</td>
+<td>Belief in the hypothesis <strong>after</strong> seeing the data</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(H)\)</span></td>
+<td>Prior</td>
+<td>Belief in the hypothesis <strong>before</strong> seeing the data</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(D \mid H)\)</span></td>
+<td>Likelihood</td>
+<td>Probability of the data if the hypothesis holds</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P(D)\)</span></td>
+<td>Marginal</td>
+<td>Total probability of the data; normalizes the result</td>
+</tr>
+</tbody>
+</table>
+<p>When we compare <strong>two</strong> competing hypotheses (often a null H080 and an alternative H081), we can write Bayes’ theorem for each and divide. The marginal term <span class="math inline">\(P(D)\)</span> is identical in both and cancels:</p>
+<p><span class="math display">\[\underbrace{\frac{P(H_1 \mid D)}{P(H_0 \mid D)}}_{\text{posterior odds}}
+= \underbrace{\frac{P(D \mid H_1)}{P(D \mid H_0)}}_{\text{Bayes factor } BF_{10}}
+\times
+\underbrace{\frac{P(H_1)}{P(H_0)}}_{\text{prior odds}}\]</span></p>
+<p>The middle term, the ratio of how well each hypothesis predicted the data, is the <strong>Bayes factor</strong>. It is the core of Bayesian hypothesis testing.</p>
+<hr>
+</section>
+<section id="the-bayes-factor" class="level2">
+<h2 class="anchored" data-anchor-id="the-bayes-factor">The Bayes Factor</h2>
+<p>The <strong>Bayes factor</strong> <span class="math inline">\(BF_{10}\)</span> measures how much more likely the observed data are under H081 than under H080:</p>
+<p><span class="math display">\[BF_{10} = \frac{P(D \mid H_1)}{P(D \mid H_0)}\]</span></p>
+<p>The subscript “10” gives the direction: evidence for hypothesis <strong>1</strong> relative to hypothesis <strong>0</strong>. Its reciprocal, <span class="math inline">\(BF_{01} = 1 / BF_{10}\)</span>, points the other way.</p>
+<ul>
+<li><span class="math inline">\(BF_{10} = 10\)</span> 192 the data are <strong>100d7 more likely</strong> under H081 than under H080.</li>
+<li><span class="math inline">\(BF_{10} = 1\)</span> 192 the data are <strong>equally consistent</strong> with both; no evidence either way.</li>
+<li><span class="math inline">\(BF_{10} = 0.1\)</span> 192 the data are <strong>100d7 more likely under H080</strong> 014 genuine evidence <em>for</em> the null, something a p-value cannot provide.</li>
+</ul>
+<p>Unlike the p-value, the Bayes factor is <strong>symmetric</strong>: it can favor the null, favor the alternative, or sit near 1 and tell you the experiment was simply uninformative. There is no “fail to reject” limbo.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A widely used descriptive scale groups Bayes factors into bands of evidential strength. These labels are conventions(!), a Bayes factor is a <strong>continuous</strong> measure, and the same concerns about arbitrariness of frequency statistics metrics apply here too.</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/statistics/L14/images/L14_bayes_factor_scale.png" class="img-fluid figure-img"></p>
+<figcaption>A Bayes factor is read on a continuous scale. Values above 1 favor H081 (an effect); values below 1 favor H080 (no effect).</figcaption>
+</figure>
+</div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(BF_{10}\)</span></th>
+<th>Evidence for H081</th>
+<th><span class="math inline">\(BF_{10}\)</span></th>
+<th>Evidence for H080</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1 013 3</td>
+<td>Anecdotal</td>
+<td>1 013 1/3</td>
+<td>Anecdotal</td>
+</tr>
+<tr class="even">
+<td>3 013 10</td>
+<td>Moderate</td>
+<td>1/3 013 1/10</td>
+<td>Moderate</td>
+</tr>
+<tr class="odd">
+<td>10 013 30</td>
+<td>Strong</td>
+<td>1/10 013 1/30</td>
+<td>Strong</td>
+</tr>
+<tr class="even">
+<td>30 013 100</td>
+<td>Very strong</td>
+<td>1/30 013 1/100</td>
+<td>Very strong</td>
+</tr>
+<tr class="odd">
+<td>&gt; 100</td>
+<td>Decisive</td>
+<td>&lt; 1/100</td>
+<td>Decisive</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="you-have-already-computed-a-bayes-factor" class="level2">
+<h2 class="anchored" data-anchor-id="you-have-already-computed-a-bayes-factor">You Have Already Computed a Bayes Factor</h2>
+<p>When you ran a t-test in <code>pingouin</code> in a previous session, the output table included a column that I said was not relevant for now: <strong><code>BF10</code></strong>. Let us look at <code>BF10</code> now in an example comparing the percent yield of a reaction run with two different catalysts.</p>
+<div>
+<div id="pyodide-2" class="exercise-cell">
+
+</div>
+<script type="pyodide-2-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBQZXJjZW50IHlpZWxkcyBmcm9tIHR3byBjYXRhbHlzdHMsIDEyIGluZGVwZW5kZW50IHJ1bnMgZWFjaFxuY2F0X0EgPSBucC5hcnJheShbNzAuNSwgNjUuMiwgNzYuMSwgNjguMywgNzMuOCwgNjQuMCwgNzUuMiwgNjkuMCwgNjYuNSwgNzcuNCwgNjcuOSwgNzIuMV0pXG5jYXRfQiA9IG5wLmFycmF5KFs3NC44LCA3MC4xLCA4MC4zLCA3Mi41LCA3OC4wLCA2OS4yLCA3OS4xLCA3My40LCA3MS4wLCA4MS42LCA3Mi44LCA3Ni4yXSlcblxucmVzdWx0ID0gcGcudHRlc3QoY2F0X0EsIGNhdF9CKVxucmVzdWx0LnJvdW5kKDQpIn0=
+</script>
+</div>
+<p>The table reports the frequentist outputs you already know (the t-statistic, degrees of freedom, p-value, 95% CI, Cohen’s d, and power), and it also outputs the <strong>Bayes factor <code>BF10</code></strong>. Let us pull out the p-value and the Bayes factor and read them side by side:</p>
+<div>
+<div id="pyodide-3" class="exercise-cell">
+
+</div>
+<script type="pyodide-3-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicF92YWx1ZSA9IHJlc3VsdC5hdFtcIlQtdGVzdFwiLCBcInAtdmFsXCJdXG5iZjEwID0gZmxvYXQocmVzdWx0LmF0W1wiVC10ZXN0XCIsIFwiQkYxMFwiXSkgICAjIHBpbmdvdWluIHJldHVybnMgQkYxMCBhcyBhIHN0cmluZ1xuXG5wcmludChmXCJwLXZhbHVlIDoge3BfdmFsdWU6LjRmfVwiKVxucHJpbnQoZlwiQkYxMCAgICA6IHtiZjEwOi4zZ31cIikifQ==
+</script>
+</div>
+<p>The two numbers tell a consistent but <strong>differently phrased</strong> story:</p>
+<ul>
+<li>The <strong>p-value</strong> (248 0.02) says: <em>if the two catalysts truly had equal mean yield, data this extreme would be unlikely.</em> Since it falls below the conventional 3b1 = 0.05, we reject H080.</li>
+<li>The <strong>Bayes factor</strong> (248 3) says: <em>the observed data are about 30d7 more likely under “the catalysts differ” than under “they are the same.”</em> On the scale above, that is only <strong>moderate</strong> evidence for H081.</li>
+</ul>
+<p>Consider this further: the p-value crossed its threshold and delivered a “reject” vote, but the Bayes factor indicates the evidence only moderate. <em> </em>The two methods do not map one-to-one<strong>: a result can be “statistically significant” and still represent only modest evidence once you ask <em>how much more likely</em> the data are under one hypothesis than the other. The Bayes factor adds a </strong>statement of evidential strength** on a continuous scale, rather than a binary reject / fail-to-reject verdict.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+<span class="screen-reader-only">Note</span>Where does <code>BF10</code> come from?
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This session will be released later in the semester.</p>
+<p><code>pingouin</code> computes the Bayes factor for the t-test using the default Jeffreys013Zellner013Siow (JZS) prior with a scale of <span class="math inline">\(r = 0.707\)</span> on the effect size (the <code>r</code> argument of <code>pg.ttest</code>). The prior encodes a mild, reasonable belief that if an effect exists it is more likely to be small-to-moderate than enormous. You can see the same number from the t-statistic and sample sizes alone:</p>
+<div>
+<div id="pyodide-4" class="exercise-cell">
+
+</div>
+<script type="pyodide-4-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidF9zdGF0ID0gcmVzdWx0LmF0W1wiVC10ZXN0XCIsIFwiVFwiXVxuYmYxMF9kaXJlY3QgPSBwZy5iYXllc2ZhY3Rvcl90dGVzdCh0X3N0YXQsIG54PWxlbihjYXRfQSksIG55PWxlbihjYXRfQikpXG5wcmludChmXCJCRjEwIGZyb20gdGhlIHQtc3RhdGlzdGljOiB7YmYxMF9kaXJlY3Q6LjNnfVwiKSJ9
+</script>
 </div>
 </div>
+</div>
+<hr>
+</section>
+<section id="bayes-and-the-null" class="level2">
+<h2 class="anchored" data-anchor-id="bayes-and-the-null">Bayes and the Null</h2>
+<p>The most useful thing a Bayes factor does is something no p-value can: provide <strong>evidence that there is no meaningful difference.</strong> Consider comparing two catalysts that genuinely perform the same.</p>
+<div>
+<div id="pyodide-5" class="exercise-cell">
+
+</div>
+<script type="pyodide-5-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiY2F0X0MgPSBucC5hcnJheShbNzAuMSwgNzEuMywgNjkuNCwgNzAuOCwgNzIuMCwgNjguOSwgNzEuNSwgNzAuMiwgNjkuNywgNzIuNCwgNzAuNiwgNjkuMV0pXG5jYXRfRCA9IG5wLmFycmF5KFs3MC45LCA2OS44LCA3MS4xLCA3MC40LCA2OS4zLCA3MS44LCA3MC4wLCA3Mi4yLCA2OS42LCA3MC43LCA3MS40LCA3MC4zXSlcblxucmVzX2NkID0gcGcudHRlc3QoY2F0X0MsIGNhdF9EKVxucF9jZCA9IHJlc19jZC5hdFtcIlQtdGVzdFwiLCBcInAtdmFsXCJdXG5iZl9jZCA9IGZsb2F0KHJlc19jZC5hdFtcIlQtdGVzdFwiLCBcIkJGMTBcIl0pXG5wcmludChmXCJwLXZhbHVlIDoge3BfY2Q6LjRmfVwiKVxucHJpbnQoZlwiQkYxMCAgICA6IHtiZl9jZDouM2d9ICAgKEJGMDEgPSB7MS9iZl9jZDouMmZ9KVwiKSJ9
+</script>
+</div>
+<p>Here the frequentist test “fails to reject” H080, which is <strong>not</strong> the same as supporting H080! The non-significant p-value is compatible with “no effect” <em>and</em> with “a real effect we lacked power to detect.” It cannot distinguish them, but the Bayes factor can. A <span class="math inline">\(BF_{10}\)</span> below 1 (equivalently <span class="math inline">\(BF_{01} &gt; 1\)</span>) says the data are <strong>positively more consistent with “no difference.”</strong> We have evidence <em>for</em> the null, not merely an absence of evidence against it. Practically, this is the difference between “our assay could not tell these catalysts apart” and “our assay shows these catalysts behave the same.”</p>
+<hr>
+</section>
+<section id="the-estimation-view-posteriors-and-credible-intervals" class="level2">
+<h2 class="anchored" data-anchor-id="the-estimation-view-posteriors-and-credible-intervals">The Estimation View: Posteriors and Credible Intervals</h2>
+<p>The Bayes factor answers <em>“is there an effect?”</em> A second Bayesian output answers <em>“how big is it, and how sure are we?”</em> This is estimation question and the domain of belief that we discussed before.</p>
+<p>Instead of a single point estimate, Bayesian estimation produces a <strong>posterior distribution</strong> over the quantity of interest. In our example, the difference in mean yield between catalysts B and A. From it we read a <strong>credible interval</strong>.</p>
+<div>
+<div id="pyodide-6" class="exercise-cell">
+
+</div>
+<script type="pyodide-6-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGlmZiA9IGNhdF9CLm1lYW4oKSAtIGNhdF9BLm1lYW4oKVxuc2UgPSBucC5zcXJ0KGNhdF9BLnZhcihkZG9mPTEpL2xlbihjYXRfQSkgKyBjYXRfQi52YXIoZGRvZj0xKS9sZW4oY2F0X0IpKVxuZG9mID0gcmVzdWx0LmF0W1wiVC10ZXN0XCIsIFwiZG9mXCJdXG5cbiMgVW5kZXIgYSBmbGF0ICh1bmluZm9ybWF0aXZlKSBwcmlvciwgdGhlIHBvc3RlcmlvciBmb3IgdGhlIG1lYW4gZGlmZmVyZW5jZVxuIyBmb2xsb3dzIGEgc2NhbGVkIHQtZGlzdHJpYnV0aW9uIGNlbnRlcmVkIG9uIHRoZSBvYnNlcnZlZCBkaWZmZXJlbmNlLlxubG8sIGhpID0gc3RhdHMudC5pbnRlcnZhbCgwLjk1LCBkb2YsIGxvYz1kaWZmLCBzY2FsZT1zZSlcbnBfQl9ndF9BID0gMSAtIHN0YXRzLnQuY2RmKDAsIGRvZiwgbG9jPWRpZmYsIHNjYWxlPXNlKVxuXG5wcmludChmXCJPYnNlcnZlZCBkaWZmZXJlbmNlIChCIC0gQSkgOiB7ZGlmZjouMmZ9ICUgeWllbGRcIilcbnByaW50KGZcIjk1JSBjcmVkaWJsZSBpbnRlcnZhbCAgICAgICA6IFt7bG86LjJmfSwge2hpOi4yZn1dXCIpXG5wcmludChmXCJQb3N0ZXJpb3IgUChCID4gQSkgICAgICAgICAgOiB7cF9CX2d0X0E6LjNmfVwiKSJ9
+</script>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/statistics/L14/images/L14_posterior_difference.png" class="img-fluid figure-img"></p>
+<figcaption>Posterior distribution for the difference in mean yield (B 212 A) under a flat prior. The shaded band is the 95% credible interval; the dashed line marks zero (no difference).</figcaption>
+</figure>
+</div>
+<p>Read the credible interval carefully, because this is where Bayesian and frequentist language <strong>diverge most sharply</strong>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>95% <strong>confidence</strong> interval (Session 7)</th>
+<th>95% <strong>credible</strong> interval (here)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>What is random?</td>
+<td>The interval (varies run to run)</td>
+<td>The parameter (we are uncertain about it)</td>
+</tr>
+<tr class="even">
+<td>Correct reading</td>
+<td>“95% of intervals built this way contain the true value”</td>
+<td>“There is a 95% probability the true value lies in <strong>this</strong> interval”</td>
+</tr>
+<tr class="odd">
+<td>The intuitive reading</td>
+<td><strong>Wrong</strong></td>
+<td><strong>Correct</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Interestingly, the general interpretation students often <em>want</em> to give a confidence interval (“I’m 95% sure the true difference is in here”) is what a <strong>credible</strong> interval provides. The posterior also lets us make direct probability statements with no frequentist equivalent, such as <span class="math inline">\(P(\text{B} &gt; \text{A})\)</span> read straight off the distribution.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Our flat-prior shortcut
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The numbers above use a <strong>flat (uninformative) prior</strong>, under which the posterior for the mean difference coincides numerically with the frequentist t-interval. We use this deliberately: it isolates the one thing that changes, the <em>interpretation</em>, without new machinery. With an informative prior (real prior knowledge about catalyst behavior), the posterior would shift. Full posterior estimation with chosen priors uses dedicated samplers, but this material is beyond an introductory course.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Advanced: what an informative prior actually does
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A flat prior says “before seeing data, any difference is as plausible as any other.” That is rarely what a scientist truly believes because usually our experiments are based on fundamental knowledge at a minimum. If <em>before</em> the experiment you expected two catalysts to be broadly similar, a difference of more than a few percent would be surprising. You can encode that as an <strong>informative prior</strong>: a distribution centered at 0 (no difference) with a modest spread, say a Normal with standard deviation 2% yield, written <span class="math inline">\(N(0, 2^2)\)</span>.</p>
+<p>For a Normal prior and an (approximately) Normal likelihood, the posterior is available in closed form (no sampler needed) as a precision-weighted blend of prior and data:</p>
+<div>
+<div id="pyodide-7" class="exercise-cell">
+
+</div>
+<script type="pyodide-7-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicHJpb3JfbWVhbiwgcHJpb3Jfc2QgPSAwLjAsIDIuMCAgICAgICAgICAjIHNrZXB0aWNhbDogZGlmZmVyZW5jZXMgPiB+NCUgc3VycHJpc2luZ1xuXG5wb3N0X3ZhciAgPSAxIC8gKDEvcHJpb3Jfc2QqKjIgKyAxL3NlKioyKVxucG9zdF9tZWFuID0gcG9zdF92YXIgKiAocHJpb3JfbWVhbi9wcmlvcl9zZCoqMiArIGRpZmYvc2UqKjIpXG5wb3N0X3NkICAgPSBucC5zcXJ0KHBvc3RfdmFyKVxuXG5sb19pLCBoaV9pID0gcG9zdF9tZWFuIC0gMS45Nipwb3N0X3NkLCBwb3N0X21lYW4gKyAxLjk2KnBvc3Rfc2RcbnBfZ3RfaSA9IDEgLSBzdGF0cy5ub3JtLmNkZigwLCBsb2M9cG9zdF9tZWFuLCBzY2FsZT1wb3N0X3NkKVxuXG5wcmludChmXCJGbGF0IHByaW9yICAgICAgIDogbWVhbiB7ZGlmZjo1LjJmfSAlLCA5NSUgQ0kgW3tsbzo0LjJmfSwge2hpOjQuMmZ9XSwgUChCPkEpIHtwX0JfZ3RfQTouM2Z9XCIpXG5wcmludChmXCJTa2VwdGljYWwgTigwLDLCsik6IG1lYW4ge3Bvc3RfbWVhbjo1LjJmfSAlLCA5NSUgQ0kgW3tsb19pOjQuMmZ9LCB7aGlfaTo0LjJmfV0sIFAoQj5BKSB7cF9ndF9pOi4zZn1cIikifQ==
+</script>
+</div>
+<p>A skeptical prior pulls the estimate <strong>toward zero</strong>, the posterior mean drops from about 4.4% to 2.5%, and the credible interval now reaches just below zero. The data still move belief strongly toward “B beats A” (<span class="math inline">\(P(\text{B} &gt; \text{A})\)</span> falls only from 0.99 to about 0.97), but the <em>size</em> of the claimed effect is mediated by prior skepticism. This is the Bayesian approach in action: <strong>the posterior is a compromise between what you believed and what you measured</strong>, and the more data you collect, the more the likelihood dominates and the choice of prior washes out.</p>
+<p>Caveat: An informative prior is a scientific claim you must be able to <strong>justify and report</strong>, just like with reporting out <span class="math inline">\(\alpha\)</span> values for the frequency based approach!</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="bayesian-comparison-of-more-than-two-groups" class="level2">
+<h2 class="anchored" data-anchor-id="bayesian-comparison-of-more-than-two-groups">Bayesian Comparison of More Than Two Groups</h2>
+<p>We previously saw that with more than two groups, we used <strong>ANOVA</strong>, and then used post-hoc tests to find <em>which</em> groups differ. Theoretically, Bayesian workflow parallels this step for step. Unfortunately, <code>pingouin</code>’s <code>anova</code> does not return a Bayes factor directly, but we can obtain a well-established <em>approximation</em> from the ANOVA sums of squares using the BIC (Wagenmakers, 2007). This approximation will be applied in this course so that we can continue using the same python tools.</p>
+<div>
+<div id="pyodide-8" class="exercise-cell">
+
+</div>
+<script type="pyodide-8-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVmIGFub3ZhX2JheWVzX2ZhY3RvcihkYXRhLCBkdiwgYmV0d2Vlbik6XG4gICAgIyBBcHByb3hpbWF0ZSBCRjEwIGZvciBhIG9uZS13YXkgQU5PVkEgZnJvbSB0aGUgQklDIChXYWdlbm1ha2VycyAyMDA3KS5cblxuICAgIGFvdiA9IHBnLmFub3ZhKGRhdGE9ZGF0YSwgZHY9ZHYsIGJldHdlZW49YmV0d2VlbiwgZGV0YWlsZWQ9VHJ1ZSlcbiAgICBzc19lZmZlY3QgPSBhb3YubG9jW2FvdltcIlNvdXJjZVwiXSA9PSBiZXR3ZWVuLCBcIlNTXCJdLmlsb2NbMF1cbiAgICBzc193aXRoaW4gPSBhb3YubG9jW2FvdltcIlNvdXJjZVwiXSA9PSBcIldpdGhpblwiLCBcIlNTXCJdLmlsb2NbMF1cbiAgICBuID0gbGVuKGRhdGEpXG4gICAgayA9IGRhdGFbYmV0d2Vlbl0ubnVuaXF1ZSgpICAgICAgICAgICAgIyBncm91cC1tZWFucyBtb2RlbCBwYXJhbWV0ZXJzXG4gICAgYmljX2FsdCAgPSBuICogbnAubG9nKHNzX3dpdGhpbiAvIG4pICAgICAgICAgICAgICAgKyBrICogbnAubG9nKG4pXG4gICAgYmljX251bGwgPSBuICogbnAubG9nKChzc193aXRoaW4gKyBzc19lZmZlY3QpIC8gbikgKyAxICogbnAubG9nKG4pXG4gICAgcmV0dXJuIG5wLmV4cCgoYmljX251bGwgLSBiaWNfYWx0KSAvIDIpIn0=
+</script>
+</div>
+<p>Now compare three catalysts with the method that we have previously discussed. Remember, if the dataframe starts <strong>wide</strong>, we need to <code>melt</code> them to <strong>long</strong> format for <code>pingouin</code>.</p>
+<div>
+<div id="pyodide-9" class="exercise-cell">
+
+</div>
+<script type="pyodide-9-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoid2lkZSA9IHBkLkRhdGFGcmFtZSh7XG4gICAgXCJBXCI6IFs2MC4xLCA1OC40LCA2Mi4zLCA1OS44LCA2MS4wLCA1Ny45LCA2MC41LCA1OC4wLCA2MS43LCA1OS4yLCA2MC45LCA1OC42XSxcbiAgICBcIkJcIjogWzc0LjksIDc2LjIsIDczLjEsIDc1LjUsIDc0LjAsIDc2LjgsIDczLjYsIDc1LjAsIDc0LjQsIDc2LjEsIDczLjksIDc1LjNdLFxuICAgIFwiQ1wiOiBbODkuOCwgOTEuMiwgODguNCwgOTAuNiwgODkuMSwgOTEuOSwgODguNywgOTAuMCwgODkuNSwgOTEuNCwgODguOSwgOTAuMl0sXG59KVxubG9uZyA9IHdpZGUubWVsdCh2YXJfbmFtZT1cImNhdGFseXN0XCIsIHZhbHVlX25hbWU9XCJ5aWVsZFwiKVxuXG5hb3YgPSBwZy5hbm92YShkYXRhPWxvbmcsIGR2PVwieWllbGRcIiwgYmV0d2Vlbj1cImNhdGFseXN0XCIpXG5wX2Fub3ZhID0gYW92W1wicC11bmNcIl0uaWxvY1swXVxuYmZfYW5vdmEgPSBhbm92YV9iYXllc19mYWN0b3IobG9uZywgXCJ5aWVsZFwiLCBcImNhdGFseXN0XCIpXG5cbnByaW50KGZcIkFOT1ZBIHAtdmFsdWUgOiB7cF9hbm92YTouM2d9XCIpXG5wcmludChmXCJBTk9WQSBCRjEwICAgIDoge2JmX2Fub3ZhOi4zZ31cIikifQ==
+</script>
+</div>
+<p>Both agree overwhelmingly that the catalysts differ, but the Bayes factor states <em>how</em> overwhelmingly, on the same continuous evidence scale as before. And analogous to how obtaining a significant ANOVA prompts performing a <strong>post-hoc tests</strong>, the Bayesian workflow computes a <strong>pairwise Bayes factor</strong> for each comparison:</p>
+<div>
+<div id="pyodide-10" class="exercise-cell">
+
+</div>
+<script type="pyodide-10-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1wb3J0IGl0ZXJ0b29sc1xuXG5yb3dzID0gW11cbmZvciBnMSwgZzIgaW4gaXRlcnRvb2xzLmNvbWJpbmF0aW9ucyh3aWRlLmNvbHVtbnMsIDIpOlxuICAgIHIgPSBwZy50dGVzdCh3aWRlW2cxXSwgd2lkZVtnMl0pXG4gICAgcm93cy5hcHBlbmQoe1xuICAgICAgICBcImNvbXBhcmlzb25cIjogZlwie2cxfSB2cyB7ZzJ9XCIsXG4gICAgICAgIFwicC12YWxcIjogci5hdFtcIlQtdGVzdFwiLCBcInAtdmFsXCJdLFxuICAgICAgICBcIkJGMTBcIjogIGZsb2F0KHIuYXRbXCJULXRlc3RcIiwgXCJCRjEwXCJdKSxcbiAgICB9KVxuXG5wYWlyd2lzZSA9IHBkLkRhdGFGcmFtZShyb3dzKVxucGFpcndpc2UifQ==
+</script>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>A note on multiple comparisons
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the frequentist workflow, running many pairwise tests inflates the family-wise error rate, which is why we use post-hoc corrections. The Bayesian framework handles accumulating comparisons differently: through the prior and hierarchical models (beyond this course). Nonetheless, the implementation caution is the same: <strong>the more comparisons you make, the more careful you must be!</strong> Reporting a Bayes factor for each comparison does not license cherry-picking the largest one after the fact.</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="putting-it-together-a-decision-table" class="level2">
+<h2 class="anchored" data-anchor-id="putting-it-together-a-decision-table">Putting It Together: A Decision Table</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>Frequentist answer</th>
+<th>Bayesian answer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Is there an effect?</td>
+<td>p-value vs.&nbsp;threshold 3b1</td>
+<td>Bayes factor <span class="math inline">\(BF_{10}\)</span></td>
+</tr>
+<tr class="even">
+<td>Can I support “no effect”?</td>
+<td><strong>No</strong> (only “fail to reject”)</td>
+<td><strong>Yes</strong> (<span class="math inline">\(BF_{10} &lt; 1\)</span>)</td>
+</tr>
+<tr class="odd">
+<td>How big is the effect?</td>
+<td>Point estimate + 95% CI</td>
+<td>Posterior + 95% credible interval</td>
+</tr>
+<tr class="even">
+<td>How should I read the interval?</td>
+<td>“95% of such intervals cover the truth”</td>
+<td>“95% probability the value is in here”</td>
+</tr>
+<tr class="odd">
+<td>Can I state P(hypothesis)?</td>
+<td><strong>No</strong></td>
+<td><strong>Yes</strong> (posterior probability)</td>
+</tr>
+<tr class="even">
+<td>Does it use prior knowledge?</td>
+<td>No</td>
+<td>Yes (explicitly)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="strengths-costs-and-honest-cautions" class="level2">
+<h2 class="anchored" data-anchor-id="strengths-costs-and-honest-cautions">Strengths, Costs, and Honest Cautions</h2>
+<p>However, Bayesian methods are not a cure-all!</p>
+<p><strong>Strengths</strong></p>
+<ul>
+<li>Evidence is reported on a continuous, symmetric scale, including evidence <em>for</em> the null.</li>
+<li>Results answer the question we usually meant to ask: <span class="math inline">\(P(\text{hypothesis} \mid \text{data})\)</span>.</li>
+<li>Credible intervals carry the intuitive interpretation.</li>
+<li>Prior knowledge is incorporated <strong>explicitly</strong> and transparently.</li>
+</ul>
+<p><strong>Costs and cautions</strong></p>
+<ul>
+<li><strong>The prior is a choice.</strong> It must be stated and justified! A poorly chosen prior can over-rule true information.</li>
+<li><strong>Bayes factors depend on the prior</strong>: Two analysts with different priors can report different Bayes factors from identical data.</li>
+<li><strong>Bayes, like frequency statistics, still relies on conventions:</strong> “Strong evidence” at <span class="math inline">\(BF_{10} = 10\)</span> is as arbitrary as <span class="math inline">\(\alpha = 0.05\)</span>.</li>
+<li><strong>Most published chemistry and biology is still frequentist.</strong> Bayesian methods are growing, but it is important to be fluent in both.</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Statistical significance 260 scientific significance 014 still true
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Statistical significance or Bayesian strong evidence still does not necessarily imply practical significance. We have added a new framework, but the domain expertise is still relevant for interpreting practical significance.</p>
+</div>
+</div>
+<hr>
+<div class="callout callout-style-default callout-tip callout-titled" title="Key takeaways">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Key takeaways
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>The <strong>Bayesian</strong> framework treats probability as degree of belief and updates it with data via Bayes’ theorem (Session 5).</li>
+<li>The <strong>Bayes factor</strong> <span class="math inline">\(BF_{10}\)</span> measures how strongly the data support H081 over H080 — and, unlike the p-value, it can support the null.</li>
+<li><code>pingouin</code> reports <code>BF10</code> in every <code>pg.ttest</code>.</li>
+<li><strong>Credible intervals</strong> carry the interpretation students instinctively (and <em>wrongly</em>) give to confidence intervals.</li>
+<li>The ANOVA workflow extends to the Bayesian setting via a BIC-based Bayes factor and pairwise Bayes factors, mirroring post-hoc tests.</li>
+<li>Bayesian and frequentist analyses often agree on the direction of a conclusion but differ in <strong>what they let you say</strong> about it.</li>
+</ul>
+</div>
+</div>
+<hr>
+</section>
+<section id="in-person-session" class="level2">
+<h2 class="anchored" data-anchor-id="in-person-session">In Person Session</h2>
+<p>TBD</p>
+<!-- FIX: Brainstorming
+1. Re-analyzethe Session 10 catalyst data with Bayes factors to compare the conclusions to the original p-value analysis.
+2. One two-group comparison and vary the prior scale `r` in `pg.ttest`; observe how `BF10` responds while the p-value does not.
+3. From a published "no significant difference" claim, discuss if a Bayes factor would strengthen, weaken, or overturn it.
+-->
 
 
+<script type="pyodide-data">
+eyJvcHRpb25zIjp7ImVudiI6eyJQTE9UTFlfUkVOREVSRVIiOiJwbG90bHlfbWltZXR5cGUifSwiaW5kZXhVUkwiOiJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvcHlvZGlkZS92MC4yOC4xL2Z1bGwvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsicHlvZGlkZV9odHRwIiwibWljcm9waXAiLCJpcHl0aG9uIiwibnVtcHkiLCJwYW5kYXMiLCJtYXRwbG90bGliIiwic2VhYm9ybiIsInNjaXB5Iiwic2Npa2l0LWxlYXJuIiwic3RhdHNtb2RlbHMiLCJtaWNyb3BpcCJdfX0=
+</script>
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W119
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTEwIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTAgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEwLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTAtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xMCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTAsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTkiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl85ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS05LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtOS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzkgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzksIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTgiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl84ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS04LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtOC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzggPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzgsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTciLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl83ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS03LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzcgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzcsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTYiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl82ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS02LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzYgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzYsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl81ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS01LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzUgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzUsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTQiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl80ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS00LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzQgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzQsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTMiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8zID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0zLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzMgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzMsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8yID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzIgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzIsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTEiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8xID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzEgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzEsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLXByZWx1ZGUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJweW9kaWRlT2pzID0ge1xuICBjb25zdCB7XG4gICAgUHlvZGlkZUV2YWx1YXRvcixcbiAgICBQeW9kaWRlRW52aXJvbm1lbnRNYW5hZ2VyLFxuICAgIHNldHVwUHl0aG9uLFxuICAgIHN0YXJ0UHlvZGlkZVdvcmtlcixcbiAgICBiNjREZWNvZGUsXG4gICAgY29sbGFwc2VQYXRoLFxuICB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzdGF0dXNDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctc3RhdHVzXCIpO1xuICBjb25zdCBpbmRpY2F0b3JDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpbmRpY2F0b3JDb250YWluZXIuY2xhc3NMaXN0LnJlbW92ZShcImQtbm9uZVwiKTtcblxuICBsZXQgc3RhdHVzVGV4dCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIilcbiAgc3RhdHVzVGV4dC5jbGFzc0xpc3QgPSBcImV4ZXJjaXNlLWxvYWRpbmctZGV0YWlsc1wiO1xuICBzdGF0dXNUZXh0ID0gc3RhdHVzQ29udGFpbmVyLmFwcGVuZENoaWxkKHN0YXR1c1RleHQpO1xuICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYEluaXRpYWxpc2VgO1xuXG4gIC8vIEhvaXN0IGluZGljYXRvciBvdXQgZnJvbSBmaW5hbCBzbGlkZSB3aGVuIHJ1bm5pbmcgdW5kZXIgcmV2ZWFsXG4gIGNvbnN0IHJldmVhbFN0YXR1cyA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsIC5leGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaWYgKHJldmVhbFN0YXR1cykge1xuICAgIHJldmVhbFN0YXR1cy5yZW1vdmUoKTtcbiAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCA+IC5zbGlkZXNcIikuYXBwZW5kQ2hpbGQocmV2ZWFsU3RhdHVzKTtcbiAgfVxuXG4gIC8vIE1ha2UgYW55IHJldmVhbCBzbGlkZXMgd2l0aCBsaXZlIGNlbGxzIHNjcm9sbGFibGVcbiAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChcIi5yZXZlYWwgLmV4ZXJjaXNlLWNlbGxcIikuZm9yRWFjaCgoZWwpID0+IHtcbiAgICBlbC5jbG9zZXN0KCdzZWN0aW9uLnNsaWRlJykuY2xhc3NMaXN0LmFkZChcInNjcm9sbGFibGVcIik7XG4gIH0pXG5cbiAgLy8gUHlvZGlkZSBzdXBwbGVtZW50YWwgZGF0YSBhbmQgb3B0aW9uc1xuICBjb25zdCBkYXRhQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLWRhdGFcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBkYXRhID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZGF0YUNvbnRlbnQpKTtcblxuICAvLyBHcmFiIGxpc3Qgb2YgcmVzb3VyY2VzIHRvIGJlIGRvd25sb2FkZWRcbiAgY29uc3QgZmlsZXNDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInZmcy1maWxlXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZmlsZXMgPSBKU09OLnBhcnNlKGI2NERlY29kZShmaWxlc0NvbnRlbnQpKTtcblxuICBsZXQgcHlvZGlkZVByb21pc2UgPSAoYXN5bmMgKCkgPT4ge1xuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgUHlvZGlkZWA7XG4gICAgY29uc3QgcHlvZGlkZSA9IGF3YWl0IHN0YXJ0UHlvZGlkZVdvcmtlcihkYXRhLm9wdGlvbnMpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiBtaWNyb3BpcGA7XG4gICAgYXdhaXQgcHlvZGlkZS5sb2FkUGFja2FnZShcIm1pY3JvcGlwXCIpO1xuICAgIGNvbnN0IG1pY3JvcGlwID0gYXdhaXQgcHlvZGlkZS5weWltcG9ydChcIm1pY3JvcGlwXCIpO1xuICAgIGF3YWl0IGRhdGEucGFja2FnZXMucGtncy5tYXAoKHBrZykgPT4gKCkgPT4ge1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiAke3BrZ31gO1xuICAgICAgcmV0dXJuIG1pY3JvcGlwLmluc3RhbGwocGtnKTtcbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcbiAgICBhd2FpdCBtaWNyb3BpcC5kZXN0cm95KCk7XG5cbiAgICAvLyBEb3dubG9hZCBhbmQgaW5zdGFsbCByZXNvdXJjZXNcbiAgICBhd2FpdCBmaWxlcy5tYXAoKGZpbGUpID0+IGFzeW5jICgpID0+IHtcbiAgICAgIGNvbnN0IG5hbWUgPSBmaWxlLnN1YnN0cmluZyhmaWxlLmxhc3RJbmRleE9mKCcvJykgKyAxKTtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcmVzb3VyY2U6ICR7bmFtZX1gO1xuICAgICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaChmaWxlKTtcbiAgICAgIGlmICghcmVzcG9uc2Uub2spIHtcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBDYW4ndCBkb3dubG9hZCBcXGAke2ZpbGV9XFxgLiBFcnJvciAke3Jlc3BvbnNlLnN0YXR1c306IFwiJHtyZXNwb25zZS5zdGF0dXNUZXh0fVwiLmApO1xuICAgICAgfVxuICAgICAgY29uc3QgZGF0YSA9IGF3YWl0IHJlc3BvbnNlLmFycmF5QnVmZmVyKCk7XG5cbiAgICAgIC8vIFN0b3JlIFVSTHMgaW4gdGhlIGN3ZCB3aXRob3V0IGFueSBzdWJkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBpZiAoZmlsZS5pbmNsdWRlcyhcIjovL1wiKSkge1xuICAgICAgICBmaWxlID0gbmFtZTtcbiAgICAgIH1cblxuICAgICAgLy8gQ29sbGFwc2UgaGlnaGVyIGRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGZpbGUgPSBjb2xsYXBzZVBhdGgoZmlsZSk7XG5cbiAgICAgIC8vIENyZWF0ZSBkaXJlY3RvcnkgdHJlZSwgaWdub3JpbmcgXCJkaXJlY3RvcnkgZXhpc3RzXCIgVkZTIGVycm9yc1xuICAgICAgY29uc3QgcGFydHMgPSBmaWxlLnNwbGl0KCcvJykuc2xpY2UoMCwgLTEpO1xuICAgICAgbGV0IHBhdGggPSAnJztcbiAgICAgIHdoaWxlIChwYXJ0cy5sZW5ndGggPiAwKSB7XG4gICAgICAgIHBhdGggKz0gcGFydHMuc2hpZnQoKSArICcvJztcbiAgICAgICAgdHJ5IHtcbiAgICAgICAgICBhd2FpdCBweW9kaWRlLkZTLm1rZGlyKHBhdGgpO1xuICAgICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgICAgaWYgKGUubmFtZSAhPT0gXCJFcnJub0Vycm9yXCIpIHRocm93IGU7XG4gICAgICAgICAgaWYgKGUuZXJybm8gIT09IDIwKSB7XG4gICAgICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICAgICAgY29uc3QgZXJyb3JUZXh0ID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLlVURjhUb1N0cmluZyhlcnJvclRleHRQdHIpO1xuICAgICAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBGaWxlc3lzdGVtIEVycm9yICR7ZS5lcnJub30gXCIke2Vycm9yVGV4dH1cIi5gKTtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cblxuICAgICAgLy8gV3JpdGUgdGhpcyBmaWxlIHRvIHRoZSBWRlNcbiAgICAgIHRyeSB7XG4gICAgICAgIHJldHVybiBhd2FpdCBweW9kaWRlLkZTLndyaXRlRmlsZShmaWxlLCBuZXcgVWludDhBcnJheShkYXRhKSk7XG4gICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgIGlmIChlLm5hbWUgIT09IFwiRXJybm9FcnJvclwiKSB0aHJvdyBlO1xuICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICBjb25zdCBlcnJvclRleHQgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuVVRGOFRvU3RyaW5nKGVycm9yVGV4dFB0cik7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvciAke2UuZXJybm99IFwiJHtlcnJvclRleHR9XCIuYCk7XG4gICAgICB9XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYFB5b2RpZGUgZW52aXJvbm1lbnQgc2V0dXBgO1xuICAgIGF3YWl0IHNldHVwUHl0aG9uKHB5b2RpZGUpO1xuXG4gICAgc3RhdHVzVGV4dC5yZW1vdmUoKTtcbiAgICBpZiAoc3RhdHVzQ29udGFpbmVyLmNoaWxkcmVuLmxlbmd0aCA9PSAwKSB7XG4gICAgICBzdGF0dXNDb250YWluZXIucGFyZW50Tm9kZS5yZW1vdmUoKTtcbiAgICB9XG4gICAgcmV0dXJuIHB5b2RpZGU7XG4gIH0pKCkuY2F0Y2goKGVycikgPT4ge1xuICAgIHN0YXR1c1RleHQuc3R5bGUuY29sb3IgPSBcInZhcigtLWV4ZXJjaXNlLWVkaXRvci1obC1lciwgI0FEMDAwMClcIjtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gZXJyLm1lc3NhZ2U7XG4gICAgLy9pbmRpY2F0b3JDb250YWluZXIucXVlcnlTZWxlY3RvcihcIi5zcGlubmVyLWdyb3dcIikuY2xhc3NMaXN0LmFkZChcImQtbm9uZVwiKTtcbiAgICB0aHJvdyBlcnI7XG4gIH0pO1xuXG4gIC8vIEtlZXAgdHJhY2sgb2YgaW5pdGlhbCBPSlMgYmxvY2sgcmVuZGVyXG4gIGNvbnN0IHJlbmRlcmVkT2pzID0ge307XG5cbiAgY29uc3QgcHJvY2VzcyA9IGFzeW5jIChjb250ZXh0LCBpbnB1dHMpID0+IHtcbiAgICBjb25zdCBweW9kaWRlID0gYXdhaXQgcHlvZGlkZVByb21pc2U7XG4gICAgY29uc3QgZXZhbHVhdG9yID0gbmV3IFB5b2RpZGVFdmFsdWF0b3IocHlvZGlkZSwgY29udGV4dCk7XG4gICAgYXdhaXQgZXZhbHVhdG9yLnByb2Nlc3MoaW5wdXRzKTtcbiAgICByZXR1cm4gZXZhbHVhdG9yLmNvbnRhaW5lcjtcbiAgfVxuXG4gIHJldHVybiB7XG4gICAgcHlvZGlkZVByb21pc2UsXG4gICAgcmVuZGVyZWRPanMsXG4gICAgcHJvY2VzcyxcbiAgfTtcbn1cbiJ9XX0=
 </script>
 <div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
 <div id="exercise-loading-status" class="d-flex gap-2">
@@ -369,6 +864,7 @@ eyJjb250ZW50cyI6W119
 <script type="vfs-file">
 W10=
 </script>
+</section>
 
 </main> <!-- /main -->
 <script type="ojs-module-contents">

@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-09-04">
+<meta name="dcterms.date" content="2026-10-15">
 
-<title>Cheat Sheet: Choosing a Statistical Test – Introduction to Data Analytics and Python</title>
+<title>Practice Exam 1 (Sessions 1-14) – Introduction to Data Analytics and Python</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -24,6 +24,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -35,7 +70,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../parts/about.html" rel="next">
-<link href="../parts/sessions/L25.html" rel="prev">
+<link href="../parts/reference_sheet.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -77,9 +112,6 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
 <link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
-<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -93,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../parts/cheatsheet.html">Reference</a></li><li class="breadcrumb-item"><a href="../parts/cheatsheet.html"><span class="chapter-title">Cheat Sheet: Choosing a Statistical Test</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../parts/reference_sheet.html">Reference</a></li><li class="breadcrumb-item"><a href="../parts/practice_exam1_L01-L14.html"><span class="chapter-title">Practice Exam 1 (Sessions 1-14)</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -303,7 +335,12 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../parts/cheatsheet.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Cheat Sheet: Choosing a Statistical Test</span></a>
+  <a href="../parts/reference_sheet.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Reference sheet: Choosing a Statistical Test</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../parts/practice_exam1_L01-L14.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Practice Exam 1 (Sessions 1-14)</span></a>
   </div>
 </li>
       </ul>
@@ -318,15 +355,25 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#practice-exam-based-on-sessions-114" id="toc-practice-exam-based-on-sessions-114" class="nav-link active" data-scroll-target="#practice-exam-based-on-sessions-114">Practice Exam based on Sessions 1–14</a>
+  <ul class="collapse">
+  <li><a href="#section-a-coding-46-points" id="toc-section-a-coding-46-points" class="nav-link" data-scroll-target="#section-a-coding-46-points">Section A: Coding (46 points)</a></li>
+  <li><a href="#section-b-statistics-data-analysis-54-points" id="toc-section-b-statistics-data-analysis-54-points" class="nav-link" data-scroll-target="#section-b-statistics-data-analysis-54-points">Section B: Statistics &amp; Data Analysis (54 points)</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../parts/cheatsheet.html">Reference</a></li><li class="breadcrumb-item"><a href="../parts/cheatsheet.html"><span class="chapter-title">Cheat Sheet: Choosing a Statistical Test</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../parts/reference_sheet.html">Reference</a></li><li class="breadcrumb-item"><a href="../parts/practice_exam1_L01-L14.html"><span class="chapter-title">Practice Exam 1 (Sessions 1-14)</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Cheat Sheet: Choosing a Statistical Test</span></h1>
+<h1 class="title"><span class="chapter-title">Practice Exam 1 (Sessions 1-14)</span></h1>
 </div>
 
 
@@ -337,7 +384,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Updated</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 4, 2026</p>
+      <p class="date">October 15, 2026</p>
     </div>
   </div>
   
@@ -349,19 +396,150 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This section will be released later in the semester.</p>
-</div>
-</div>
+<section id="practice-exam-based-on-sessions-114" class="level2">
+<h2 class="anchored" data-anchor-id="practice-exam-based-on-sessions-114">Practice Exam based on Sessions 1–14</h2>
+<p><strong>Format:</strong> Written, closed-book <strong>Time limit:</strong> 2 h. <strong>Total: 100 points.</strong></p>
+<p>Important: Where a question asks you to “justify,” credit is given for the reasoning, not just the final answer.</p>
+<hr>
+<section id="section-a-coding-46-points" class="level3">
+<h3 class="anchored" data-anchor-id="section-a-coding-46-points">Section A: Coding (46 points)</h3>
+<ul>
+<li>Assume the following imports are already in place unless a question states otherwise:</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statistics <span class="im">as</span> pystats</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats <span class="im">as</span> spstats</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pingouin <span class="im">as</span> pg</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="code-comprehension-short-12-points" class="level4">
+<h4 class="anchored" data-anchor-id="code-comprehension-short-12-points">Code comprehension — short (12 points)</h4>
+<p><em>Read each snippet and answer. Assume code runs exactly as written.</em></p>
+<p><strong>A1. (3 pts)</strong> What is printed?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>masses <span class="op">=</span> [<span class="fl">18.02</span>, <span class="fl">44.01</span>, <span class="fl">28.01</span>, <span class="fl">16.04</span>]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(masses[<span class="dv">1</span>], masses[<span class="op">-</span><span class="dv">1</span>], <span class="bu">len</span>(masses))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>A2. (2 pts)</strong> What is the value and type of <code>result</code>?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>yields <span class="op">=</span> [<span class="dv">78</span>, <span class="dv">81</span>, <span class="dv">74</span>, <span class="dv">90</span>]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> <span class="bu">sum</span>(yields) <span class="op">/</span> <span class="bu">len</span>(yields)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result, <span class="bu">type</span>(result))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>A3. (2 pts)</strong> What does this print, and why does it not print <code>4</code>?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>readings <span class="op">=</span> [<span class="fl">2.1</span>, <span class="fl">3.4</span>, <span class="fl">2.9</span>, <span class="fl">3.1</span>]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> r <span class="kw">in</span> readings:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> r <span class="op">&gt;</span> <span class="dv">3</span>:</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(count)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>A4. (2 pts)</strong> What is the final value of <code>d</code>?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> {<span class="st">"HCl"</span>: <span class="fl">79.3</span>, <span class="st">"AcOH"</span>: <span class="fl">88.2</span>}</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>d[<span class="st">"HCl"</span>] <span class="op">=</span> <span class="fl">80.0</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>d[<span class="st">"HCOOH"</span>] <span class="op">=</span> <span class="fl">65.5</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(d)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>A5. (3 pts)</strong> What is printed? Explain the role of <code>try</code>/<code>except</code> here.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>raw <span class="op">=</span> [<span class="st">"4.2"</span>, <span class="st">"n/a"</span>, <span class="st">"3.9"</span>]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>clean <span class="op">=</span> []</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> raw:</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        clean.append(<span class="bu">float</span>(x))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">ValueError</span>:</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        clean.append(np.nan)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(clean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="code-comprehension-extended-18-points" class="level4">
+<h4 class="anchored" data-anchor-id="code-comprehension-extended-18-points">Code comprehension — extended (18 points)</h4>
+<p><em>Trace each snippet carefully. Assume code runs exactly as written.</em></p>
+<p><strong>A6. (6 pts)</strong> Below, <code>samples</code> is a list of dictionaries.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> [</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"id"</span>: <span class="st">"A1"</span>, <span class="st">"yield"</span>: <span class="dv">82</span>, <span class="st">"pure"</span>: <span class="va">True</span>},</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"id"</span>: <span class="st">"A2"</span>, <span class="st">"yield"</span>: <span class="dv">45</span>, <span class="st">"pure"</span>: <span class="va">False</span>},</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"id"</span>: <span class="st">"A3"</span>, <span class="st">"yield"</span>: <span class="dv">91</span>, <span class="st">"pure"</span>: <span class="va">True</span>},</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"id"</span>: <span class="st">"A4"</span>, <span class="st">"yield"</span>: <span class="dv">67</span>, <span class="st">"pure"</span>: <span class="va">True</span>},</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>keep <span class="op">=</span> []</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> s <span class="kw">in</span> samples:</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> s[<span class="st">"pure"</span>] <span class="kw">and</span> s[<span class="st">"yield"</span>] <span class="op">&gt;</span> <span class="dv">70</span>:</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        keep.append(s[<span class="st">"id"</span>])</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        total <span class="op">+=</span> s[<span class="st">"yield"</span>]</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(keep)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(total <span class="op">/</span> <span class="bu">len</span>(keep))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="a">
+<li><strong>(3 pts)</strong> What are the two lines that are printed?</li>
+<li><strong>(3 pts)</strong> The second printed line is an average. Explain, in one sentence, over <em>which</em> samples the average is computed and why <code>A4</code> is not among them.</li>
+</ol>
+<p><strong>A7. (6 pts)</strong> The following builds on a pandas DataFrame.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"c1"</span>: [<span class="dv">10</span>, <span class="dv">20</span>], <span class="st">"c2"</span>: [<span class="dv">30</span>, <span class="dv">40</span>], <span class="st">"c3"</span>: [<span class="dv">50</span>, <span class="dv">60</span>]})</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>targets <span class="op">=</span> [<span class="st">"c1"</span>, <span class="st">"c3"</span>]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> df:</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> col <span class="kw">in</span> targets:</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        df[<span class="ss">f"</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">_n"</span>] <span class="op">=</span> df[col] <span class="op">/</span> <span class="dv">10</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.columns.tolist())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="a">
+<li><strong>(3 pts)</strong> What is printed?</li>
+<li><strong>(3 pts)</strong> When you write <code>for col in df:</code>, what does the loop variable <code>col</code> take as its values on each iteration? Why is no new column created for <code>c2</code>?</li>
+</ol>
+<p><strong>A8. (6 pts)</strong> The loop below processes raw instrument readings.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>raw <span class="op">=</span> [<span class="st">"3.1"</span>, <span class="st">""</span>, <span class="st">"4.5"</span>, <span class="st">"x"</span>, <span class="st">"2.8"</span>]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>vals, bad <span class="op">=</span> [], <span class="dv">0</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> r <span class="kw">in</span> raw:</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        vals.append(<span class="bu">float</span>(r))</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">ValueError</span>:</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        bad <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(vals), bad, <span class="bu">round</span>(<span class="bu">sum</span>(vals) <span class="op">/</span> <span class="bu">len</span>(vals), <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="a">
+<li><strong>(4 pts)</strong> What is printed?</li>
+<li><strong>(2 pts)</strong> Which entries of <code>raw</code> cause the <code>except</code> block to run, and what would happen to the program if the <code>try</code>/<code>except</code> were removed?</li>
+</ol>
+</section>
+<section id="short-code-writing-single-lines-16-points" class="level4">
+<h4 class="anchored" data-anchor-id="short-code-writing-single-lines-16-points">Short code writing — single lines (16 points)</h4>
+<p><em>Write a single line of Python for each. Assume the imports above.</em></p>
+<p><strong>A9. (2 pts)</strong> Create a list named <code>temps</code> containing the values 20, 25, 30, 35, 40.</p>
+<p><strong>A10. (3 pts)</strong> Using <code>range</code>, create a list named <code>concs</code> of the values 0, 100, 200, …, 1000.</p>
+<p><strong>A11. (2 pts)</strong> Create a dictionary named <code>expt</code> with keys <code>"catalyst"</code> (value <code>"Pd"</code>) and <code>"yield"</code> (value <code>88.2</code>).</p>
+<p><strong>A12. (3 pts)</strong> Given a list <code>data</code>, write one line that creates a new list <code>highs</code> containing only the entries of <code>data</code> greater than 50 (use a list comprehension).</p>
+<p><strong>A13. (3 pts)</strong> Given a DataFrame <code>df</code> with a column <code>"yield"</code>, write one line that adds a new column <code>"yield_frac"</code> equal to the <code>"yield"</code> column divided by 100.</p>
+<p><strong>A14. (3 pts)</strong> Given two lists <code>c1</code> and <code>c2</code>, write one line that runs an unpaired two-sided independent t-test with pingouin and stores it in <code>res</code>.</p>
+<hr>
+</section>
+</section>
+<section id="section-b-statistics-data-analysis-54-points" class="level3">
+<h3 class="anchored" data-anchor-id="section-b-statistics-data-analysis-54-points">Section B: Statistics &amp; Data Analysis (54 points)</h3>
+<section id="short-form-answers-24-points" class="level4">
+<h4 class="anchored" data-anchor-id="short-form-answers-24-points">Short-form answers (24 points)</h4>
+<p><em>Answer in 1–4 sentences each.</em></p>
+<p><strong>B1. (3 pts)</strong> State the null hypothesis (H₀) and the alternative hypothesis (H₁) for the research question: <em>“Does catalyst A give a higher yield than catalyst B?”</em></p>
+<p><strong>B2. (3 pts)</strong> For each case below, state whether the outcome is a <strong>Type I</strong> or a <strong>Type II</strong> error. a) A QC lab tests whether a reagent batch deviates from spec. The batch is actually <em>within</em> spec, but the test flags it as off-spec and the batch is discarded. b) A new catalyst genuinely outperforms the old one, but the experiment returns p = 0.21 and the team concludes there is no improvement. c) A screen reports a compound as a “hit” (active), when the compound is in fact inactive.</p>
+<p><strong>B3. (4 pts)</strong> A colleague says: <em>“The p-value is the probability that the null hypothesis is true.”</em> Explain why this is <strong>wrong</strong>, and give a correct one-sentence definition of a p-value.</p>
+<p><strong>B4. (3 pts)</strong> Two catalysts give yields of 220 ± 30 and 340 ± 60 (n = 5). What is the <strong>fold-change</strong>, and name one thing fold-change does <strong>not</strong> account for that effect size accounts for.</p>
+<p><strong>B5. (3 pts)</strong> A study compares two catalysts with n = 6 per group, and a reviewer asks for an effect size. State which of <strong>Cohen’s d</strong> or <strong>Hedges’ g</strong> is more appropriate here, and explain why in one sentence.</p>
+<p><strong>B6. (3 pts)</strong> A colleague has designed an experiment but finds it is underpowered. The effect size is fixed by the chemistry, and they need to keep α = 0.05. Name an experimental factor they can change to obtain higher power in a repeat experiment, how this is related to power, and how should they change that factor to gain power.</p>
+<p><strong>B7. (5 pts)</strong> Your data are not normally distributed. You want to compare two independent groups. Name the appropriate test, and explain in two sentences how this test differs from an analogous test for normally distributed data and why it has <em>lower power</em> than its parametric equivalent.</p>
+</section>
+<section id="long-form-answers-30-points" class="level4">
+<h4 class="anchored" data-anchor-id="long-form-answers-30-points">Long-form answers (30 points)</h4>
+<p><strong>B8. Catalyst screen (18 pts)</strong></p>
+<p>You are testing whether a new catalyst improves reaction yield over your normal catalyst. You collect:</p>
+<pre><code>No catalyst (negative control): [3.1, 4.0, 2.8, 3.5, 4.2]
+Normal catalyst (positive control): [30.2, 34.5, 28.7, 33.9, 36.1]
+New catalyst:                        [71.2, 68.5, 90.1, 74.0, 69.8]</code></pre>
+<ol type="a">
+<li><p><strong>(3 pts)</strong> Identify the role of the “No catalyst” group and the “Normal catalyst” group. Why is each included?</p></li>
+<li><p><strong>(2 pts)</strong> State an appropriate null hypothesis for comparing the new catalyst to your normal catalyst.</p></li>
+<li><p><strong>(6 pts)</strong> Outline, in order, the analysis workflow you would follow to decide whether the difference between the new and normal catalyst is statistically meaningful. (You may list the steps.)</p></li>
+<li><p><strong>(4 pts)</strong> One value in the “New catalyst” group (90.1) looks far from the others. State one <em>legitimate</em> reason you would be allowed to remove it, and one method (name it) for objectively flagging it as an outlier.</p></li>
+<li><p><strong>(3 pts)</strong> Would it be acceptable to remove 90.1 simply because doing so makes your p-value more significant? Explain what this practice is called and why it is a problem.</p></li>
+</ol>
+<p><strong>B9. Reading a result (12 pts)</strong></p>
+<p>A paper reports: <em>“The engineered enzyme was significantly faster than wild type (p &lt; 0.001).”</em> The figure shows the two means are very close with large, overlapping error bars, and n = 3 per group.</p>
+<ol type="a">
+<li><p><strong>(4 pts)</strong> Give <strong>two</strong> distinct reasons this “significant” result might not be scientifically important or trustworthy.</p></li>
+<li><p><strong>(4 pts)</strong> Name two additional quantities (beyond the p-value) you would want reported to properly interpret this comparison, and say what each one tells you.</p></li>
+<li><p><strong>(4 pts)</strong> The authors conclude from a <em>separate</em>, non-significant comparison (p = 0.30, n = 3) that “the two linkers have no effect on activity.” Explain why “not significant” does not establish “no effect” here, and name one framework from the course that <em>can</em> provide evidence in favor of no difference.</p></li>
+</ol>
+<hr>
+<p><em>End of practice exam.</em></p>
 
 
 <script type="ojs-module-contents">
@@ -378,6 +556,9 @@ eyJjb250ZW50cyI6W119
 <script type="vfs-file">
 W10=
 </script>
+</section>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script type="ojs-module-contents">
@@ -793,8 +974,8 @@ window._ojs.runtime.interpretFromScriptTags();
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../parts/sessions/L25.html" class="pagination-link" aria-label="25. Design of Experiments &amp; Machine Learning">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">25. Design of Experiments &amp; Machine Learning</span></span>
+      <a href="../parts/reference_sheet.html" class="pagination-link" aria-label="Reference sheet: Choosing a Statistical Test">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Reference sheet: Choosing a Statistical Test</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

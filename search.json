@@ -1243,7 +1243,51 @@
     "href": "parts/sessions/L10.html#post-hoc-tests-after-a-significant-anova",
     "title": "10. Comparing more than two samples",
     "section": "Post-Hoc Tests: After a Significant ANOVA",
-    "text": "Post-Hoc Tests: After a Significant ANOVA\nNOTE: if the ANOVA p-value is not below the threshold, you should not perform a post-hoc test!!!\nIf ANOVA finds a significant effect, it tells you that at least one condition is different, but not which ones.\nPost-hoc tests identify which specific pair(s) of group means differ significantly, while controlling for family-wise error rate across all the comparisons.\nFor the ANOVA test, there are two appropriate post-hoc tests: Tukey’s and Games-Howell.\nTukey’s test: assumes similar variances and equal sample sizes.\nGames-Howell test: more robust when variances or sample sizes differ between conditions.\nWe have not yet discussed how to test differences in variances, but this will be covered in the next session.\nThe output of a post-hoc test in pingouin also indicates the effect size for the pair-wise comparisons.\nBelow is an example of the Tukey test with pingouin.\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nThis remainder of this session will be released later in the semester.",
+    "text": "Post-Hoc Tests: After a Significant ANOVA\nNOTE: if the ANOVA p-value is not below the threshold, you should not perform a post-hoc test!!!\nIf ANOVA finds a significant effect, it tells you that at least one condition is different, but not which ones.\nPost-hoc tests identify which specific pair(s) of group means differ significantly, while controlling for family-wise error rate across all the comparisons.\nFor the ANOVA test, there are two appropriate post-hoc tests: Tukey’s and Games-Howell.\nTukey’s test: assumes similar variances and equal sample sizes.\nGames-Howell test: more robust when variances or sample sizes differ between conditions.\nWe have not yet discussed how to test differences in variances, but this will be covered in the next session.\nThe output of a post-hoc test in pingouin also indicates the effect size for the pair-wise comparisons.\nBelow is an example of the Tukey test with pingouin.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>10. Comparing more than two samples</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L10.html#why-not-just-use-the-t-test-repeatedly",
+    "href": "parts/sessions/L10.html#why-not-just-use-the-t-test-repeatedly",
+    "title": "10. Comparing more than two samples",
+    "section": "Why Not Just Use the t-Test Repeatedly?",
+    "text": "Why Not Just Use the t-Test Repeatedly?\nIf you have three conditions to compare, you could run three t-tests: A vs. B, A vs. C, and B vs. C. This is incorrect for two reasons:\n1. Type I error inflation: each test has a 5% chance of a false positive. Running three tests at α = 0.05 means the probability of making no false positive is 0.95³ = 86%. The chance of at least one false positive is therefore 14%, not 5%. This gets much worse with more comparisons.\n2. Loss of statistical power: ANOVA uses all groups to estimate variability (pooled variance), giving more accurate estimates than individual t-tests that only use two groups at a time.\nBy pooling variance across all groups, ANOVA has more degrees of freedom to estimate the within-group variability. This makes the estimate of the error term more reliable and gives ANOVA higher power than repeated t-tests for detecting effects that are consistent across conditions.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>10. Comparing more than two samples</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L10.html#effect-sizes-and-power-for-anova",
+    "href": "parts/sessions/L10.html#effect-sizes-and-power-for-anova",
+    "title": "10. Comparing more than two samples",
+    "section": "Effect Sizes and Power for ANOVA",
+    "text": "Effect Sizes and Power for ANOVA\n\n\n\n\n\n\n\n\nMetric\nFormula\nNotes\n\n\n\n\nη² (eta-squared)\nSS_effect / SS_total\nBiased; overestimates in small samples\n\n\nω² (omega-squared)\nCorrected version of η²\nRecommended for small samples\n\n\n\nη² is biased because it divides by total sum of squares, which includes the very effect being estimated. This makes η² appear larger in small samples than it truly is in the population. ω² applies a correction analogous to Bessel’s correction for variance, and is the preferred metric for the sample sizes typically encountered in chemistry. However, ω² calculations are not available in all statistical programs, so we will default to using η².\nFor a t-test, we calculated effect size and power. For ANOVA, we will use the effect size \\(\\eta^2\\). There are other effect sizes (partial \\(\\eta^2\\) and \\(\\omega^2\\)), but for this entry-level course, we will stick with \\(\\eta^2\\). Power can be calculated for ANOVA in pingouin, but its interpretation is slightly more complex, because what we derive is an omnibus power. Planning the number of replicates around an omnibus power calculation can still leave a posthoc two-way comparison under powered.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>10. Comparing more than two samples</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L10.html#n-way-anova",
+    "href": "parts/sessions/L10.html#n-way-anova",
+    "title": "10. Comparing more than two samples",
+    "section": "N-Way ANOVA",
+    "text": "N-Way ANOVA\nWhen there are multiple input variables, N-way ANOVA is used.\nExample: you want to test the effect of two DNA systems (input 1: 4 types) and two cell types (input 2: 2 types) on protein expression. This is a 2-way ANOVA.\n\n\n\nTwo-way ANOVA output from a real experiment comparing DNA system and cell type effects on protein expression.\n\n\nimport pingouin as pg\n\npg.anova(dv=\"Protein_expression\", between=[\"Cells\", \"DNA\"], data=df)\nInteraction effects: an interaction is present when the effect of one input variable depends on the level of another. In this example, if the best DNA system performed differently in each cell type, that would be an interaction. When no significant interaction is found, the two factors can be treated as independent.",
+    "crumbs": [
+      "Inferential Statistics",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>10. Comparing more than two samples</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L10.html#bonferroni-correction",
+    "href": "parts/sessions/L10.html#bonferroni-correction",
+    "title": "10. Comparing more than two samples",
+    "section": "Bonferroni Correction",
+    "text": "Bonferroni Correction\nWhen performing many simultaneous comparisons (for example, comparing all pairwise combinations in a large N-way ANOVA), the Bonferroni correction adjusts the significance threshold:\n\\[\\alpha_{\\text{corrected}} = \\frac{\\alpha}{m}\\]\nwhere m is the number of comparisons. This controls the family-wise error rate but is conservative — it increases Type II error (missed true effects) as the number of comparisons grows.\n\n\n\n\n\n\n\nTipKey takeaways\n\n\n\n\nCompare &gt;2 groups with ANOVA, not repeated t-tests (controls Type I inflation; pools variance for power).\nF = between-group / within-group variance; a significant ANOVA -&gt; post-hoc (Tukey or Games-Howell).\nN-way ANOVA tests several factors and their interactions.\nIn Python: pg.anova(...), then pg.pairwise_tukey(...) / pg.pairwise_gameshowell(...); data in long format via df.melt(...).",
     "crumbs": [
       "Inferential Statistics",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>10. Comparing more than two samples</span>"

@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-10-05">
+<meta name="dcterms.date" content="2026-10-26">
 
 <title>11. Non-normal data – Introduction to Data Analytics and Python</title>
 <style>
@@ -384,7 +384,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Updated</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 5, 2026</p>
+      <p class="date">October 26, 2026</p>
     </div>
   </div>
   
@@ -494,6 +494,12 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicHJpbnQocGcuaG9tb3NjZWRh
 <h2 class="anchored" data-anchor-id="non-parametric-tests">Non-Parametric Tests</h2>
 <p>When data are <strong>not normally distributed</strong>, non-parametric tests are used (regardless of homoscedasticity). Instead of directly using measured values, non-parametric tests evaluate <strong>ranked</strong> data.</p>
 <p>Converting data to ranks discards information about the magnitude of differences: you only know that one value is larger than another, not by how much. This is why non-parametric tests have lower statistical power than their parametric equivalents. However, when the normality assumption is strongly violated, p-values derived from parametric tests can be unreliable. A valid, lower-powered test is preferable to an invalid, higher-powered one.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/statistics/L11/images/L11_S12_decisiontree.png" class="img-fluid figure-img"></p>
+<figcaption>Decision tree (assuming normality and one outcome variable)</figcaption>
+</figure>
+</div>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">

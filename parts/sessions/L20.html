@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-09-04">
+<meta name="dcterms.date" content="2026-10-26">
 
 <title>20. Multiple Linear Regression and Model Comparison – Introduction to Data Analytics and Python</title>
 <style>
@@ -78,6 +78,35 @@ ul.task-list li input[type="checkbox"] {
 <script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
 <link href="../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -320,8 +349,30 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#code-imports" id="toc-code-imports" class="nav-link active" data-scroll-target="#code-imports">Code imports</a></li>
+  <li><a href="#multiple-linear-regression-mlr" id="toc-multiple-linear-regression-mlr" class="nav-link" data-scroll-target="#multiple-linear-regression-mlr">Multiple Linear Regression (MLR)</a>
+  <ul class="collapse">
+  <li><a href="#multicollinearity" id="toc-multicollinearity" class="nav-link" data-scroll-target="#multicollinearity">Multicollinearity</a></li>
+  <li><a href="#interpreting-mlr-coefficients" id="toc-interpreting-mlr-coefficients" class="nav-link" data-scroll-target="#interpreting-mlr-coefficients">Interpreting MLR Coefficients</a></li>
+  <li><a href="#analyzing-the-model" id="toc-analyzing-the-model" class="nav-link" data-scroll-target="#analyzing-the-model">Analyzing the model</a></li>
+  </ul></li>
+  <li><a href="#finding-the-best-fit" id="toc-finding-the-best-fit" class="nav-link" data-scroll-target="#finding-the-best-fit">Finding the best fit</a>
+  <ul class="collapse">
+  <li><a href="#overfitting-and-underfitting" id="toc-overfitting-and-underfitting" class="nav-link" data-scroll-target="#overfitting-and-underfitting">Overfitting and Underfitting</a></li>
+  <li><a href="#model-comparison" id="toc-model-comparison" class="nav-link" data-scroll-target="#model-comparison">Model Comparison</a></li>
+  </ul></li>
+  <li><a href="#mlr-and-machine-learning" id="toc-mlr-and-machine-learning" class="nav-link" data-scroll-target="#mlr-and-machine-learning">MLR and Machine Learning</a>
+  <ul class="collapse">
+  <li><a href="#prediction-interpolation-vs.-extrapolation" id="toc-prediction-interpolation-vs.-extrapolation" class="nav-link" data-scroll-target="#prediction-interpolation-vs.-extrapolation">Prediction: Interpolation vs.&nbsp;Extrapolation</a></li>
+  </ul></li>
+  <li><a href="#in-person" id="toc-in-person" class="nav-link" data-scroll-target="#in-person">In person</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -339,7 +390,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Updated</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 4, 2026</p>
+      <p class="date">October 26, 2026</p>
     </div>
   </div>
   
@@ -351,25 +402,262 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This session extends regression to <strong>multiple predictors</strong> (MLR) and covers <strong>model comparison</strong> (F-test, AIC, BIC), implemented with <code>scikit-learn</code> and <code>statsmodels</code>.</p>
+<p>This session extends regression to <strong>multiple predictors</strong> (MLR) and covers <strong>model comparison</strong> (F-test, AIC, BIC), implemented with <code>scipy</code> and <code>statsmodels</code>.</p>
 <hr>
-<div class="callout callout-style-default callout-note callout-titled">
+<section id="code-imports" class="level2">
+<h2 class="anchored" data-anchor-id="code-imports">Code imports</h2>
+<div>
+<div id="pyodide-1" class="exercise-cell">
+
+</div>
+<script type="pyodide-1-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBSdW4gdGhpcyBjZWxsIGZpcnN0IOKAlCBsb2FkcyB0aGUgbGlicmFyaWVzIHVzZWQgaW4gdGhpcyBzZXNzaW9uXG5pbXBvcnQgbnVtcHkgYXMgbnBcbmltcG9ydCBwYW5kYXMgYXMgcGRcbmltcG9ydCBtYXRwbG90bGliLnB5cGxvdCBhcyBwbHRcbmltcG9ydCBzZWFib3JuIGFzIHNuc1xuZnJvbSBzY2lweS5vcHRpbWl6ZSBpbXBvcnQgY3VydmVfZml0XG5mcm9tIHNjaXB5IGltcG9ydCBzdGF0c1xuaW1wb3J0IHN0YXRzbW9kZWxzLmFwaSBhcyBzbSJ9
+</script>
+</div>
+</section>
+<section id="multiple-linear-regression-mlr" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-linear-regression-mlr">Multiple Linear Regression (MLR)</h2>
+<p>In simple linear regression (SLR), we were modeling (fitting) data with one continuous outcome as a function of one continuous input variable.</p>
+<p>In <strong>Multiple linear regression (MLR)</strong>, we model data with one continuous outcome as a function of multiple continuous input variables. A generalized equation that describes this is shown below.</p>
+<p><span class="math display">\[y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p + \varepsilon\]</span></p>
+<p><strong>Example:</strong> modeling reaction yield as a function of both pH and temperature simultaneously. If both inputs are continuous and the number of unique values per input is sufficient, MLR is appropriate. If each input takes only a few discrete values (3 pH values and 3 temperatures), two-way ANOVA would be used instead. Why is this the case? If you have only a few discrete values, you cannot reliably fit a function.</p>
+<p><strong>Assumptions</strong> (same first four as for SLR, but add one more):</p>
+<ol type="1">
+<li>Linearity</li>
+<li>Normality of residuals</li>
+<li>Homoscedasticity</li>
+<li>Independence of errors</li>
+<li><strong>No perfect multicollinearity</strong>: the input variables must not be perfectly correlated with each other</li>
+</ol>
+<p>Example dataset: we have collected a dataset for activity of a catalyst at different starting material concentrations, temperatures, inhibitor concentrations, and additive concentrations.</p>
+<div>
+<div id="pyodide-2" class="exercise-cell">
+
+</div>
+<script type="pyodide-2-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibWxyID0ge1xuICAgIFwiU3RhcnRpbmcgbWF0ZXJpYWwgKG1NKVwiOiAgICAgICBbMTQzLjYsIDI4Ny43LCAyMzMuMCwgMTk5LjcsIDg5LjAsIDg5LjAsIDY0LjUsIDI2Ni41LCAyMDAuMywgMjI3LjAsIDU1LjEsIDI5Mi41LCAyNTguMSwgMTAzLjEsIDk1LjUsIDk1LjldLFxuICAgIFwiVGVtcGVyYXR1cmUgKMuaQylcIjogICAgIFszOS40LCAzNS41LCAzOC44LCAzNy45LCAzMi4wLCAzOC40LCAyMS44LCAyMy45LCAyMC45LCAyNi41LCAyNy44LCAyNS40LCAzNi42LCAyNy4xLCAyNS42LCAzMC45XSxcbiAgICBcIkluaGliaXRvciAobU0pXCI6ICAgICAgIFs2LjEsIDcuMywgNi42LCA3LjAsIDcuOCwgNi41LCA2LjgsIDcuNSwgNi41LCA2LjIsIDYuNiwgNi4zLCA3LjksIDcuNiwgNy4zLCA3LjddLFxuICAgIFwiQWRkaXRpdmUgKG1NKVwiOiAgICAgICAgWzAuOSwgMC4yLCAwLjEsIDAuNSwgMS4wLCAwLjIsIDAuNywgMC44LCAwLjIsIDAuNywgMC40LCAwLjYsIDAuNiwgMC41LCAwLjEsIDAuOF0sXG4gICAgXCJDYXRhbHlzdF9BY3Rpdml0eSAoJSB5aWVsZClcIjogWzQ3LjAsIDMzLjcsIDQyLjIsIDM5LjQsIDM3LjUsIDQ2LjksIDE5LjIsIDE4LjIsIDE0LjUsIDI3LjUsIDMzLjMsIDIwLjAsIDM2LjcsIDI2LjcsIDI1LjYsIDM1LjZdLFxufVxuZGYgPSBwZC5EYXRhRnJhbWUobWxyKVxucHJlZGljdG9ycyA9IFtcIlN0YXJ0aW5nIG1hdGVyaWFsIChtTSlcIiwgXCJUZW1wZXJhdHVyZSAoy5pDKVwiLCBcIkluaGliaXRvciAobU0pXCIsIFwiQWRkaXRpdmUgKG1NKVwiXSJ9
+</script>
+</div>
+<p><strong>Terminology note:</strong> MLR (multiple input variables, one outcome) is <em>very often</em> confused with <em>multivariate</em> regression (multiple outcome variables). The two are NOT the same. We will discuss multivariate analysis later in the semester.</p>
+<hr>
+<section id="multicollinearity" class="level3">
+<h3 class="anchored" data-anchor-id="multicollinearity">Multicollinearity</h3>
+<p><strong>Multicollinearity</strong> occurs when two or more input variables are highly correlated. This makes it difficult or impossible to separate their individual effects on the outcome.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/statistics/L19/images/slide07_img1.png" class="img-fluid figure-img"></p>
+<figcaption>Example of high positive correlation between two input variables.</figcaption>
+</figure>
+</div>
+<p><strong>Rule of thumb:</strong> correlations between predictors (or inputs) greater than ±0.8 are a common warning threshold. Check pairwise correlations before fitting an MLR model. If multicollinearity is present, consider removing one of the correlated predictors.</p>
+<p>When predictors are highly correlated, the model coefficients become unstable: Small changes in the data produce large swings in the estimated <span class="math inline">\(\beta\)</span> values. The standard errors of the coefficients inflate, making p-values unreliable. The overall model fit (<span class="math inline">\(R^2\)</span>) may still be high, creating a misleading impression that the model is reliable when individual predictors cannot be trusted.</p>
+<p>Example dataset continued: Before fitting our data, we should test if any of the predictors is collinear (rule of thumb: |r| &gt; 0.8 is problematic):</p>
+<div>
+<div id="pyodide-3" class="exercise-cell">
+
+</div>
+<script type="pyodide-3-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiY29yciA9IGRmW3ByZWRpY3RvcnNdLmNvcnIoKVxuc25zLmhlYXRtYXAoY29yciwgYW5ub3Q9VHJ1ZSwgY21hcD1cImNvb2x3YXJtXCIsIGNlbnRlcj0wLCB2bWluPS0xLCB2bWF4PTEsIHNxdWFyZT1UcnVlKVxucGx0LnRpdGxlKFwiUHJlZGljdG9yIGNvcnJlbGF0aW9uIG1hdHJpeFwiKVxucGx0LnNob3coKSJ9
+</script>
+</div>
+<hr>
+</section>
+<section id="interpreting-mlr-coefficients" class="level3">
+<h3 class="anchored" data-anchor-id="interpreting-mlr-coefficients">Interpreting MLR Coefficients</h3>
+<p>Each coefficient <span class="math inline">\(\beta_i\)</span> represents the expected change in y for a one-unit increase in <span class="math inline">\(x_i\)</span>, <strong>holding all other predictors constant</strong>.</p>
+<ul>
+<li><strong>Sign:</strong> positive = positive association; negative = negative association</li>
+<li><strong>Magnitude:</strong> the size of the effect, but only comparable between predictors if the variables are on the same scale (such as after z-score standardization that we discussed in a prior lecture!)</li>
+<li><strong>Intercept (<span class="math inline">\(\beta_0\)</span>):</strong> the expected value of y when all predictors are zero.</li>
+</ul>
+<p>Example dataset continued: To derive the coefficients, we should model the data with MLR. BUT, first we need to <strong>standardize the predictor scales so that we can compare the scales of the coefficients</strong>, then we can fit a model.</p>
+<div>
+<div id="pyodide-4" class="exercise-cell">
+
+</div>
+<script type="pyodide-4-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBzdGFuZGFyZGl6ZSBwcmVkaWN0b3JzICh6LXNjb3JlKSBzbyBjb2VmZmljaWVudHMgYXJlIGNvbXBhcmFibGVcblhtYXQgPSBkZltwcmVkaWN0b3JzXS52YWx1ZXNcblh6ICAgPSAoWG1hdCAtIFhtYXQubWVhbihheGlzPTApKSAvIFhtYXQuc3RkKGF4aXM9MCwgZGRvZj0xKVxueSAgICA9IGRmW1wiQ2F0YWx5c3RfQWN0aXZpdHkgKCUgeWllbGQpXCJdLnZhbHVlc1xuXG4jIG1vZGVsIGZ1bmN0aW9uOiBpbnRlcmNlcHQgKyBvbmUgc2xvcGUgcGVyIHByZWRpY3RvclxuZGVmIG1scl9tb2RlbChYLCBiMCwgYjEsIGIyLCBiMywgYjQpOlxuICAgIHJldHVybiBiMCArIGIxKlhbMF0gKyBiMipYWzFdICsgYjMqWFsyXSArIGI0KlhbM11cblxuIyB3ZSBtdXN0IHRyYW5zcG9zZSB0aGUgWCB2YWx1ZXMgZm9yIGN1cnZlX2ZpdCBiZWNhdXNlIGN1cnZlX2ZpdCBwYXNzZXMgY29sdW1ucyBvZiBYIHRvIHRoZSBtb2RlbFxuIyB0byB0cmFuc3Bvc2UgYW4gYXJyYXkgd2UgdXNlIGFycmF5X25hbWUuVFxucG9wdCwgcGNvdiA9IGN1cnZlX2ZpdChtbHJfbW9kZWwsIFh6LlQsIHkpIFxuXG5wcmludChmXCJJbnRlcmNlcHQ6IHtwb3B0WzBdOi4zZn1cIilcbmZvciBuYW1lLCBjb2VmIGluIHppcChwcmVkaWN0b3JzLCBwb3B0WzE6XSk6XG4gICAgcHJpbnQoZlwiICB7bmFtZX06IHtjb2VmOisuM2Z9XCIpIn0=
+</script>
+</div>
+<hr>
+</section>
+<section id="analyzing-the-model" class="level3">
+<h3 class="anchored" data-anchor-id="analyzing-the-model">Analyzing the model</h3>
+<p>Most of the model analysis for MLR is similar to SLR.</p>
+<section id="goodness-of-fit-metrics" class="level4">
+<h4 class="anchored" data-anchor-id="goodness-of-fit-metrics">Goodness of fit metrics</h4>
+<p>In the SLR lecture, we learned about adjusted <span class="math inline">\(R^2\)</span>, RMSE, and MAE. Here we also can use these metrics to evaluate the model.</p>
+<p><strong>Evaluate</strong> with R², adjusted R², and RMSE:</p>
+<div>
+<div id="pyodide-5" class="exercise-cell">
+
+</div>
+<script type="pyodide-5-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicHJlZCA9IG1scl9tb2RlbChYei5ULCAqcG9wdClcbnJlc2lkdWFscyA9IHkgLSBwcmVkXG5uLCBrID0gbGVuKHkpLCBsZW4ocHJlZGljdG9ycylcbnNzX3JlcyA9IG5wLnN1bShyZXNpZHVhbHMqKjIpXG5zc190b3QgPSBucC5zdW0oKHkgLSB5Lm1lYW4oKSkqKjIpXG5yMl9hZGogPSAxIC0gKDEtcjIpKihuLTEpLyhuLWstMSlcbnJtc2UgICA9IG5wLnNxcnQobnAubWVhbihyZXNpZHVhbHMqKjIpKVxucHJpbnQoZlwiYWRqdXN0ZWQgUjI6IHtyMl9hZGo6LjNmfSAgIFJNU0U6IHtybXNlOi4zZn1cIikifQ==
+</script>
+</div>
+</section>
+<section id="residual-analysis-for-mlr" class="level4">
+<h4 class="anchored" data-anchor-id="residual-analysis-for-mlr">Residual Analysis for MLR</h4>
+<p>The same residual checks as for SLR apply:</p>
+<ul>
+<li><strong>Linearity:</strong> scatter plot of predicted vs.&nbsp;actual values should be close to the diagonal; residuals vs.&nbsp;each predictor should show no systematic pattern.</li>
+<li><strong>Homoscedasticity:</strong> residuals should have constant spread across predicted values.</li>
+<li><strong>Normality:</strong> Q-Q plot of residuals should be approximately linear.</li>
+</ul>
+<p><strong>Diagnostics</strong>: actual vs.&nbsp;predicted, and residuals:</p>
+<div>
+<div id="pyodide-6" class="exercise-cell">
+
+</div>
+<script type="pyodide-6-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicmVzaWR1YWxzID0geSAtIHlfcHJlZFxuZmlnLCBheGVzID0gcGx0LnN1YnBsb3RzKDEsIDIsIGZpZ3NpemU9KDEwLCA0KSlcbmF4ZXNbMF0uc2NhdHRlcih5LCB5X3ByZWQsIGFscGhhPTAuNylcbmF4ZXNbMF0ucGxvdChbeS5taW4oKSwgeS5tYXgoKV0sIFt5Lm1pbigpLCB5Lm1heCgpXSwgXCJyLVwiKVxuYXhlc1swXS5zZXRfeGxhYmVsKFwiQWN0dWFsXCIpOyBheGVzWzBdLnNldF95bGFiZWwoXCJQcmVkaWN0ZWRcIilcbmF4ZXNbMV0uc2NhdHRlcih5X3ByZWQsIHJlc2lkdWFscywgYWxwaGE9MC43KTsgYXhlc1sxXS5heGhsaW5lKDAsIGNvbG9yPVwicmVkXCIpXG5heGVzWzFdLnNldF94bGFiZWwoXCJQcmVkaWN0ZWRcIik7IGF4ZXNbMV0uc2V0X3lsYWJlbChcIlJlc2lkdWFsc1wiKVxucGx0LnRpZ2h0X2xheW91dCgpOyBwbHQuc2hvdygpIn0=
+</script>
+</div>
+</section>
+</section>
+</section>
+<section id="finding-the-best-fit" class="level2">
+<h2 class="anchored" data-anchor-id="finding-the-best-fit">Finding the best fit</h2>
+<p>The goal of regression in chemistry, biochemistry, and related fields is to find a model that best describes the data mathematically, physically, and scientifically. We can err on either side of this goal and get models that do not represent our data well.</p>
+<section id="overfitting-and-underfitting" class="level3">
+<h3 class="anchored" data-anchor-id="overfitting-and-underfitting">Overfitting and Underfitting</h3>
+<p><strong>Underfitting</strong>: the model is too simple to capture the pattern in the data. The fit looks poor even on the data used to create the model/fit.</p>
+<p><strong>Overfitting</strong>: the model is too complex. The model visually looks like it describes the data well, but it is capturing noise rather than true signal. It will generalize poorly to new data.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This session will be released later in the semester.</p>
+<p><strong>[Slide 11 — image needed]:</strong> Plots showing underfitting, a robust fit, and overfitting. Re-export slide 11 from <code>DSA101_Lecture_19.pptx</code> as PNG and save to <code>../images/statistics/L19/images/slide11_img1.png</code>.</p>
 </div>
 </div>
+<p>In linear regression, the adjusted <span class="math inline">\(R^2\)</span> partially addresses overfitting by penalizing for additional predictors. More formally, we can use statistical tests or comparisons to decide between models, including the F-test, AIC, and BIC (see below).</p>
+<p>The best defense against overfitting is scientific reasoning: add predictors only when you have a theoretical or domain reason to expect they impact the outcome.</p>
+</section>
+<section id="model-comparison" class="level3">
+<h3 class="anchored" data-anchor-id="model-comparison">Model Comparison</h3>
+<p>When multiple models could describe the same data, formal comparison is needed. Three complementary methods:</p>
+<section id="f-test-for-nested-models-only" class="level4">
+<h4 class="anchored" data-anchor-id="f-test-for-nested-models-only">F-Test (for nested models ONLY)</h4>
+<p>The F-test compares two models where one is a simpler version of the other (a “nested” model, such as a simple linear regression and a multiple linear regression with two inputs). <span class="math inline">\(H_0\)</span>: the simpler model fits the data as well as the more complex model.</p>
+<p><span class="math display">\[F = \frac{(\text{RSS}_{\text{simple}} - \text{RSS}_{\text{complex}}) / (p_2 - p_1)}{\text{RSS}_{\text{complex}} / (n - p_2 - 1)}\]</span></p>
+<p>If p &lt; 0.05, the additional parameters in the complex model significantly improve the fit.</p>
+<p><strong>Limitation</strong>: only valid for nested models.</p>
+</section>
+<section id="aic-akaike-information-criterion" class="level4">
+<h4 class="anchored" data-anchor-id="aic-akaike-information-criterion">AIC (Akaike Information Criterion)</h4>
+<p><span class="math display">\[\text{AIC} = 2k - 2\ln(\hat{L})\]</span></p>
+<p>where k is the number of parameters and <span class="math inline">\(\hat{L}\)</span> is the maximum likelihood. AIC penalises for complexity but less aggressively than BIC (see below). The AIC is calculated for both models, and the model with the lowest AIC has the most support. The ∆AIC can provide a degree of belief for the selected model.</p>
+</section>
+<section id="bic-bayesian-information-criterion" class="level4">
+<h4 class="anchored" data-anchor-id="bic-bayesian-information-criterion">BIC (Bayesian Information Criterion)</h4>
+<p><span class="math display">\[\text{BIC} = k\ln(n) - 2\ln(\hat{L})\]</span></p>
+<p>again where k is the number of parameters and <span class="math inline">\(\hat{L}\)</span> is the maximum likelihood. The BIC penalises for complexity more aggressively than the AIC (penalizes overfitting more), but otherwise the interpretations are the same.</p>
+</section>
+<section id="f-test-vs.-aic-vs.-bic" class="level4">
+<h4 class="anchored" data-anchor-id="f-test-vs.-aic-vs.-bic">F-test vs.&nbsp;AIC vs.&nbsp;BIC</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Works on non-nested models?</th>
+<th>Conservatism</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>F-test</td>
+<td>No</td>
+<td>Moderate</td>
+</tr>
+<tr class="even">
+<td>AIC</td>
+<td>Yes</td>
+<td>Less conservative</td>
+</tr>
+<tr class="odd">
+<td>BIC</td>
+<td>Yes</td>
+<td>More conservative</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Comparing nested models</strong> (full vs.&nbsp;one with Substrate dropped) with <code>statsmodels</code> — F-test and AIC:</p>
+<div>
+<div id="pyodide-7" class="exercise-cell">
+
+</div>
+<script type="pyodide-7-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZnVsbCAgICA9IHNtLk9MUyh5LCBzbS5hZGRfY29uc3RhbnQoZGZbcHJlZGljdG9yc10pKS5maXQoKVxucmVkdWNlZCA9IHNtLk9MUyh5LCBzbS5hZGRfY29uc3RhbnQoZGZbW1wiVGVtcGVyYXR1cmVcIiwgXCJJbmhpYml0b3JcIiwgXCJBZGRpdGl2ZVwiXV0pKS5maXQoKVxuXG5wcmludChmXCJBSUMg4oCUIGZ1bGw6IHtmdWxsLmFpYzouMWZ9ICAgcmVkdWNlZDoge3JlZHVjZWQuYWljOi4xZn0gICAobG93ZXIgaXMgYmV0dGVyKVwiKVxuRiwgcHZhbCwgXyA9IGZ1bGwuY29tcGFyZV9mX3Rlc3QocmVkdWNlZClcbnByaW50KGZcIkYtdGVzdCBmb3IgZHJvcHBpbmcgU3Vic3RyYXRlOiBGID0ge0Y6LjJmfSwgcCA9IHtwdmFsOi40Zn1cIikifQ==
+</script>
+</div>
+<p>For nested models, the F-test provides a significance-based answer, testing a hypothesis. For non-nested model comparison, AIC and BIC provide relative rankings; they are meaningless in isolation but informative when compared between models applied to the same data. When AIC and BIC disagree (one favors the complex model, the other the simple model), consider domain knowledge and residual analysis to make a final decision.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="mlr-and-machine-learning" class="level2">
+<h2 class="anchored" data-anchor-id="mlr-and-machine-learning">MLR and Machine Learning</h2>
+<p>MLR is a predictive modeling technique with a similar goal as most machine learning methods. MLR is frequently used as a <strong>baseline model</strong> in ML projects: if a complex neural network cannot outperform MLR on a given dataset, it is not worth the added complexity (similar to evaluating over- and underfitting).</p>
+<p>The terminology between the fields differ and some of the perspectives and goals differ.</p>
+<p>Terminology:</p>
+<ul>
+<li>in MLR, we say “inputs”, “predictors,” “coefficients,” and “intercept”</li>
+<li>in ML, the same concepts are called “features,” “weights,” and “biases”</li>
+</ul>
+<p>In terms of the perspectives and goals, MLR methods are focused on finding a mathematical way to describe the data. Thus, a black-box answer is not sufficient. In contrast, to date, many ML methods are focused on the predictive power with less focus on interpretability. However, this is changing in terms of ML at an exciting rate.</p>
+<p>We will discuss more <em>introductory</em> level ML later in the semester.</p>
+<hr>
+<section id="prediction-interpolation-vs.-extrapolation" class="level3">
+<h3 class="anchored" data-anchor-id="prediction-interpolation-vs.-extrapolation">Prediction: Interpolation vs.&nbsp;Extrapolation</h3>
+<p>Once a model is fitted, it can be used to predict y for new values of x. Two important caveats:</p>
+<p><strong>Interpolation</strong> is when we predict information for a data point that falls within the range of the data used to build our model. Interpolation is generally reasonable, with uncertainty that increases toward the edges of the range.</p>
+<p><strong>Extrapolation</strong> is when we predict information for a data point that falls outside the range of the data used to build our model. Extrapolation carries inherent risks and can be highly unreliable. We have no information about if the data continues to show this behavior outside of the range that we have studied. Maybe another phenomenon takes over, such as saturation or decay. It is important to note when predictions are made from extrapolation beyond the data used to build the model.</p>
+<hr>
+<div class="callout callout-style-default callout-tip callout-titled" title="Key takeaways">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Key takeaways
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>MLR predicts a continuous outcome from several continuous predictors; watch for multicollinearity (|r| &gt; 0.8).</li>
+<li>Each coefficient is the effect of one predictor holding the others constant; standardize scales to compare them.</li>
+<li>Interpolation is reliable; extrapolate is fragile</li>
+<li>Guard against overfitting (adjusted <span class="math inline">\(R^2\)</span>, AIC, BIC).</li>
+<li>Model comparison: F-test (nested only), AIC (less conservative), BIC (more conservative).</li>
+<li>In Python: <code>sklearn.LinearRegression</code> to fit, <code>statsmodels.OLS</code> for the F-test / AIC comparison.</li>
+</ul>
+</div>
+</div>
+<!--
+Notes to self:
+
+- In the past, the matrix representation of the OLS solution: β = (XᵀX)⁻¹Xᵀy did not go overwell, so this was removed.
+-->
+<hr>
+</section>
+</section>
+<section id="in-person" class="level2">
+<h2 class="anchored" data-anchor-id="in-person">In person</h2>
+<p>TBD</p>
 
 
+<script type="pyodide-data">
+eyJvcHRpb25zIjp7ImVudiI6eyJQTE9UTFlfUkVOREVSRVIiOiJwbG90bHlfbWltZXR5cGUifSwiaW5kZXhVUkwiOiJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvcHlvZGlkZS92MC4yOC4xL2Z1bGwvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsicHlvZGlkZV9odHRwIiwibWljcm9waXAiLCJpcHl0aG9uIiwibnVtcHkiLCJwYW5kYXMiLCJtYXRwbG90bGliIiwic2VhYm9ybiIsInNjaXB5Iiwic2Npa2l0LWxlYXJuIiwic3RhdHNtb2RlbHMiLCJtaWNyb3BpcCJdfX0=
+</script>
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W119
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTciLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl83ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS03LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzcgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzcsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTYiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl82ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS02LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzYgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzYsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl81ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS01LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzUgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzUsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTQiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl80ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS00LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzQgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzQsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTMiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8zID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0zLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzMgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzMsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8yID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzIgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzIsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTEiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8xID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzEgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzEsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLXByZWx1ZGUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJweW9kaWRlT2pzID0ge1xuICBjb25zdCB7XG4gICAgUHlvZGlkZUV2YWx1YXRvcixcbiAgICBQeW9kaWRlRW52aXJvbm1lbnRNYW5hZ2VyLFxuICAgIHNldHVwUHl0aG9uLFxuICAgIHN0YXJ0UHlvZGlkZVdvcmtlcixcbiAgICBiNjREZWNvZGUsXG4gICAgY29sbGFwc2VQYXRoLFxuICB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzdGF0dXNDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctc3RhdHVzXCIpO1xuICBjb25zdCBpbmRpY2F0b3JDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpbmRpY2F0b3JDb250YWluZXIuY2xhc3NMaXN0LnJlbW92ZShcImQtbm9uZVwiKTtcblxuICBsZXQgc3RhdHVzVGV4dCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIilcbiAgc3RhdHVzVGV4dC5jbGFzc0xpc3QgPSBcImV4ZXJjaXNlLWxvYWRpbmctZGV0YWlsc1wiO1xuICBzdGF0dXNUZXh0ID0gc3RhdHVzQ29udGFpbmVyLmFwcGVuZENoaWxkKHN0YXR1c1RleHQpO1xuICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYEluaXRpYWxpc2VgO1xuXG4gIC8vIEhvaXN0IGluZGljYXRvciBvdXQgZnJvbSBmaW5hbCBzbGlkZSB3aGVuIHJ1bm5pbmcgdW5kZXIgcmV2ZWFsXG4gIGNvbnN0IHJldmVhbFN0YXR1cyA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsIC5leGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaWYgKHJldmVhbFN0YXR1cykge1xuICAgIHJldmVhbFN0YXR1cy5yZW1vdmUoKTtcbiAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCA+IC5zbGlkZXNcIikuYXBwZW5kQ2hpbGQocmV2ZWFsU3RhdHVzKTtcbiAgfVxuXG4gIC8vIE1ha2UgYW55IHJldmVhbCBzbGlkZXMgd2l0aCBsaXZlIGNlbGxzIHNjcm9sbGFibGVcbiAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChcIi5yZXZlYWwgLmV4ZXJjaXNlLWNlbGxcIikuZm9yRWFjaCgoZWwpID0+IHtcbiAgICBlbC5jbG9zZXN0KCdzZWN0aW9uLnNsaWRlJykuY2xhc3NMaXN0LmFkZChcInNjcm9sbGFibGVcIik7XG4gIH0pXG5cbiAgLy8gUHlvZGlkZSBzdXBwbGVtZW50YWwgZGF0YSBhbmQgb3B0aW9uc1xuICBjb25zdCBkYXRhQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLWRhdGFcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBkYXRhID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZGF0YUNvbnRlbnQpKTtcblxuICAvLyBHcmFiIGxpc3Qgb2YgcmVzb3VyY2VzIHRvIGJlIGRvd25sb2FkZWRcbiAgY29uc3QgZmlsZXNDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInZmcy1maWxlXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZmlsZXMgPSBKU09OLnBhcnNlKGI2NERlY29kZShmaWxlc0NvbnRlbnQpKTtcblxuICBsZXQgcHlvZGlkZVByb21pc2UgPSAoYXN5bmMgKCkgPT4ge1xuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgUHlvZGlkZWA7XG4gICAgY29uc3QgcHlvZGlkZSA9IGF3YWl0IHN0YXJ0UHlvZGlkZVdvcmtlcihkYXRhLm9wdGlvbnMpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiBtaWNyb3BpcGA7XG4gICAgYXdhaXQgcHlvZGlkZS5sb2FkUGFja2FnZShcIm1pY3JvcGlwXCIpO1xuICAgIGNvbnN0IG1pY3JvcGlwID0gYXdhaXQgcHlvZGlkZS5weWltcG9ydChcIm1pY3JvcGlwXCIpO1xuICAgIGF3YWl0IGRhdGEucGFja2FnZXMucGtncy5tYXAoKHBrZykgPT4gKCkgPT4ge1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiAke3BrZ31gO1xuICAgICAgcmV0dXJuIG1pY3JvcGlwLmluc3RhbGwocGtnKTtcbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcbiAgICBhd2FpdCBtaWNyb3BpcC5kZXN0cm95KCk7XG5cbiAgICAvLyBEb3dubG9hZCBhbmQgaW5zdGFsbCByZXNvdXJjZXNcbiAgICBhd2FpdCBmaWxlcy5tYXAoKGZpbGUpID0+IGFzeW5jICgpID0+IHtcbiAgICAgIGNvbnN0IG5hbWUgPSBmaWxlLnN1YnN0cmluZyhmaWxlLmxhc3RJbmRleE9mKCcvJykgKyAxKTtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcmVzb3VyY2U6ICR7bmFtZX1gO1xuICAgICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaChmaWxlKTtcbiAgICAgIGlmICghcmVzcG9uc2Uub2spIHtcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBDYW4ndCBkb3dubG9hZCBcXGAke2ZpbGV9XFxgLiBFcnJvciAke3Jlc3BvbnNlLnN0YXR1c306IFwiJHtyZXNwb25zZS5zdGF0dXNUZXh0fVwiLmApO1xuICAgICAgfVxuICAgICAgY29uc3QgZGF0YSA9IGF3YWl0IHJlc3BvbnNlLmFycmF5QnVmZmVyKCk7XG5cbiAgICAgIC8vIFN0b3JlIFVSTHMgaW4gdGhlIGN3ZCB3aXRob3V0IGFueSBzdWJkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBpZiAoZmlsZS5pbmNsdWRlcyhcIjovL1wiKSkge1xuICAgICAgICBmaWxlID0gbmFtZTtcbiAgICAgIH1cblxuICAgICAgLy8gQ29sbGFwc2UgaGlnaGVyIGRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGZpbGUgPSBjb2xsYXBzZVBhdGgoZmlsZSk7XG5cbiAgICAgIC8vIENyZWF0ZSBkaXJlY3RvcnkgdHJlZSwgaWdub3JpbmcgXCJkaXJlY3RvcnkgZXhpc3RzXCIgVkZTIGVycm9yc1xuICAgICAgY29uc3QgcGFydHMgPSBmaWxlLnNwbGl0KCcvJykuc2xpY2UoMCwgLTEpO1xuICAgICAgbGV0IHBhdGggPSAnJztcbiAgICAgIHdoaWxlIChwYXJ0cy5sZW5ndGggPiAwKSB7XG4gICAgICAgIHBhdGggKz0gcGFydHMuc2hpZnQoKSArICcvJztcbiAgICAgICAgdHJ5IHtcbiAgICAgICAgICBhd2FpdCBweW9kaWRlLkZTLm1rZGlyKHBhdGgpO1xuICAgICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgICAgaWYgKGUubmFtZSAhPT0gXCJFcnJub0Vycm9yXCIpIHRocm93IGU7XG4gICAgICAgICAgaWYgKGUuZXJybm8gIT09IDIwKSB7XG4gICAgICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICAgICAgY29uc3QgZXJyb3JUZXh0ID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLlVURjhUb1N0cmluZyhlcnJvclRleHRQdHIpO1xuICAgICAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBGaWxlc3lzdGVtIEVycm9yICR7ZS5lcnJub30gXCIke2Vycm9yVGV4dH1cIi5gKTtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cblxuICAgICAgLy8gV3JpdGUgdGhpcyBmaWxlIHRvIHRoZSBWRlNcbiAgICAgIHRyeSB7XG4gICAgICAgIHJldHVybiBhd2FpdCBweW9kaWRlLkZTLndyaXRlRmlsZShmaWxlLCBuZXcgVWludDhBcnJheShkYXRhKSk7XG4gICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgIGlmIChlLm5hbWUgIT09IFwiRXJybm9FcnJvclwiKSB0aHJvdyBlO1xuICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICBjb25zdCBlcnJvclRleHQgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuVVRGOFRvU3RyaW5nKGVycm9yVGV4dFB0cik7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvciAke2UuZXJybm99IFwiJHtlcnJvclRleHR9XCIuYCk7XG4gICAgICB9XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYFB5b2RpZGUgZW52aXJvbm1lbnQgc2V0dXBgO1xuICAgIGF3YWl0IHNldHVwUHl0aG9uKHB5b2RpZGUpO1xuXG4gICAgc3RhdHVzVGV4dC5yZW1vdmUoKTtcbiAgICBpZiAoc3RhdHVzQ29udGFpbmVyLmNoaWxkcmVuLmxlbmd0aCA9PSAwKSB7XG4gICAgICBzdGF0dXNDb250YWluZXIucGFyZW50Tm9kZS5yZW1vdmUoKTtcbiAgICB9XG4gICAgcmV0dXJuIHB5b2RpZGU7XG4gIH0pKCkuY2F0Y2goKGVycikgPT4ge1xuICAgIHN0YXR1c1RleHQuc3R5bGUuY29sb3IgPSBcInZhcigtLWV4ZXJjaXNlLWVkaXRvci1obC1lciwgI0FEMDAwMClcIjtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gZXJyLm1lc3NhZ2U7XG4gICAgLy9pbmRpY2F0b3JDb250YWluZXIucXVlcnlTZWxlY3RvcihcIi5zcGlubmVyLWdyb3dcIikuY2xhc3NMaXN0LmFkZChcImQtbm9uZVwiKTtcbiAgICB0aHJvdyBlcnI7XG4gIH0pO1xuXG4gIC8vIEtlZXAgdHJhY2sgb2YgaW5pdGlhbCBPSlMgYmxvY2sgcmVuZGVyXG4gIGNvbnN0IHJlbmRlcmVkT2pzID0ge307XG5cbiAgY29uc3QgcHJvY2VzcyA9IGFzeW5jIChjb250ZXh0LCBpbnB1dHMpID0+IHtcbiAgICBjb25zdCBweW9kaWRlID0gYXdhaXQgcHlvZGlkZVByb21pc2U7XG4gICAgY29uc3QgZXZhbHVhdG9yID0gbmV3IFB5b2RpZGVFdmFsdWF0b3IocHlvZGlkZSwgY29udGV4dCk7XG4gICAgYXdhaXQgZXZhbHVhdG9yLnByb2Nlc3MoaW5wdXRzKTtcbiAgICByZXR1cm4gZXZhbHVhdG9yLmNvbnRhaW5lcjtcbiAgfVxuXG4gIHJldHVybiB7XG4gICAgcHlvZGlkZVByb21pc2UsXG4gICAgcmVuZGVyZWRPanMsXG4gICAgcHJvY2VzcyxcbiAgfTtcbn1cbiJ9XX0=
 </script>
 <div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
 <div id="exercise-loading-status" class="d-flex gap-2">
@@ -382,6 +670,7 @@ eyJjb250ZW50cyI6W119
 <script type="vfs-file">
 W10=
 </script>
+</section>
 
 </main> <!-- /main -->
 <script type="ojs-module-contents">

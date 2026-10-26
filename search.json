@@ -1737,7 +1737,73 @@
     "href": "parts/sessions/L21.html",
     "title": "21. Nonlinear Regression",
     "section": "",
-    "text": "This session covers nonlinear regression: fitting models such as exponential decay and Michaelis–Menten with scipy.optimize.curve_fit, and choosing between competing models.\n\n\n\n\n\n\n\nNote\n\n\n\nThis session will be released later in the semester.",
+    "text": "Non-Linearity: living outside the straight and narrow\nThis session covers nonlinear regression: fitting models such as exponential decay and Michaelis–Menten with scipy.optimize.curve_fit, and choosing between competing models.\nMany phenomena in science follow non-linear relationships. Forcing a linear model onto non-linear data produces incorrect parameter estimates, poor residuals, and unreliable predictions.\nExamples of non-linear behavior:",
+    "crumbs": [
+      "Modeling & Regression",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>21. Nonlinear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L21.html#non-linearity-living-outside-the-straight-and-narrow",
+    "href": "parts/sessions/L21.html#non-linearity-living-outside-the-straight-and-narrow",
+    "title": "21. Nonlinear Regression",
+    "section": "",
+    "text": "Exponential decay (radioactive decay, first-order reaction kinetics)\n\nSingle exponential example: \\[y = A\\,e^{-k x}\\]\n\nMichaelis-Menten enzyme kinetics (saturation curve)\n\n\\[v = \\frac{V_{\\max}\\,[S]}{K_m + [S]}\\]\n\npH responses and sigmoidal transitions\n\nHenderson–Hasselbalch: \\[f = \\frac{1}{1 + 10^{(\\mathrm{p}K_a - \\mathrm{pH})}}\\]\n\nNon-ohmic material behavior\n\nPower law: \\[I = a\\,V^{\\,b}\\]\n\n\n\nNonlinear vs. Linear Regression\n\n\n\n\n\n\n\n\nAspect\nLinear regression\nNonlinear regression\n\n\n\n\nModel equation\nKnown: y = \\(\\beta_0\\) + \\(\\beta_1\\)x + …\nProblem-specific: requires domain knowledge\n\n\nAssumptions\nNormality, homoscedasticity, independence, linearity\nIndependence, homoscedasticity\n\n\nParameter estimation\nAnalytic (ordinary least squares, OLS)\nNumerical optimization; sensitive to starting values\n\n\nGoodness of fit\n\\(R^2\\) is appropriate\n\\(R^2\\) is not appropriate; use RMSE or MAE\n\n\nCommon pitfalls\nUnderfitting with too few predictors\nConvergence failure; overfitting; model selection difficulty\n\n\n\n\\(R^2\\) is defined relative to the mean-prediction baseline. For linear models, this baseline is meaningful because the least-squares fit always outperforms predicting the mean. For nonlinear models, this guarantee does not hold: the optimization may produce predictions that are worse than the baseline of predicting the mean. In that case \\(R^2\\) can be negative, which is mathematically valid but creates an unbounded \\(R^2\\). Thus, comparing \\(R^2\\) values between different nonlinear models is not straightforward. For non-linear models, RMSE and MAE are preferred because they are interpretable in the original units of the data and are comparable across models.\n\n\nModel Selection with Nonlinear Regression\nThe same model comparison tools from the previous session: F-test (for nested models), AIC, and BIC.\nA real example with exponential kinetics:\nAre reaction kinetics data best described by a single- or double-exponential function? Below I am illustrating the same data fit to a single (top) or double (bottom) exponential function. From the plots, how could we decide on the best model?\n \nF-test p-value: 0.499 → fail to reject \\(H_0\\) (the simpler model fits at least as well as the complex one). Therefore, the F-test suggests that you should select the single-exponential model.\nA second example with enzyme kinetics:\nAre the data better described by a standard Michaelis-Menten model (top) or an inhibitory model (bottom)?\n \nF-test p-value: 0.00388 → reject \\(H_0\\) (the more complex inhibitory model significantly improves the fit). Choose the inhibitory model.\nThe general principle: start with the simplest model that is physically plausible for the system you are investigating. Add complexity only when the additional parameters are statistically justified (F-test/AIC/BIC) and when you have a domain-based reason to expect the more complex behavior. A model selected purely on statistical grounds without physical justification is at high risk of overfitting.\n\n\nPitfalls in Nonlinear Regression\nConvergence failure: the mathematical optimization method has failed to find a minimum. This failure is most commonly caused by poor starting values for the parameters or a model that is not supported by the data. It is important to specify physically reasonable starting values (see more below).\nSensitivity to starting values: unlike OLS (which has an analytic solution), nonlinear regression finds a local minimum, which may not be the global minimum. This issue can become more complex with model complexity. If the model is very complex: try multiple starting values and verify that the optimized parameters are physically reasonable.\nModel selection requires domain knowledge: unlike linear regression, there is no standard set of models. You must have a scientific reason to choose a specific functional form (domain expertise).\nOverfitting / underfitting: the same risks as in linear regression, but the risk is higher because the model has more degrees of freedom in its functional form.\nInterpolation vs. extrapolation: a nonlinear model may behave unpredictably outside the range of the training data. This is particularly true for empirical models with no physical basis.",
+    "crumbs": [
+      "Modeling & Regression",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>21. Nonlinear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L21.html#linearizing-non-linear-data",
+    "href": "parts/sessions/L21.html#linearizing-non-linear-data",
+    "title": "21. Nonlinear Regression",
+    "section": "Linearizing Non-Linear Data",
+    "text": "Linearizing Non-Linear Data\nSome non-linear relationships can be converted to a linear form through transformation:\nExample: a first-order reaction \\(y = A \\cdot e^{-kt}\\) can be linearized by taking the natural log: \\(\\ln(y) = \\ln(A) - kt\\)\nThis was historically default practice because linear regression is computationally much simpler. In more modern data analysis, there are sometimes critiques regarding transforming data. Why? Because data and error propagation can be distorted by transformations. Because of this, a decision to transform data requires domain expertise.",
+    "crumbs": [
+      "Modeling & Regression",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>21. Nonlinear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L21.html#advanced-global-fitting",
+    "href": "parts/sessions/L21.html#advanced-global-fitting",
+    "title": "21. Nonlinear Regression",
+    "section": "Advanced: Global Fitting",
+    "text": "Advanced: Global Fitting\nWhen datasets are collected that should share a parameter, the data can be modeled by a method called global fitting.\nGlobal fitting simultaneously fits a model to multiple related datasets, optimizing shared parameters across all datasets at once.\nExample: monitoring a reaction at multiple concentrations of a reactant. The rate constant \\(k\\) should be the same at all concentrations. A global fit optimizes \\(k\\) across all concentration datasets simultaneously, rather than fitting each separately and averaging.\nGlobal fitting is analogous to ANOVA in the same way that separate t-tests are analogous to individual comparisons: it uses all the available data to estimate shared parameters, reducing uncertainty and increasing power. A separate-fit approach would estimate \\(k\\) independently for each dataset and then combine the estimates, losing information and potentially producing inconsistent parameter estimates.",
+    "crumbs": [
+      "Modeling & Regression",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>21. Nonlinear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L21.html#best-practices-for-regression",
+    "href": "parts/sessions/L21.html#best-practices-for-regression",
+    "title": "21. Nonlinear Regression",
+    "section": "Best Practices for Regression",
+    "text": "Best Practices for Regression\n\nVisualize the data before fitting any model\nUse domain knowledge to select the model form and initial parameter estimates\nAlways examine residuals and goodness-of-fit metrics\nStart with simple models; add complexity only when statistically and scientifically justified\nDocument starting values and any convergence issues\nBe explicit about whether predictions are interpolated or extrapolated",
+    "crumbs": [
+      "Modeling & Regression",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>21. Nonlinear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L21.html#nonlinear-regression-in-python",
+    "href": "parts/sessions/L21.html#nonlinear-regression-in-python",
+    "title": "21. Nonlinear Regression",
+    "section": "Nonlinear Regression in Python",
+    "text": "Nonlinear Regression in Python\nFor any nonlinear model the workflow is the same: convert data to arrays -&gt; define the model as a function -&gt; curve_fit -&gt; predictions -&gt; residuals/RMSE -&gt; plot data with a smooth fitted curve.\n\nExample 1: Exponential decay (first-order kinetics)\n\\[A(t) = A_0 \\, e^{-kt}\\]\n\n\n\n\n\n\n\n\n\n\n\n\nVisualize with a smooth curve (a fine x-grid through the fitted function):\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n*popt unpacks the parameter array — equivalent to writing A0_fit, k_fit. It lets you call the model with any number of fitted parameters.\n\n\n\n\nExample 2: Michaelis-Menten kinetics\n\\[v = \\frac{V_{max}\\,[S]}{K_M + [S]}\\]\n\n\n\n\n\n\n\n\nEvaluating model quality\nUse RMSE (not \\(R^2\\)) for nonlinear fits, and always look at the residuals:\n\n\n\n\n\n\n\n\nModel comparison: single vs. double exponential\nIs a second exponential term justified? Fit both and compare with AIC (lower is better):\n\n\n\n\n\n\nThe single exponential wins — the extra two parameters don’t improve the fit enough to justify them, exactly the principle of preferring the simplest adequate model.\n\n\n\n\n\n\n\nTipKey takeaways\n\n\n\n\nUse domain knowledge to choose the model form and sensible starting parameter values.\nNonlinear fitting is numerical optimization -&gt; local minima; verify convergence and physical plausibility.\nUse RMSE/MAE, not \\(R^2\\), to judge nonlinear fits.\nPrefer the simplest justified model; global fitting shares parameters across related datasets.\nIn Python: scipy.optimize.curve_fit(model, x, y, p0=...); compare models with AIC (or an F-test for nested models).",
+    "crumbs": [
+      "Modeling & Regression",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>21. Nonlinear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "parts/sessions/L21.html#in-person",
+    "href": "parts/sessions/L21.html#in-person",
+    "title": "21. Nonlinear Regression",
+    "section": "In Person",
+    "text": "In Person\nTBD",
     "crumbs": [
       "Modeling & Regression",
       "<span class='chapter-number'>19</span>  <span class='chapter-title'>21. Nonlinear Regression</span>"

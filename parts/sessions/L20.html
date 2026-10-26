@@ -524,6 +524,12 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicmVzaWR1YWxzID0geSAtIHBy
 <h3 class="anchored" data-anchor-id="overfitting-and-underfitting">Overfitting and Underfitting</h3>
 <p><strong>Underfitting</strong>: the model is too simple to capture the pattern in the data. The fit looks poor even on the data used to create the model/fit.</p>
 <p><strong>Overfitting</strong>: the model is too complex. The model visually looks like it describes the data well, but it is capturing noise rather than true signal. It will generalize poorly to new data.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/statistics/L20/images/L20_over_under_fitting.png" class="img-fluid figure-img"></p>
+<figcaption>Comparison of overfitting and underfitting</figcaption>
+</figure>
+</div>
 <p>In linear regression, the adjusted <span class="math inline">\(R^2\)</span> partially addresses overfitting by penalizing for additional predictors. More formally, we can use statistical tests or comparisons to decide between models, including the F-test, AIC, and BIC (see below).</p>
 <p>The best defense against overfitting is scientific reasoning: add predictors only when you have a theoretical or domain reason to expect they impact the outcome.</p>
 </section>
